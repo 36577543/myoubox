@@ -1,20 +1,11 @@
 // version	1.01
-// protoc.exe --cpp_out=./vr  vr.proto
+// protoc.exe --cpp_out=.  vr.proto
 
 syntax = "proto3";
 
 option java_package = "com.oddmu.vrdreamer.proto";
 option java_outer_classname = "MessageMsgProtos";
 
-message Message {
-	int64 id = 1;			// 调用序列号：deviceId+time
-	string method = 2;		// 接口名称
-	int32 storeId = 3;		// 营业点ID
-	string deviceId = 4;	// 设备ID，用于对连接判断
-	bytes content = 5;		// 具体业务模型
-	int32 returnCode = 6;	// 返回状态码，0-成功，其它数字为失败
-	string returnMsg = 7;	// 具体错误信息
-}
 
 // Center Api--由客户端程序调用
 // 客户端身份验证:		bool Authentication(string sign)	// sign:校验key，32位小写md5，md5(storeId=storeId.value&deviceId=deviceId.value&key=key)，key="123456"

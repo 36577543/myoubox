@@ -55,9 +55,9 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;BOOST_THREAD_PROVIDES_FUTURE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\common\LKComponent\GDI;..\..\common\res;..\..\include\protobuf-3.2.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\proto;..\..\common\res;..\..\common\LKComponent\GDI;..\..\include\protobuf-3.2.0\include;D:\Program Files\boost_1_59_0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -84,9 +84,9 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BOOST_THREAD_PROVIDES_FUTURE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\common\LKComponent\GDI;..\..\common\res;..\..\include\protobuf-3.2.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\proto;..\..\common\res;..\..\common\LKComponent\GDI;..\..\include\protobuf-3.2.0\include;D:\Program Files\boost_1_59_0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -155,18 +155,23 @@
     <ClInclude Include="..\Module\gfunction.h" />
     <ClInclude Include="..\Module\Json.h" />
     <ClInclude Include="..\Module\log.h" />
+    <ClInclude Include="..\Proto\Message.pb.h" />
+    <ClInclude Include="..\Proto\vr.pb.h" />
     <ClInclude Include="ChangeSkinDlg.h" />
     <ClInclude Include="DlgLogin.h" />
     <ClInclude Include="LocalDataInfo.h" />
     <ClInclude Include="LockDlg.h" />
+    <ClInclude Include="Logger.h" />
+    <ClInclude Include="md5.hh" />
     <ClInclude Include="myoubox.h" />
     <ClInclude Include="myouboxConst.h" />
     <ClInclude Include="myouboxDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TcpClient.h" />
+    <ClInclude Include="TcpSession.h" />
     <ClInclude Include="TrayMainMenu.h" />
-    <ClInclude Include="vr\vr.pb.h" />
     <ClInclude Include="WMI_DeviceQuery.h" />
   </ItemGroup>
   <ItemGroup>
@@ -302,21 +307,41 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\Proto\Message.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Proto\vr.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="ChangeSkinDlg.cpp" />
     <ClCompile Include="DlgLogin.cpp" />
     <ClCompile Include="LocalDataInfo.cpp" />
     <ClCompile Include="LockDlg.cpp" />
+    <ClCompile Include="Logger.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="md5.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="myoubox.cpp" />
     <ClCompile Include="myouboxDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TrayMainMenu.cpp" />
-    <ClCompile Include="vr\vr.pb.cc">
+    <ClCompile Include="TcpClient.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TcpSession.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TrayMainMenu.cpp" />
     <ClCompile Include="WMI_DeviceQuery.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -327,9 +352,10 @@
     <ResourceCompile Include="myoubox.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Proto\Message.proto" />
+    <None Include="..\Proto\protoc.exe" />
+    <None Include="..\Proto\Vr.proto" />
     <None Include="res\myoubox.rc2" />
-    <None Include="vr\protoc.exe" />
-    <None Include="vr\Vr.proto" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\common\res\jpg\dlg_bg.jpg" />

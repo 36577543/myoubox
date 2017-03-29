@@ -204,11 +204,26 @@
     <ClInclude Include="DlgLogin.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="vr\vr.pb.h">
-      <Filter>Proto</Filter>
-    </ClInclude>
     <ClInclude Include="WMI_DeviceQuery.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="md5.hh">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpSession.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Proto\Message.pb.h">
+      <Filter>Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Proto\vr.pb.h">
+      <Filter>Proto</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -335,11 +350,26 @@
     <ClCompile Include="DlgLogin.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="vr\vr.pb.cc">
-      <Filter>Proto</Filter>
-    </ClCompile>
     <ClCompile Include="WMI_DeviceQuery.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="md5.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpClient.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TcpSession.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Proto\Message.pb.cc">
+      <Filter>Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Proto\vr.pb.cc">
+      <Filter>Proto</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -354,10 +384,13 @@
     <None Include="res\myoubox.rc2">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="vr\protoc.exe">
+    <None Include="..\Proto\Message.proto">
       <Filter>Proto</Filter>
     </None>
-    <None Include="vr\Vr.proto">
+    <None Include="..\Proto\protoc.exe">
+      <Filter>Proto</Filter>
+    </None>
+    <None Include="..\Proto\Vr.proto">
       <Filter>Proto</Filter>
     </None>
   </ItemGroup>
