@@ -14,6 +14,7 @@
     <ProjectGuid>{FC83D535-3DFD-4A05-BCF3-7FF1AC0F6BC3}</ProjectGuid>
     <RootNamespace>myoubox</RootNamespace>
     <Keyword>MFCProj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -29,7 +30,7 @@
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -56,12 +57,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\common\LKComponent\GDI;..\..\common\res</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\common\LKComponent\GDI;..\..\common\res;..\..\include\protobuf-3.2.0\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <AdditionalOptions>libprotobufd.lib %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalLibraryDirectories>D:\Program Files\boost_1_59_0\lib32-msvc-14.0;..\..\lib</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -83,7 +86,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\common\LKComponent\GDI;..\..\common\res</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\common\LKComponent\GDI;..\..\common\res;..\..\include\protobuf-3.2.0\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -91,6 +94,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <AdditionalOptions>libprotobuf.lib %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalLibraryDirectories>D:\Program Files\boost_1_59_0\lib32-msvc-14.0;..\..\lib</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -161,6 +166,8 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TrayMainMenu.h" />
+    <ClInclude Include="vr\vr.pb.h" />
+    <ClInclude Include="WMI_DeviceQuery.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\LKComponent\GDI\DynDialogEx.cpp">
@@ -306,6 +313,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TrayMainMenu.cpp" />
+    <ClCompile Include="vr\vr.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="WMI_DeviceQuery.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\common\res\interfacecommon.rc" />
@@ -313,6 +328,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\myoubox.rc2" />
+    <None Include="vr\protoc.exe" />
+    <None Include="vr\Vr.proto" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\common\res\jpg\dlg_bg.jpg" />

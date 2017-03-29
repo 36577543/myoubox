@@ -34,6 +34,9 @@
     <Filter Include="Common">
       <UniqueIdentifier>{3f82eb64-b892-4019-a77f-9e1b6c77c2e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Proto">
+      <UniqueIdentifier>{d61b1afc-3a96-4793-866e-496a0ffb687b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -201,6 +204,12 @@
     <ClInclude Include="DlgLogin.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="vr\vr.pb.h">
+      <Filter>Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="WMI_DeviceQuery.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="myoubox.cpp">
@@ -326,6 +335,12 @@
     <ClCompile Include="DlgLogin.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="vr\vr.pb.cc">
+      <Filter>Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="WMI_DeviceQuery.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="myoubox.rc">
@@ -338,6 +353,12 @@
   <ItemGroup>
     <None Include="res\myoubox.rc2">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="vr\protoc.exe">
+      <Filter>Proto</Filter>
+    </None>
+    <None Include="vr\Vr.proto">
+      <Filter>Proto</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

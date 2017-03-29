@@ -1,0 +1,111 @@
+// version	1.01
+// protoc.exe --cpp_out=./vr  vr.proto
+
+syntax = "proto3";
+
+option java_package = "com.oddmu.vrdreamer.proto";
+option java_outer_classname = "MessageMsgProtos";
+
+message Message {
+	int64 id = 1;			// 调用序列号：deviceId+time
+	string method = 2;		// 接口名称
+	int32 storeId = 3;		// 营业点ID
+	string deviceId = 4;	// 设备ID，用于对连接判断
+	bytes content = 5;		// 具体业务模型
+	int32 returnCode = 6;	// 返回状态码，0-成功，其它数字为失败
+	string returnMsg = 7;	// 具体错误信息
+}
+
+// Center Api--由客户端程序调用
+// 客户端身份验证:		bool Authentication(string sign)	// sign:校验key，32位小写md5，md5(storeId=storeId.value&deviceId=deviceId.value&key=key)，key="123456"
+// 获取门店列表:X		StoreList GetStoreList(string adminId, string pswd)	// adminId:业主ID
+// 添加设备:X			bool AddDevice(DeviceInfo param)
+// 获取门店配置:		Config GetConfig()
+// 获取门店价格策略:	PricePolicy GetPricePolicy()
+// 获取门店活动:X		Activity GetActivity()
+// 用户结帐:			UserInfo Checkout(string openid)
+
+// Store Api--由中心调用
+// 用户登录: 			bool UserLogin(UserInfo param)
+// 远程控制:X 			bool RemoteControl(RemoteControl param)
+// 更新门店配置:X		bool UpdateConfig(Config param)
+// 更新门店价格策略:X	bool UpdatePricePolicy(PricePolicy param)
+// 更新门店活动:X		bool UpdateActivity(Activity param)
+
+// 门店列表
+message StoreList {
+	map<int32, string> stores = 1;	// 业主关联的所有门店列表<门店ID，门店名称>
+}
+
+// 设备
+message DeviceInfo {
+	int32 storeId = 1;		// 营业点ID
+	string deviceId = 2;	// 设备ID, 初步先用Mac地址
+	string deviceName = 3;	// 设备名
+}
+
+// 用户信息
+message UserInfo {
+	string openid = 1;		// 用户openid
+	string nickname = 2;	// 昵称
+	string headimgUrl = 3;	// 头像url
+	float balance = 4;		// 账户余额
+	int32 playMinutes = 5;	// 余额可上机时间(中心可以不计算)
+	repeated Coupon coupons = 6;	// 代金卷
+}
+
+
+// 门店配置
+message Config {
+	string storeName = 1;	// 门店名
+	int32 storeId = 2;		// 门店ID
+	int32 freeMinutes = 3;	// 用户登录后，一开始不计费的时间（分钟）
+	repeated Notification notices = 4;		// 公告
+}
+
+// 公告
+message Notification {
+	int32 type = 1;			// 公告类型（1：系统，2：公安，3：文化）
+	string msg = 2;			// 公告内容
+	bytes image = 3;		// 公告图片
+	string Url = 4;			// url
+}
+
+// 远程控制
+message RemoteControl {
+	int32 action = 1;	// 1:关机	2:重起	3:锁屏	4：执行命令
+	int32 command = 2;	// 具体执行的命令
+}
+
+
+// 代金卷，优惠卷
+message Coupon {
+	int32 type = 1;		// 1:代金卷，2:优惠卷
+	float price = 2;	// 面值
+	float discounts = 3;// 折扣
+	string comment = 4;	// 使用说明
+}
+
+// 活动
+message Activity {
+	int32 type = 1;		// 1:关注微信	2:首次充值	3:充值
+	Coupon coupon = 2;	// 代金卷，优惠卷
+	string comment = 3;	// 例：关注微信送10元代金卷，首次充值送10元代金卷，充100送10元代金卷
+}
+
+// 价格策略
+message PricePolicy {
+	map<int32, DayPrice> dayPrices = 1;	// key表示周几（从1~7，表示周一~周日），value为当天各时间段的价格
+}
+
+// 一天中各时间段的价格
+message DayPrice {
+	// 时间段的价格
+	message PeriodPrice {
+		int32 beginTime = 1;	// 开始时间。当前时间距离0点多少分钟
+		int32 endTime = 2;		// 结束时间。例: 90表示从0点过了90分钟，即1:30
+		map<int32, int32> prices = 3;	// 价格组。key为分钟，计价时间单位；value为价格，单位是分。例: [10分钟10元][30分钟25元][60分钟40元]
+	}
+
+	 repeated PeriodPrice periodPrices = 1;	// 从00:00:00开始，按时间顺序加入一天中各时间段的价格
+}
