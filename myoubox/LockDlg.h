@@ -45,4 +45,5 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	afx_msg LRESULT OnNcHitTest(CPoint point);
+	afx_msg LRESULT OnCenterEvent(WPARAM wParam, LPARAM lParam);
 };

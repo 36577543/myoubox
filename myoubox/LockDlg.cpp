@@ -11,6 +11,7 @@
 #include "myouboxDlg.h"
 
 #include "log.h"
+#include "CenterComm.h"
 
 // CLockDlg ¶Ô»°¿ò
 CLockDlg *CLockDlg::m_pDlgLock = 0;
@@ -183,6 +184,7 @@ LRESULT CLockDlg::OnCommonMsg(WPARAM wParam, LPARAM lParam)
 }
 
 BEGIN_MESSAGE_MAP(CLockDlg, CLKDialog)
+	ON_MESSAGE(WM_APP_CENTER_EVENT, &CLockDlg::OnCenterEvent)
 	ON_BN_CLICKED(100, &CLockDlg::OnBnClickedButtonLogin)
 	ON_WM_TIMER()
 	ON_WM_NCHITTEST()
@@ -298,3 +300,8 @@ LRESULT CLockDlg::OnNcHitTest(CPoint point)
 	return HTOBJECT;
 }
 
+LRESULT CLockDlg::OnCenterEvent(WPARAM wParam, LPARAM lParam)
+{
+	LockScreen(false);
+	return 1;
+}
