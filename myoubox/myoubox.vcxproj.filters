@@ -204,9 +204,6 @@
     <ClInclude Include="DlgLogin.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="WMI_DeviceQuery.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -224,6 +221,15 @@
     </ClInclude>
     <ClInclude Include="..\Proto\vr.pb.h">
       <Filter>Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="CenterComm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgUnlockSetting.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StoreConfig.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -350,9 +356,6 @@
     <ClCompile Include="DlgLogin.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="WMI_DeviceQuery.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Logger.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -370,6 +373,15 @@
     </ClCompile>
     <ClCompile Include="..\Proto\vr.pb.cc">
       <Filter>Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="CenterComm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgUnlockSetting.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StoreConfig.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -393,6 +405,7 @@
     <None Include="..\Proto\Vr.proto">
       <Filter>Proto</Filter>
     </None>
+    <None Include="store.cfg" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\myoubox.ico">

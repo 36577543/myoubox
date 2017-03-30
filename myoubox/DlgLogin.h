@@ -40,4 +40,6 @@ private:
 	CLKEdit		m_ctlUserPass;
 	CLKButton	m_BtnOK;
 	CLKButton	m_BtnCancel;
+
+	CString	m_tip;
 };

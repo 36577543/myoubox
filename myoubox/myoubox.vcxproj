@@ -157,8 +157,10 @@
     <ClInclude Include="..\Module\log.h" />
     <ClInclude Include="..\Proto\Message.pb.h" />
     <ClInclude Include="..\Proto\vr.pb.h" />
+    <ClInclude Include="CenterComm.h" />
     <ClInclude Include="ChangeSkinDlg.h" />
     <ClInclude Include="DlgLogin.h" />
+    <ClInclude Include="DlgUnlockSetting.h" />
     <ClInclude Include="LocalDataInfo.h" />
     <ClInclude Include="LockDlg.h" />
     <ClInclude Include="Logger.h" />
@@ -168,11 +170,11 @@
     <ClInclude Include="myouboxDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StoreConfig.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpSession.h" />
     <ClInclude Include="TrayMainMenu.h" />
-    <ClInclude Include="WMI_DeviceQuery.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\LKComponent\GDI\DynDialogEx.cpp">
@@ -315,8 +317,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="CenterComm.cpp" />
     <ClCompile Include="ChangeSkinDlg.cpp" />
     <ClCompile Include="DlgLogin.cpp" />
+    <ClCompile Include="DlgUnlockSetting.cpp" />
     <ClCompile Include="LocalDataInfo.cpp" />
     <ClCompile Include="LockDlg.cpp" />
     <ClCompile Include="Logger.cpp">
@@ -333,6 +337,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="StoreConfig.cpp" />
     <ClCompile Include="TcpClient.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -342,10 +347,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TrayMainMenu.cpp" />
-    <ClCompile Include="WMI_DeviceQuery.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\common\res\interfacecommon.rc" />
@@ -356,6 +357,7 @@
     <None Include="..\Proto\protoc.exe" />
     <None Include="..\Proto\Vr.proto" />
     <None Include="res\myoubox.rc2" />
+    <None Include="store.cfg" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\common\res\jpg\dlg_bg.jpg" />

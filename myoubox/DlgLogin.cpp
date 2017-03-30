@@ -10,14 +10,17 @@
 #include "LKFontMgr.h"
 #include "LKImageMgr.h"
 
+#include "StoreConfig.h"
+#include "md5.hh"
+#include "AtlBase.h"
+#include "AtlConv.h"
+
 // CDlgLogin 对话框
 
 IMPLEMENT_DYNAMIC(CDlgLogin, CLKDialog)
 
 CDlgLogin::CDlgLogin(CWnd* pParent /*=NULL*/)
 : CLKDialog(CDlgLogin::IDD, pParent)
-//, m_BtnOK(2)
-//, m_BtnCancel(2)
 {
 	SetTopOffset(22);
 	SetRightOffset(10);
@@ -93,6 +96,16 @@ void CDlgLogin::OnPaint(CDC *pDC)
 	rt.OffsetRect(0, 60);
 	pDC->DrawText(strText, rt, DT_RIGHT | DT_VCENTER);
 	pDC->SelectObject(pFt);
+
+	CRect rect;
+	GetClientRect(&rect);
+	rt.left = 0;
+	rt.right = rect.right;
+	rt.OffsetRect(0, 60);
+	pDC->SetTextColor(RGB(255, 0, 0));
+	pFt = pDC->SelectObject(CLKFontMgr::GetSTPoint16());
+	pDC->DrawText(m_tip, rt, DT_CENTER | DT_VCENTER);
+	pDC->SelectObject(pFt);
 }
 
 BEGIN_MESSAGE_MAP(CDlgLogin, CLKDialog)
@@ -136,6 +149,30 @@ BOOL CDlgLogin::OnInitDialog()
 
 void CDlgLogin::OnBnClickedButtonOk()
 {
+	std::string username, password;
+	username = CW2A(m_ctlUserName.GetText());
+	password = CW2A(m_ctlUserPass.GetPassword());
+
+	auto & config = StoreConfig::getInstance();
+	if (config._username != username)
+	{
+		static int n = 1;
+		m_tip.Format(L"用户名输入错误！%d次", n++);
+		Invalidate();
+		return;
+	}
+
+	MD5 context;
+	context.update((unsigned char *)password.c_str(), password.length());
+	context.finalize();
+	if (config._password != context.hex_digest())
+	{
+		static int n = 1;
+		m_tip.Format(L"密码输入错误！%d次", n++);
+		Invalidate();
+		return;
+	}
+
 	OnOK();
 }
 
