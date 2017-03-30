@@ -16,6 +16,8 @@
 #include "LockDlg.h"
 #include "ConfigFile.h"
 #include "log.h"
+#include "DlgUnlockSetting.h"
+#include "StoreConfig.h"
 
 
 #ifdef _DEBUG
@@ -107,7 +109,20 @@ BOOL CmyouboxApp::InitInstance()
 
 	CLKImageMgr *pImageMgr = CLKImageMgr::GetInstance();
 	//LoadAllResourceImageToImageArray(pImageMgr)
-	AppLoadAllResourceImageToImageArray(pImageMgr)
+	AppLoadAllResourceImageToImageArray(pImageMgr);
+
+	StoreConfig& config = StoreConfig::getInstance();
+	if (!config.load())
+	{
+		AfxMessageBox(L"配置文件加载失败，程序起动失败，请检查store.cfg");
+		return FALSE;
+	}
+	if (config._username == "" || config._password == "")
+	{
+		CDlgUnlockSetting dlg;
+		if (IDOK != dlg.DoModal())
+			return FALSE;
+	}
 
 	CLockDlg::LockScreen(true);
 	CmyouboxDlg dlg;
@@ -155,3 +170,4 @@ void CmyouboxApp::FreeSingle()
 	CConfigFile::FreeInstance();
 	FreeLogs();
 }
+
