@@ -44,7 +44,7 @@ enum SeverityLevel
 
 void initLogger(SeverityLevel lvl);
 BOOST_LOG_GLOBAL_LOGGER(tracer_logger, src::severity_logger_mt<SeverityLevel>)
-BOOST_LOG_GLOBAL_LOGGER(player_logger, src::severity_channel_logger_mt<SeverityLevel>)
+BOOST_LOG_GLOBAL_LOGGER(global_logger, src::severity_channel_logger_mt<SeverityLevel>)
 
 class FuncTracer
 {

@@ -108,3 +108,7 @@ BOOST_LOG_GLOBAL_LOGGER_CTOR_ARGS(
 	src::severity_logger_mt<SeverityLevel>,
 	(keywords::severity = trace))
 
+BOOST_LOG_GLOBAL_LOGGER_CTOR_ARGS(
+	global_logger,
+	src::severity_channel_logger_mt<SeverityLevel>,
+	(keywords::channel = "global"))
