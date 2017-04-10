@@ -231,6 +231,9 @@
     <ClInclude Include="StoreConfig.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DlgWeb.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="myoubox.cpp">
@@ -383,6 +386,9 @@
     <ClCompile Include="StoreConfig.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="DlgWeb.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="myoubox.rc">
@@ -406,6 +412,10 @@
       <Filter>Proto</Filter>
     </None>
     <None Include="store.cfg" />
+    <None Include="DlgWeb.htm" />
+    <None Include="res\html1.htm" />
+    <None Include="DlgWeb2.htm" />
+    <None Include="res\html_dlg.htm" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\myoubox.ico">

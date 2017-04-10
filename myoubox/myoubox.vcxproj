@@ -161,6 +161,7 @@
     <ClInclude Include="ChangeSkinDlg.h" />
     <ClInclude Include="DlgLogin.h" />
     <ClInclude Include="DlgUnlockSetting.h" />
+    <ClInclude Include="DlgWeb.h" />
     <ClInclude Include="LocalDataInfo.h" />
     <ClInclude Include="LockDlg.h" />
     <ClInclude Include="Logger.h" />
@@ -321,6 +322,7 @@
     <ClCompile Include="ChangeSkinDlg.cpp" />
     <ClCompile Include="DlgLogin.cpp" />
     <ClCompile Include="DlgUnlockSetting.cpp" />
+    <ClCompile Include="DlgWeb.cpp" />
     <ClCompile Include="LocalDataInfo.cpp" />
     <ClCompile Include="LockDlg.cpp" />
     <ClCompile Include="Logger.cpp">
@@ -356,6 +358,18 @@
     <None Include="..\Proto\Message.proto" />
     <None Include="..\Proto\protoc.exe" />
     <None Include="..\Proto\Vr.proto" />
+    <None Include="DlgWeb.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="DlgWeb2.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\html1.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\html_dlg.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="res\myoubox.rc2" />
     <None Include="store.cfg" />
   </ItemGroup>
