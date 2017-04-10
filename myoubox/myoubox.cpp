@@ -18,6 +18,7 @@
 #include "log.h"
 #include "DlgUnlockSetting.h"
 #include "StoreConfig.h"
+#include "DlgWeb.h"
 
 
 #ifdef _DEBUG
@@ -123,6 +124,13 @@ BOOL CmyouboxApp::InitInstance()
 		if (IDOK != dlg.DoModal())
 			return FALSE;
 	}
+	if (config._storeId == "" || config._deviceID == 0)
+	{
+		CDlgWeb dlg;
+		dlg.DoModal();
+	}
+	if (config._storeId == "" || config._deviceID == 0)
+		return FALSE;
 
 	CLockDlg::LockScreen(true);
 	CmyouboxDlg dlg;

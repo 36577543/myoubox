@@ -14,6 +14,7 @@ public:
 	std::string _storeName;
 	std::string _storeId;
 	std::string _mac;
+	int64_t _macID;
 	int64_t _deviceID;
 
 private:

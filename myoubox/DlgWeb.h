@@ -28,4 +28,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 	DECLARE_DHTML_EVENT_MAP()
+public:
+	virtual void OnNavigateComplete(LPDISPATCH pDisp, LPCTSTR szUrl);
+	virtual void OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl);
 };

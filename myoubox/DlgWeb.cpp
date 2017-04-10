@@ -4,7 +4,32 @@
 #include "stdafx.h"
 #include "myoubox.h"
 #include "DlgWeb.h"
+#include "StoreConfig.h"
+#include "Logger.h"
 
+template <class T> void SafeRelease(T **ppT)
+{
+	if (*ppT)
+	{
+		(*ppT)->Release();
+		*ppT = NULL;
+	}
+}
+
+#define CHECK_HR(hr)			\
+	if (FAILED(hr))				\
+	{							\
+		BOOST_LOG_FUNCTION();	\
+		LOG_ERROR(logger) << std::showbase << std::uppercase << std::hex << hr << std::noshowbase << std::nouppercase << std::dec; \
+		goto done;				\
+	}
+#define CHECK_NULL(point)		\
+	if (!point)					\
+	{							\
+		BOOST_LOG_FUNCTION();	\
+		LOG_ERROR(logger) << "point is NULL"; \
+		goto done;				\
+	}
 
 // CDlgWeb ¶Ô»°¿ò
 BOOL RaisePrivileges();
@@ -48,7 +73,8 @@ END_DHTML_EVENT_MAP()
 
 HRESULT CDlgWeb::OnButtonOK(IHTMLElement* /*pElement*/)
 {
-	OnOK();
+	Navigate(L"http://139.224.61.179/vr/manage/login");
+	//OnOK();
 	return S_OK;
 }
 
@@ -90,8 +116,8 @@ BOOL RaisePrivileges()
 void SetIECoreVersion()
 {
 	REGSAM samDesiredOpen = KEY_ALL_ACCESS;
-	TCHAR* path = L"SOFTWARE\\Microsoft\\Internet Explorer\\MAIN\\FeatureControl\\FEATURE_BROWSER_EMULATION";
-	TCHAR* valueName = L"DHTMLDialog.exe";
+	TCHAR* path = _T("SOFTWARE\\Microsoft\\Internet Explorer\\MAIN\\FeatureControl\\FEATURE_BROWSER_EMULATION");
+	TCHAR* valueName = _T("myoubox.exe");
 	long version = 9999;
 	TCHAR err[1024];
 	HKEY hKey;
@@ -113,3 +139,121 @@ void SetIECoreVersion()
 		return;
 }
 
+
+
+void CDlgWeb::OnNavigateComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
+{
+	CDHtmlDialog::OnNavigateComplete(pDisp, szUrl);
+
+}
+
+
+void CDlgWeb::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
+{
+	CDHtmlDialog::OnDocumentComplete(pDisp, szUrl);
+	src::severity_channel_logger_mt<SeverityLevel>& logger = global_logger::get();
+
+	HRESULT hr;
+	IHTMLDocument2 *pDoc2 = NULL;
+	IHTMLDocument3 *pDoc3 = NULL;
+	IHTMLElement *pElementDeviceNumber = NULL;
+	IHTMLElement *pElementInput = NULL;
+	IHTMLElement *pElementTr = NULL;
+	IHTMLElement2 *pElement2Tr = NULL;
+	IHTMLElementCollection * pCollectionTr = NULL;
+	IHTMLElementCollection *pCollectionInput = NULL;
+	IDispatch *pDispatchTr = NULL;
+	IDispatch *pDispatchInput = NULL;
+
+	CString url = szUrl;
+	if (url.Find(_T("/device/add")) != -1 || url.Find(_T("/device/list")) != -1)
+	{
+		hr = GetDHtmlDocument(&pDoc2);
+		CHECK_HR(hr);
+		CHECK_NULL(pDoc2);
+
+		hr = pDoc2->QueryInterface(IID_IHTMLDocument3, (void**)&pDoc3);
+		CHECK_HR(hr);
+		CHECK_NULL(pDoc3);
+	}
+
+	if (url.Find(_T("/device/add")) != -1)
+	{
+		hr = pDoc3->getElementById(_bstr_t("deviceNumber"), &pElementDeviceNumber);
+		CHECK_HR(hr);
+		CHECK_NULL(pElementDeviceNumber);
+
+		hr = pElementDeviceNumber->put_innerText(_bstr_t(StoreConfig::getInstance()._mac.c_str()));
+		CHECK_HR(hr);
+	}
+
+	if (url.Find(_T("/device/list")) != -1)
+	{
+		hr = pDoc3->getElementsByTagName(_bstr_t("tr"), &pCollectionTr);
+		long length;
+		pCollectionTr->get_length(&length);
+		for (long i = 0; i < length; i++)
+		{
+			_variant_t index = i;
+			hr = pCollectionTr->item(index, index, &pDispatchTr);
+			if FAILED(hr)
+			{
+				LOG_ERROR(logger) << "pCollectionTr->item:" << hr;
+				continue;
+			}
+
+			hr = pDispatchTr->QueryInterface(IID_IHTMLElement, (void **)&pElementTr);
+			CHECK_HR(hr);
+
+			hr = pDispatchTr->QueryInterface(IID_IHTMLElement2, (void **)&pElement2Tr);
+			CHECK_HR(hr);
+
+			_bstr_t bstr;
+			hr = pElementTr->get_innerText(&bstr.GetBSTR());
+			CHECK_HR(hr);
+
+			CString text = bstr;
+			if (text.Find(_T("50E5493D5D78")) != -1)
+			{
+				hr = pElement2Tr->getElementsByTagName(_bstr_t("input"), &pCollectionInput);
+				CHECK_HR(hr);
+				long len;
+				pCollectionInput->get_length(&len);
+				for (long j = 0; j < length; j++)
+				{
+					_variant_t index = j;
+					hr = pCollectionInput->item(index, index, &pDispatchInput);
+					if FAILED(hr)
+					{
+						LOG_ERROR(logger) << "pCollectionInput->item:" << hr;
+						continue;
+					}
+					hr = pDispatchInput->QueryInterface(IID_IHTMLElement, (void **)&pElementInput);
+					CHECK_HR(hr);
+
+					_variant_t var;
+					hr = pElementInput->getAttribute(_bstr_t("name"), 0, &var);
+					CHECK_HR(hr);
+					if (var == _variant_t("id"))
+					{
+						hr = pElementInput->getAttribute(_bstr_t("value"), 0, &var);
+						CHECK_HR(hr);
+						auto &id = StoreConfig::getInstance()._deviceID;
+						if (id == 0)
+							id = var;
+					}
+				}
+			}
+		}
+	}
+
+done:
+	SafeRelease(&pDispatchTr);
+	SafeRelease(&pDispatchInput);
+	SafeRelease(&pElementDeviceNumber);
+	SafeRelease(&pElementInput);
+	SafeRelease(&pElementTr);
+	SafeRelease(&pElement2Tr);
+	SafeRelease(&pDoc2);
+	SafeRelease(&pDoc3);
+}

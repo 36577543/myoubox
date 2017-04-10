@@ -22,7 +22,9 @@ using std::unique_lock;
 
 src::severity_channel_logger_mt<SeverityLevel>& logger = global_logger::get();
 
-StoreConfig::StoreConfig()
+StoreConfig::StoreConfig() :
+	_macID(0),
+	_deviceID(0)
 {
 }
 
@@ -57,10 +59,10 @@ bool StoreConfig::load()
 		_storeName = tree.get<std::string>("store.storeName", "");
 		_storeId = tree.get<std::string>("store.storeId", "");
 
-		if (!GetMacAddressByAdaptersAddresses(_mac, &_deviceID))
+		if (!GetMacAddressByAdaptersAddresses(_mac, &_macID))
 		{
 			LOG_ERROR(logger) << "GetMacAddressByAdaptersAddresses failed";
-			if (!GetMacAddressByAdaptersInfo(_mac, &_deviceID))
+			if (!GetMacAddressByAdaptersInfo(_mac, &_macID))
 			{
 				LOG_ERROR(logger) << "GetMacAddressByAdaptersInfo failed";
 				return false;
@@ -119,11 +121,12 @@ bool GetMacAddressByAdaptersAddresses(std::string &mac, int64_t *pID)
 				continue;
 
 			std::stringstream ss;
-			ss << std::hex << int(curr_addresses->PhysicalAddress[0]) << "-"
-				<< int(curr_addresses->PhysicalAddress[1]) << "-"
-				<< int(curr_addresses->PhysicalAddress[2]) << "-"
-				<< int(curr_addresses->PhysicalAddress[3]) << "-"
-				<< int(curr_addresses->PhysicalAddress[4]) << "-"
+			ss << std::hex << std::uppercase
+				<< int(curr_addresses->PhysicalAddress[0]) //<< "-"
+				<< int(curr_addresses->PhysicalAddress[1]) //<< "-"
+				<< int(curr_addresses->PhysicalAddress[2]) //<< "-"
+				<< int(curr_addresses->PhysicalAddress[3]) //<< "-"
+				<< int(curr_addresses->PhysicalAddress[4]) //<< "-"
 				<< int(curr_addresses->PhysicalAddress[5]);
 			mac = ss.str();
 			*pID = 0;
@@ -167,11 +170,12 @@ bool GetMacAddressByAdaptersInfo(std::string &mac, int64_t *pID)
 				continue;
 
 			std::stringstream ss;
-			ss << std::hex << int(adapter->Address[0]) << "-"
-				<< int(adapter->Address[1]) << "-"
-				<< int(adapter->Address[2]) << "-"
-				<< int(adapter->Address[3]) << "-"
-				<< int(adapter->Address[4]) << "-"
+			ss << std::hex << std::uppercase
+				<< int(adapter->Address[0]) //<< "-"
+				<< int(adapter->Address[1]) //<< "-"
+				<< int(adapter->Address[2]) //<< "-"
+				<< int(adapter->Address[3]) //<< "-"
+				<< int(adapter->Address[4]) //<< "-"
 				<< int(adapter->Address[5]);
 
 			mac = ss.str();
