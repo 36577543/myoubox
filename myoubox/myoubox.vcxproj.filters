@@ -412,9 +412,6 @@
       <Filter>Proto</Filter>
     </None>
     <None Include="store.cfg" />
-    <None Include="DlgWeb.htm" />
-    <None Include="res\html1.htm" />
-    <None Include="DlgWeb2.htm" />
     <None Include="res\html_dlg.htm" />
   </ItemGroup>
   <ItemGroup>
