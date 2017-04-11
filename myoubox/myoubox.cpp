@@ -124,12 +124,12 @@ BOOL CmyouboxApp::InitInstance()
 		if (IDOK != dlg.DoModal())
 			return FALSE;
 	}
-	if (config._storeId == "" || config._deviceID == 0)
+	if (config._storeId == 0 || config._deviceID == 0)
 	{
 		CDlgWeb dlg;
 		dlg.DoModal();
 	}
-	if (config._storeId == "" || config._deviceID == 0)
+	if (config._storeId == 0 || config._deviceID == 0)
 		return FALSE;
 
 	CLockDlg::LockScreen(true);

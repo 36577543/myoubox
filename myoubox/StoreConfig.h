@@ -12,10 +12,10 @@ public:
 	std::string _username;
 	std::string _password;
 	std::string _storeName;
-	std::string _storeId;
 	std::string _mac;
 	int64_t _macID;
 	int64_t _deviceID;
+	int64_t _storeId;
 
 private:
 	StoreConfig();

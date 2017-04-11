@@ -165,7 +165,17 @@ void CDlgWeb::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 	IDispatch *pDispatchTr = NULL;
 	IDispatch *pDispatchInput = NULL;
 
+	int64_t storeId = 0;
+	int64_t deviceID = 0;
 	CString url = szUrl;
+	if (StoreConfig::getInstance()._storeId != 0 && StoreConfig::getInstance()._deviceID != 0)
+		return;
+	else
+	{
+		if (url.Find(_T("/manage/index")) != -1)
+			Navigate(_T("http://139.224.61.179/vr/manage/device/list"));
+	}
+
 	if (url.Find(_T("/device/add")) != -1 || url.Find(_T("/device/list")) != -1)
 	{
 		hr = GetDHtmlDocument(&pDoc2);
@@ -204,7 +214,6 @@ void CDlgWeb::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 
 			hr = pDispatchTr->QueryInterface(IID_IHTMLElement, (void **)&pElementTr);
 			CHECK_HR(hr);
-
 			hr = pDispatchTr->QueryInterface(IID_IHTMLElement2, (void **)&pElement2Tr);
 			CHECK_HR(hr);
 
@@ -213,7 +222,8 @@ void CDlgWeb::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 			CHECK_HR(hr);
 
 			CString text = bstr;
-			if (text.Find(_T("50E5493D5D78")) != -1)
+			auto &mac = StoreConfig::getInstance()._mac;
+			if (text.Find(CString(mac.c_str())) != -1)
 			{
 				hr = pElement2Tr->getElementsByTagName(_bstr_t("input"), &pCollectionInput);
 				CHECK_HR(hr);
@@ -231,18 +241,35 @@ void CDlgWeb::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 					hr = pDispatchInput->QueryInterface(IID_IHTMLElement, (void **)&pElementInput);
 					CHECK_HR(hr);
 
-					_variant_t var;
-					hr = pElementInput->getAttribute(_bstr_t("name"), 0, &var);
+					_variant_t varName, varValue;
+					hr = pElementInput->getAttribute(_bstr_t("name"), 0, &varName);
 					CHECK_HR(hr);
-					if (var == _variant_t("id"))
-					{
-						hr = pElementInput->getAttribute(_bstr_t("value"), 0, &var);
-						CHECK_HR(hr);
-						auto &id = StoreConfig::getInstance()._deviceID;
-						if (id == 0)
-							id = var;
-					}
+					hr = pElementInput->getAttribute(_bstr_t("value"), 0, &varValue);
+					CHECK_HR(hr);
+
+					varValue.ChangeType(VT_I4);
+					if (varName == _variant_t("storeId"))
+						storeId = varValue.iVal;
+					if (varName == _variant_t("id"))
+						deviceID = varValue.iVal;
 				}
+				break;
+			}
+		}
+		if (storeId == 0 || deviceID == 0)
+		{
+			AfxMessageBox(_T("未添加营业点，或未添加当前设备！"));
+			Navigate(_T("http://139.224.61.179/vr/manage/device/add"));
+		}
+		else
+		{
+			if (StoreConfig::getInstance()._storeId == 0 || StoreConfig::getInstance()._deviceID == 0)
+			{
+				auto &cfg = StoreConfig::getInstance();
+				cfg._storeId = storeId;
+				cfg._deviceID = deviceID;
+				cfg.save();
+				AfxMessageBox(_T("绑定设备成功！"));
 			}
 		}
 	}

@@ -57,7 +57,8 @@ bool StoreConfig::load()
 		_password = tree.get<std::string>("unlock.password", "");
 
 		_storeName = tree.get<std::string>("store.storeName", "");
-		_storeId = tree.get<std::string>("store.storeId", "");
+		_storeId = tree.get<int64_t>("store.storeId", 0);
+		_deviceID = tree.get<int64_t>("store.deviceID", 0);
 
 		if (!GetMacAddressByAdaptersAddresses(_mac, &_macID))
 		{
@@ -87,6 +88,7 @@ void StoreConfig::save()
 
 	tree.put("store.storeName", _storeName);
 	tree.put("store.storeId", _storeId);
+	tree.put("store.deviceID", _storeId);
 
 	tree.put("unlock.username", _username);
 	tree.put("unlock.password", _password);
