@@ -1,4 +1,4 @@
-// version	1.01
+// version	1.1
 // protoc.exe --cpp_out=.  vr.proto
 
 syntax = "proto3";
@@ -7,17 +7,91 @@ option java_package = "com.oddmu.vrdreamer.proto";
 option java_outer_classname = "MessageMsgProtos";
 
 
-// Center Api--由客户端程序调用
-// 客户端身份验证:		bool Authentication(string sign)	// sign:校验key，32位小写md5，md5(storeId=storeId.value&deviceId=deviceId.value&key=key)，key="123456"
-// 获取门店列表:X		StoreList GetStoreList(string adminId, string pswd)	// adminId:业主ID
-// 添加设备:X			bool AddDevice(DeviceInfo param)
-// 获取门店配置:		Config GetConfig()
-// 获取门店价格策略:	PricePolicy GetPricePolicy()
-// 获取门店活动:X		Activity GetActivity()
-// 用户结帐:			UserInfo Checkout(string openid)
+// ***	以下为中心接口，由网吧端调用	***
+
+// 接  口：bool Authentication(AuthInfo info)		门店身份验证
+// 返回值：如果验证失败，失败原因（“中心无此营业点”、“比如sign无效”）在Message.returnMsg里给出
+message AuthInfo {
+	int32 storeID = 1;	// 门店ID
+	string when = 2;	// 当时的时间
+	string sign = 3;	// 验证信息，大写hex编码的md5值。md5(storeID + when + key)，key="vr123dreamer"
+}
+
+// 接  口：Config GetConfig()	获取门店配置
+message Config {	
+	string storeName = 1;		// 门店名
+	int32 freeMinutes = 2;		// 用户登录后，一开始不计费的时间（分钟）
+	repeated Notification notices = 3;		// 公告
+}
+message Notification {		// 公告
+	int32 type = 1;			// 公告类型（1：系统，2：公安，3：文化）
+	string msg = 2;			// 公告内容
+	bytes image = 3;		// 公告图片
+	string Url = 4;			// url
+}
+
+
+// 接  口：PeriodPriceList GetPeriodPriceList()	获取门店所有时间段价格列表
+message PeriodPriceList {	// 门店所有时间段价格列表
+	repeated PeriodPrice periodPrices = 1;
+	repeated PriceGroup priceGroups = 2;
+}
+// 某时间段的价格
+message PeriodPrice {
+	int32 timeKey = 1;
+	int64 priceGroupId = 2;	// PriceGroup.id
+}
+// 价格组
+message PriceGroup {
+	int32 id = 1;		// 
+	string name = 2;	// 名称
+	repeated Price prices = 3;	// 价格list
+}
+message Price {			// 价格，例：[10分钟10元][30分钟25元]
+	int32 duration = 1;	// 时长，分钟
+	int32 money = 2;	// 价格，元
+}
+
+// 接  口：bool BeginCharge(string openid)	开始计费
+
+// 接  口：Bill Checkout(string openid)		用户结帐
+message Bill {
+	int32 balance = 1;		// 账户余额
+	int32 consume = 2;		// 本次消费金额
+	int32 duration = 3;		// 本次游戏时长
+}
+
+
+// ***	以下为网吧接口，由中心调用	***
+
+// 接  口：bool UserLogin(UserInfo info)		用户登录
+message UserInfo {
+	string userID = 1;		// 用户ID
+	string openid = 2;		// 用户openid
+	string nickname = 3;	// 昵称
+	bytes headImage = 4;	// 头像
+	float balance = 5;		// 账户余额
+	repeated Coupon coupons = 6;	// 代金卷
+}
+message Coupon {		// 代金卷，优惠卷
+	int32 type = 1;		// 1:代金卷，2:优惠卷
+	float price = 2;	// 面值
+	float discounts = 3;// 折扣
+	string comment = 4;	// 使用说明
+}
+
+
+
+
+
+// ***	以下暂不用	***
+
+// Center Api--由门店调用
+// 获取门店列表:		StoreList GetStoreList(string adminId, string pswd)	// adminId:业主ID
+// 添加设备:			bool AddDevice(DeviceInfo param)
+// 获取门店活动:		Activity GetActivity()
 
 // Store Api--由中心调用
-// 用户登录: 			bool UserLogin(UserInfo param)
 // 远程控制:X 			bool RemoteControl(RemoteControl param)
 // 更新门店配置:X		bool UpdateConfig(Config param)
 // 更新门店价格策略:X	bool UpdatePricePolicy(PricePolicy param)
@@ -35,46 +109,10 @@ message DeviceInfo {
 	string deviceName = 3;	// 设备名
 }
 
-// 用户信息
-message UserInfo {
-	string openid = 1;		// 用户openid
-	string nickname = 2;	// 昵称
-	string headimgUrl = 3;	// 头像url
-	float balance = 4;		// 账户余额
-	int32 playMinutes = 5;	// 余额可上机时间(中心可以不计算)
-	repeated Coupon coupons = 6;	// 代金卷
-}
-
-
-// 门店配置
-message Config {
-	string storeName = 1;	// 门店名
-	int32 storeId = 2;		// 门店ID
-	int32 freeMinutes = 3;	// 用户登录后，一开始不计费的时间（分钟）
-	repeated Notification notices = 4;		// 公告
-}
-
-// 公告
-message Notification {
-	int32 type = 1;			// 公告类型（1：系统，2：公安，3：文化）
-	string msg = 2;			// 公告内容
-	bytes image = 3;		// 公告图片
-	string Url = 4;			// url
-}
-
 // 远程控制
 message RemoteControl {
 	int32 action = 1;	// 1:关机	2:重起	3:锁屏	4：执行命令
 	int32 command = 2;	// 具体执行的命令
-}
-
-
-// 代金卷，优惠卷
-message Coupon {
-	int32 type = 1;		// 1:代金卷，2:优惠卷
-	float price = 2;	// 面值
-	float discounts = 3;// 折扣
-	string comment = 4;	// 使用说明
 }
 
 // 活动
@@ -83,37 +121,4 @@ message Activity {
 	Coupon coupon = 2;	// 代金卷，优惠卷
 	string comment = 3;	// 例：关注微信送10元代金卷，首次充值送10元代金卷，充100送10元代金卷
 }
-
-
-// 价格策略
-message PricePolicy {
-	map<int32, DayPrice> dayPrices = 1;	// key:从1~7表示周一~周日，value:一天的价格
-}
-
-// 一天的价格
-message DayPrice {
-	 repeated PeriodPrice periodPrices = 1;	// 从00:00:00开始，按时间顺序加入一天中各时间段的价格
-}
-
-// 某时间段的价格
-message PeriodPrice {
-	int32 bgnTime = 1;	// 开始时间。当前时间距离0点多少分钟
-	int32 endTime = 2;	// 结束时间。例: 90表示从0点过了90分钟，即1:30
-	int32 id = 3;		// PriceGroup.id
-}
-
-// 价格，例：[10分钟10元][30分钟25元]
-message Price {
-	int32 duration = 1;	// 时长，分钟
-	int32 money = 2;	// 价格，元
-}
-
-// 价格组
-message PriceGroup {
-	int32 id = 1;		// 
-	string name = 2;	// 名称
-	repeated Price prices = 3;	// 价格list
-}
-
-
 
