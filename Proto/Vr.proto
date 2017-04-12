@@ -84,19 +84,36 @@ message Activity {
 	string comment = 3;	// 例：关注微信送10元代金卷，首次充值送10元代金卷，充100送10元代金卷
 }
 
+
 // 价格策略
 message PricePolicy {
-	map<int32, DayPrice> dayPrices = 1;	// key表示周几（从1~7，表示周一~周日），value为当天各时间段的价格
+	map<int32, DayPrice> dayPrices = 1;	// key:从1~7表示周一~周日，value:一天的价格
 }
 
-// 一天中各时间段的价格
+// 一天的价格
 message DayPrice {
-	// 时间段的价格
-	message PeriodPrice {
-		int32 beginTime = 1;	// 开始时间。当前时间距离0点多少分钟
-		int32 endTime = 2;		// 结束时间。例: 90表示从0点过了90分钟，即1:30
-		map<int32, int32> prices = 3;	// 价格组。key为分钟，计价时间单位；value为价格，单位是分。例: [10分钟10元][30分钟25元][60分钟40元]
-	}
-
 	 repeated PeriodPrice periodPrices = 1;	// 从00:00:00开始，按时间顺序加入一天中各时间段的价格
 }
+
+// 某时间段的价格
+message PeriodPrice {
+	int32 bgnTime = 1;	// 开始时间。当前时间距离0点多少分钟
+	int32 endTime = 2;	// 结束时间。例: 90表示从0点过了90分钟，即1:30
+	int32 id = 3;		// PriceGroup.id
+}
+
+// 价格，例：[10分钟10元][30分钟25元]
+message Price {
+	int32 duration = 1;	// 时长，分钟
+	int32 money = 2;	// 价格，元
+}
+
+// 价格组
+message PriceGroup {
+	int32 id = 1;		// 
+	string name = 2;	// 名称
+	repeated Price prices = 3;	// 价格list
+}
+
+
+
