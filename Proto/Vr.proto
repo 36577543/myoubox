@@ -1,4 +1,4 @@
-// version	1.1
+// version	1.11
 // protoc.exe --cpp_out=.  vr.proto
 
 syntax = "proto3";
@@ -12,7 +12,7 @@ option java_outer_classname = "MessageMsgProtos";
 // 接  口：bool Authentication(AuthInfo info)		门店身份验证
 // 返回值：如果验证失败，失败原因（“中心无此营业点”、“比如sign无效”）在Message.returnMsg里给出
 message AuthInfo {
-	int32 storeID = 1;	// 门店ID
+	int64 storeID = 1;	// 门店ID
 	string when = 2;	// 当时的时间
 	string sign = 3;	// 验证信息，大写hex编码的md5值。md5(storeID + when + key)，key="vr123dreamer"
 }
@@ -43,7 +43,7 @@ message PeriodPrice {
 }
 // 价格组
 message PriceGroup {
-	int32 id = 1;		// 
+	int64 id = 1;		// 
 	string name = 2;	// 名称
 	repeated Price prices = 3;	// 价格list
 }
@@ -66,18 +66,18 @@ message Bill {
 
 // 接  口：bool UserLogin(UserInfo info)		用户登录
 message UserInfo {
-	string userID = 1;		// 用户ID
+	int64 userID = 1;		// 用户ID
 	string openid = 2;		// 用户openid
 	string nickname = 3;	// 昵称
 	bytes headImage = 4;	// 头像
 	float balance = 5;		// 账户余额
 	repeated Coupon coupons = 6;	// 代金卷
 }
-message Coupon {		// 代金卷，优惠卷
-	int32 type = 1;		// 1:代金卷，2:优惠卷
-	float price = 2;	// 面值
-	float discounts = 3;// 折扣
-	string comment = 4;	// 使用说明
+message Coupon {			// 代金卷，优惠卷
+	int32 type = 1;			// 1:代金卷，2:优惠卷
+	float price = 2;		// 面值
+	float discounts = 3;	// 折扣
+	string comment = 4;		// 使用说明
 }
 
 

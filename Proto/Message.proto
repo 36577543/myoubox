@@ -1,4 +1,4 @@
-// version	1.01
+// version	1.11
 // protoc.exe --cpp_out=.  Message.proto
 
 syntax = "proto3";
@@ -7,11 +7,30 @@ option java_package = "com.oddmu.vrdreamer.proto";
 option java_outer_classname = "MessageMsgProtos";
 
 message Message {
-	int64 id = 1;			// 调用序列号：deviceId+time
+	int64 id = 1;			// 调用序列号。同一TCP连接，每次调用的序列号都不同
 	string method = 2;		// 接口名称
-	int32 storeId = 3;		// 营业点ID
-	string deviceId = 4;	// 设备ID，用于对连接判断
-	bytes content = 5;		// 具体业务模型
-	int32 returnCode = 6;	// 返回状态码，0-成功，其它数字为失败
-	string returnMsg = 7;	// 具体错误信息
+	bytes content = 3;		// 接口参数或返回值
+	int32 exceptCode = 4;	// 调用异常码，0-正常，其它数字-异常
+	string exceptMsg = 5;	// 调用异常信息，是对调用状态码的文字说明
+	int64 storeId = 6;		// 营业点ID
+	int64 deviceId = 7;		// 设备ID
 }
+
+// ***	网络数据流说明	***
+
+// 一次完整的请求或返回数据流的格式为：4字节head + 不定长的body部分
+
+// 4字节头是int32的网络字节序，它的值表示后续body的字节数；body部分是Message的序列化bytes
+
+
+// ***	Message说明	***
+
+// 对于网吧端发来的request Message，其中的id、method按原来的值通过response Message返回。
+
+// method为调用接口的名称，参照vr.proto中的描述，如："Authentication", "GetConfig"等
+
+// content为参数（请求时），或返回值（response时）
+
+// exceptCode，指接口调用是否有异常，并不是指接口返回值。可能的异常有：中心无此营业点，中心没有此接口，中心处理异常（反序列化异常，数据库异常等任何异常情况）等，这些数字值，需要中心在以后的开发中补充完成
+
+// exceptMsg，指接口调用发生异常时的异常信息，是对调用状态码的文字说明
