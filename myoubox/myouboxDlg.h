@@ -70,10 +70,10 @@ protected:
 	virtual void ModiDialogRectRgn(CRgn &rgn);
 private:
 	// 启动器句柄
-	HANDLE m_hStartProcess = 0;
+	HANDLE		m_hStartProcess = 0;
 	// 主程序全路径
-	CString m_strMainProcess;
-	HICON m_hSmallIcon = 0;
+	CString		m_strMainProcess;
+	HICON		m_hSmallIcon = 0;
 	// 搜索框
 	CLKEdit		m_ctlSearch;
 	// 搜索按钮
@@ -84,19 +84,19 @@ private:
 	//CLKButton	m_BtnSkin;
 	//// 最大化按钮
 	//CLKButton	m_BtnSkin;
-	// 关闭按钮
-	CLKButton	m_BtnClose;
+	// 退出/结帐按钮
+	CLKButton	m_BtnQuitOrCheckout;
 	// 热门游戏分类
 	CLKTreeCtrl m_treeMain;
 	// 顶部主分面标签
-	CLKTab			m_tabMain;
+	CLKTab		m_tabMain;
 	// 游戏列表
 	CLKContainer m_Container;
 	// 游戏蒙板 
-	CDlgImgPl    *m_pDialog = 0;
+	CDlgImgPl	*m_pDialog = 0;
 	//CDynDialogEx    *m_pDialog = 0;
 	// 蒙板图片
-	CLKImage	 *m_pImgPl = 0;
+	CLKImage	*m_pImgPl = 0;
 private:
 	// 调整子控件的位置
 	void AdjustChildCtrl();

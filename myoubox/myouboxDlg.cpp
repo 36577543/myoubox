@@ -385,10 +385,9 @@ BOOL CmyouboxDlg::OnInitDialog()
 	// 关闭按钮
 	rtBtn = CRect(rt.right + 2, g_nTopHeight, rt.right + g_nRightRGNWidth - 4, g_nTopHeight + g_nTopHeight);
 	rtBtn.bottom = rtBtn.top + rtBtn.Width();
-	m_BtnClose.SetTextFont(CLKFontMgr::GetMSYHPoint72());
-	m_BtnClose.SetLeftMargin(9);
-//	m_BtnClose.Create(L"结   帐", rtBtn, this, 1);
-	m_BtnClose.Create(L"退   出", rtBtn, this, TRAYMAINMENUITEM_ID_LOCKSYS);
+	m_BtnQuitOrCheckout.SetTextFont(CLKFontMgr::GetMSYHPoint72());
+	m_BtnQuitOrCheckout.SetLeftMargin(9);
+	m_BtnQuitOrCheckout.Create(L"结   帐", rtBtn, this, TRAYMAINMENUITEM_ID_LOCKSYS);
 
 	// 初始化游戏列表
 	CLocalDataInfo::GetInstance()->InitGameList();

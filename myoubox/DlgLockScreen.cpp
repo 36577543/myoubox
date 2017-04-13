@@ -9,6 +9,7 @@
 #include "ConfigFile.h"
 #include "DlgAdminLogin.h"
 #include "myouboxDlg.h"
+#include "TrayMainMenu.h"
 
 #include "log.h"
 #include "CenterComm.h"
@@ -261,10 +262,16 @@ BOOL CDlgLockScreen::OnInitDialog()
 
 void CDlgLockScreen::OnBnClickedButtonLogin()
 {
-	CDlgAdminLogin dlg(this);// ::AfxGetMainWnd());
-	//dlg.SetParent(this);
+	CDlgAdminLogin dlg(this);
 	if (IDOK == dlg.DoModal())
 	{
+		auto button = (CmyouboxDlg *)::AfxGetApp()->GetMainWnd()->GetDescendantWindow(TRAYMAINMENUITEM_ID_LOCKSYS);
+		if (button)
+		{
+			button->SetDlgCtrlID(1);
+			button->SetWindowText(_T("ÍË   ³ö"));
+			button->Invalidate();
+		}
 		LockScreen(false);
 	}
 }
