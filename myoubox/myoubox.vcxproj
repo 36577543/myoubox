@@ -159,6 +159,7 @@
     <ClInclude Include="..\Proto\vr.pb.h" />
     <ClInclude Include="CenterComm.h" />
     <ClInclude Include="ChangeSkinDlg.h" />
+    <ClInclude Include="DlgImgPl.h" />
     <ClInclude Include="DlgLogin.h" />
     <ClInclude Include="DlgUnlockSetting.h" />
     <ClInclude Include="DlgWeb.h" />
@@ -320,6 +321,7 @@
     </ClCompile>
     <ClCompile Include="CenterComm.cpp" />
     <ClCompile Include="ChangeSkinDlg.cpp" />
+    <ClCompile Include="DlgImgPl.cpp" />
     <ClCompile Include="DlgLogin.cpp" />
     <ClCompile Include="DlgUnlockSetting.cpp" />
     <ClCompile Include="DlgWeb.cpp" />

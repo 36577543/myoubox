@@ -234,6 +234,9 @@
     <ClInclude Include="DlgWeb.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DlgImgPl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="myoubox.cpp">
@@ -387,6 +390,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DlgWeb.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgImgPl.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

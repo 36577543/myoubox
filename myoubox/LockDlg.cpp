@@ -15,12 +15,41 @@
 
 // CLockDlg ¶Ô»°¿ò
 CLockDlg *CLockDlg::m_pDlgLock = 0;
+// ÊÇ·ñËøÆÁ
+bool CLockDlg::IsLockScreen()
+{
+	if (m_pDlgLock)
+	{
+		if (m_pDlgLock->GetSafeHwnd())
+		{
+			return m_pDlgLock->IsWindowVisible();
+		}
+	}
+	return false;
+}
+
 // ËøÆÁ
 void CLockDlg::LockScreen(bool bLock)
 {
 	CLogClient::WriteLog("ËøÆÁ: %d", bLock);
 	if (bLock)
 	{
+		if (::AfxGetApp()->GetMainWnd())
+		{
+			if (::AfxGetApp()->GetMainWnd()->IsWindowVisible())
+			{
+				::AfxGetApp()->GetMainWnd()->ShowWindow(SW_HIDE);
+			}
+		}
+		//if (::AfxGetApp()->GetMainWnd())
+		//{
+		//	::AfxGetApp()->GetMainWnd()->ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW);
+		//	WINDOWPLACEMENT wp; //ÏÔÊ¾Òþ²Ø
+		//	wp.length = sizeof(WINDOWPLACEMENT);
+		//	wp.flags = WPF_RESTORETOMAXIMIZED;
+		//	wp.showCmd = SW_HIDE;
+		//	::AfxGetApp()->GetMainWnd()->SetWindowPlacement(&wp);
+		//}
 		if (!m_pDlgLock)
 		{
 			m_pDlgLock = new CLockDlg();
@@ -52,9 +81,6 @@ void CLockDlg::LockScreen(bool bLock)
 	else
 	{
 		CLogClient::WriteLog("½âËø");
-		//KillTimer(1);
-		//m_pDlgLock->ShowWindow(SW_HIDE);
-		//InitMenu();
 		if (m_pDlgLock->GetSafeHwnd())
 		{
 			m_pDlgLock->DestroyWindow();
@@ -63,6 +89,24 @@ void CLockDlg::LockScreen(bool bLock)
 		{
 			delete m_pDlgLock;
 			m_pDlgLock = 0;
+		}
+		//if (::AfxGetApp()->GetMainWnd())
+		//{
+		//	::AfxGetApp()->GetMainWnd()->ModifyStyleEx(WS_EX_TOOLWINDOW, WS_EX_APPWINDOW);
+		//	WINDOWPLACEMENT wp; //ÏÔÊ¾Òþ²Ø
+		//	wp.length = sizeof(WINDOWPLACEMENT);
+		//	wp.flags = WPF_RESTORETOMAXIMIZED;
+		//	wp.showCmd = SW_SHOW;
+		//	wp.rcNormalPosition = CRect(0, 0, CURSCREEN_WIDTH, CURSCREEN_HEIGHT);
+		//	::AfxGetApp()->GetMainWnd()->SetWindowPlacement(&wp);
+		//}
+		if (::AfxGetApp()->GetMainWnd())
+		{
+			if (!::AfxGetApp()->GetMainWnd()->IsWindowVisible())
+			{
+				::AfxGetApp()->GetMainWnd()->ShowWindow(SW_SHOW);
+				::AfxGetApp()->GetMainWnd()->SetTimer(10001, 100, 0);
+			}
 		}
 	}
 }
@@ -83,7 +127,7 @@ CLockDlg::CLockDlg(CWnd* pParent /*=NULL*/)
 
 CLockDlg::~CLockDlg()
 {
-	CLockDlg::HideTaskbar(false);
+	//CLockDlg::HideTaskbar(false);
 }
 
 void CLockDlg::DoDataExchange(CDataExchange* pDX)
@@ -184,7 +228,6 @@ LRESULT CLockDlg::OnCommonMsg(WPARAM wParam, LPARAM lParam)
 }
 
 BEGIN_MESSAGE_MAP(CLockDlg, CLKDialog)
-	ON_MESSAGE(WM_APP_CENTER_EVENT, &CLockDlg::OnCenterEvent)
 	ON_BN_CLICKED(100, &CLockDlg::OnBnClickedButtonLogin)
 	ON_WM_TIMER()
 	ON_WM_NCHITTEST()
@@ -210,7 +253,7 @@ BOOL CLockDlg::OnInitDialog()
 	m_BtnLogin.Create(L"µÇ   Â¼", rtBtn, this, 100);
 
 #ifndef _DEBUG
-	SetTimer(1, 1000, 0);
+	SetTimer(1, 100, 0);
 #endif
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// Òì³£:  OCX ÊôÐÔÒ³Ó¦·µ»Ø FALSE
@@ -253,33 +296,67 @@ void CLockDlg::OnTimer(UINT_PTR nIDEvent)
 	{
 		if (IsWindowVisible())
 		{
-			HWND hTop = ::GetForegroundWindow();
-			if (hTop != GetSafeHwnd() && hTop != 0)
+			if (::AfxGetApp()->GetMainWnd())
 			{
-				DWORD dwProcessID(0);
-				GetWindowThreadProcessId(hTop, &dwProcessID);
-				DWORD dwCurProcessID = GetCurrentProcessId();
-				if (dwProcessID != dwCurProcessID)
+				if (::AfxGetApp()->GetMainWnd()->IsWindowVisible())
 				{
-					//::SetParent(GetSafeHwnd(), hTop);
-					::SetWindowPos(hTop, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE);
-					::ShowWindow(hTop, SW_MINIMIZE);
-					::SetWindowPos(GetSafeHwnd(), HWND_TOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE);
-					::SetForegroundWindow(GetSafeHwnd());
-					CLogClient::WriteLog("CDlgLock::OnTimer: %d -- %d", dwProcessID, dwCurProcessID);
+					::AfxGetApp()->GetMainWnd()->ShowWindow(SW_HIDE);
 				}
 			}
-			//CLogClient::WriteLog("CDlgLock::OnTimer");
+			MinmizeZDlg(GetSafeHwnd());
+			//HWND hTop = ::GetForegroundWindow();
+			//if (hTop != GetSafeHwnd() && hTop != 0)
+			//{
+			//	DWORD dwProcessID(0);
+			//	GetWindowThreadProcessId(hTop, &dwProcessID);
+			//	DWORD dwCurProcessID = GetCurrentProcessId();
+			//	if (dwProcessID != dwCurProcessID)
+			//	{
+			//		//::SetParent(GetSafeHwnd(), hTop);
+			//		::SetWindowPos(hTop, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE);
+			//		::ShowWindow(hTop, SW_MINIMIZE);
+			//		::SetWindowPos(GetSafeHwnd(), HWND_TOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE);
+			//		::SetForegroundWindow(GetSafeHwnd());
+			//		CLogClient::WriteLog("CDlgLock::OnTimer: %d -- %d", dwProcessID, dwCurProcessID);
+			//	}
+			//}
+			////CLogClient::WriteLog("CDlgLock::OnTimer");
 		}
 		else
 		{
-			//KillTimer(nIDEvent);
+			//if (::AfxGetApp()->GetMainWnd())
+			//{
+			//	if (!::AfxGetApp()->GetMainWnd()->IsWindowVisible())
+			//	{
+			//		::AfxGetApp()->GetMainWnd()->ShowWindow(SW_SHOW);
+			//	}
+			//}
+			////KillTimer(nIDEvent);
 		}
 		SetTimer(1, 1000, 0);
 	}
 	CLKDialog::OnTimer(nIDEvent);
 }
 
+void CLockDlg::MinmizeZDlg(HWND hSelf)
+{
+	HWND hTop = ::GetForegroundWindow();
+	if (hTop != hSelf && hTop != 0)
+	{
+		DWORD dwProcessID(0);
+		GetWindowThreadProcessId(hTop, &dwProcessID);
+		DWORD dwCurProcessID = GetCurrentProcessId();
+		if (dwProcessID != dwCurProcessID)
+		{
+			//::SetParent(GetSafeHwnd(), hTop);
+			::SetWindowPos(hTop, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE);
+			::ShowWindow(hTop, SW_MINIMIZE);
+			::SetWindowPos(hSelf, HWND_TOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE);
+			::SetForegroundWindow(hSelf);
+			CLogClient::WriteLog("CDlgLock::OnTimer: %d -- %d", dwProcessID, dwCurProcessID);
+		}
+	}
+}
 
 BOOL CLockDlg::PreTranslateMessage(MSG* pMsg)
 {
@@ -300,8 +377,3 @@ LRESULT CLockDlg::OnNcHitTest(CPoint point)
 	return HTOBJECT;
 }
 
-LRESULT CLockDlg::OnCenterEvent(WPARAM wParam, LPARAM lParam)
-{
-	LockScreen(false);
-	return 1;
-}

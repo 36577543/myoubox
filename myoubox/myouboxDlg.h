@@ -12,6 +12,7 @@
 #include "LKContainer.h"
 
 
+#include "DlgImgPl.h"
 
 // CmyouboxDlg 对话框
 class CmyouboxDlg : public CLKMainDialog
@@ -65,6 +66,8 @@ protected:
 	//virtual void OnTrayLDBClick();
 	// 事件
 	virtual BOOL OnEnterPress(HWND hCrtl, LPARAM lparam);
+	// 修改窗口区域
+	virtual void ModiDialogRectRgn(CRgn &rgn);
 private:
 	// 启动器句柄
 	HANDLE m_hStartProcess = 0;
@@ -81,15 +84,19 @@ private:
 	//CLKButton	m_BtnSkin;
 	//// 最大化按钮
 	//CLKButton	m_BtnSkin;
-	//// 关闭按钮
-	//CLKButton	m_BtnSkin;
+	// 关闭按钮
+	CLKButton	m_BtnClose;
 	// 热门游戏分类
 	CLKTreeCtrl m_treeMain;
 	// 顶部主分面标签
 	CLKTab			m_tabMain;
 	// 游戏列表
 	CLKContainer m_Container;
-
+	// 游戏蒙板 
+	CDlgImgPl    *m_pDialog = 0;
+	//CDynDialogEx    *m_pDialog = 0;
+	// 蒙板图片
+	CLKImage	 *m_pImgPl = 0;
 private:
 	// 调整子控件的位置
 	void AdjustChildCtrl();
@@ -107,4 +114,6 @@ private:
 	void OnOpenMainPanel();
 	void OnEBnClickedButtonSearchI();
 	bool GetProcessidFromName(CString &strName);
+public:
+	afx_msg LRESULT OnNcHitTest(CPoint point);
 };

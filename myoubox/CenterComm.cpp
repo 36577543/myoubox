@@ -14,7 +14,7 @@ using std::mutex;
 using std::unique_lock;
 
 CenterComm::CenterComm():
-	_logger(keywords::channel = "ad")
+	_logger(keywords::channel = "vr")
 {
 	_workNet.reset(new boost::asio::io_service::work(_iosNet));
 	_workBiz.reset(new boost::asio::io_service::work(_iosBiz));
@@ -25,6 +25,7 @@ CenterComm::CenterComm():
 
 CenterComm::~CenterComm()
 {
+	google::protobuf::ShutdownProtobufLibrary();
 }
 
 CenterComm& CenterComm::getInstance()

@@ -34,15 +34,19 @@
 #define LOGINDLG_BUTTONID_SEARCH 101
 // 字母按钮起始ID
 #define LOGINDLG_BUTTONID_ABEG	102
+// 退出按钮
+#define LOGINDLG_BUTTONID_QUIT 103
 
 
-const int g_nTopHeight = 70;
+const int g_nTopHeight = 20;
 // 树形控件宽度
 const int g_nTreeWidth = 161;
 // Tab分页控件高度
 const int g_nTabHeight = 22;
 // Tab分页控件左偏移
 const int g_nTabLeftOffset = 10;
+// 右边区域宽度
+const int g_nRightRGNWidth = 300;
 
 void test()
 {
@@ -106,6 +110,19 @@ CmyouboxDlg::CmyouboxDlg(CWnd* pParent /*=NULL*/)
 
 CmyouboxDlg::~CmyouboxDlg()
 {
+	CLockDlg::HideTaskbar(false);
+	if (m_pImgPl)
+	{
+		delete m_pImgPl;
+		m_pImgPl = 0;
+	}
+	if (m_pDialog != NULL) {
+		if (m_pDialog->GetSafeHwnd() != NULL) {
+			m_pDialog->DestroyWindow();
+		}
+		delete m_pDialog;
+		m_pDialog = NULL;
+	}
 	if (m_hSmallIcon)
 	{
 		::DestroyIcon(m_hSmallIcon);
@@ -124,10 +141,11 @@ void CmyouboxDlg::InitImageList()
 {
 	// 初始化图片列表
 	CLKDialog::InitImageList();
-	//m_arrImage[LKGDIBASEDIALOG_IMAGEINDEX_MAX] = 0;
-	//m_arrImage[LKGDIBASEDIALOG_IMAGEINDEX_MIN] = 0;
-	//m_arrImage[LKGDIBASEDIALOG_IMAGEINDEX_RESTORE] = 0;
+	m_arrImage[LKGDIBASEDIALOG_IMAGEINDEX_MAX] = 0;
+	m_arrImage[LKGDIBASEDIALOG_IMAGEINDEX_MIN] = 0;
+	m_arrImage[LKGDIBASEDIALOG_IMAGEINDEX_RESTORE] = 0;
 	m_arrImage[LKGDIBASEDIALOG_IMAGEINDEX_SELF] = 0;
+	m_arrImage[LKGDIBASEDIALOG_IMAGEINDEX_CLOSE] = 0;
 	////m_pBGImg = CLKImageMgr::GetImageS(LOGINBG_IMAGE);
 	////if (m_pBGImg)
 	////{
@@ -139,53 +157,27 @@ void CmyouboxDlg::InitImageList()
 // 初始化窗口前景图片
 void CmyouboxDlg::OnInitMemImg()
 {
-	//CLKImage *pImg = GetMemImage();
-	//if (pImg && pImg->IsValid())
-	//{
-	//	CRect rtText(0, 0, 80, 24);
-	//	UINT uFormat = DT_LEFT | DT_VCENTER | DT_SINGLELINE;
-	//	COLORREF crText = RGB(255, 255, 255);
-	//	rtText.OffsetRect(178, 28);
-	//	pImg->DrawText(_T("按字母查找："), rtText, CLKFontMgr::GetST90(), uFormat, crText);
-	//}
-	//// 6像素高顶部通用蒙板 
-	////#define LKIMAGELISTINDEX_COMMON_TOPMASK6		2
-	//CLKImage *pImgMask = CLKImageMgr::GetImageS(LKIMAGELISTINDEX_COMMON_TOPMASK6);
-	//CLKImage *pImg = GetMemImage();
-	//if (pImgMask && pImg)
-	//{
-	//	CRect rt;
-	//	GetWindowRect(&rt);
-	//	rt.MoveToXY(0, 0);
-	//	CRect rtMask(0, GetTitleBarHeight() + g_nTopHeight - pImgMask->GetHeight() - 2, rt.right, GetTitleBarHeight() + g_nTopHeight - 2);
-	//	pImgMask->DrawToImage(pImg, rtMask);
-	//}
-	// 头部背景
-	CLKImage *pImgHBG = CLKImageMgr::GetImageS(LKIMAMYOUBOX_DIALOG_HEAD);
+	// 二维码
+	// 获取二维码图片 
 	CLKImage *pImg = GetMemImage();
-	if (pImgHBG && pImg)
+	CStringA strFileA = CConfigFile::GetInstance()->GetCodePathNameA().c_str();
+	CString strFile;
+	strFile = strFileA;
+	CLKImage img;
+	if (img.LoadEx(strFile, false) && pImg)
 	{
-		CRect rtHBG(2, 2, m_rtWnd.Width() - 4, pImgHBG->GetHeight());
-		pImgHBG->DrawToImage(pImg, rtHBG);
+		CRect rt(0, 0, CURSCREEN_WIDTH, CURSCREEN_HEIGHT);
+		CRect rtCode(rt.right - g_nRightRGNWidth + 2, rt.top + g_nTopHeight + g_nRightRGNWidth, rt.right - 2, 0);
+		rtCode.bottom = rtCode.top + g_nRightRGNWidth;
+		img.DrawToImage(pImg, rtCode);
+		rtCode.OffsetRect(0, rtCode.Height());
+		rtCode.bottom = rtCode.top + 40;
+		CString strTitle = L"充值";
+
+		pImg->DrawTextW(strTitle, rtCode, CLKFontMgr::GetSTPoint28(), DT_TOP | DT_CENTER, RGB(250, 0, 0));
+//		pImg->
 	}
-	// 头部标签
-	CLKImage *pImgHL = CLKImageMgr::GetImageS(LKIMAMYOUBOX_DIALOG_HEADLABEL);
-	if (pImgHL && pImg)
-	{
-		CRect rtHL(0, 0, pImgHL->GetWidth(), pImgHL->GetHeight());
-		rtHL.MoveToXY(20, 10);
-		pImgHL->DrawToImage(pImg, rtHL);
-	}
-	// 分隔条
-	CLKImage *pImgSplit = CLKImageMgr::GetImageS(LKIMAGELISTINDEX_COMMON_SPLIT);
-	if (pImgSplit && pImg)
-	{
-		CRect rtS(0, 67, m_rtWnd.Width(), pImgSplit->GetHeight() + 67);
-		//pImgSplit->DrawToImageLR(pImg, rtS);
-		//CLKImage img(rtS.Width(), rtS.Height());
-		//pImgSplit->StretchBilinear(&img, rtS.Width(), rtS.Height(), pImgSplit->GetWidth(), pImgSplit->GetHeight());
-		pImgSplit->DrawToImage(pImg, rtS);
-	}
+
 }
 
 LRESULT CmyouboxDlg::OnCommonMsg(WPARAM wParam, LPARAM lParam)
@@ -316,6 +308,7 @@ BEGIN_MESSAGE_MAP(CmyouboxDlg, CLKMainDialog)
 	ON_COMMAND(TRAYMAINMENUITEM_ID_LOCKSYS, OnLockClient)
 	ON_WM_SHOWWINDOW()
 	ON_WM_TIMER()
+	ON_WM_NCHITTEST()
 END_MESSAGE_MAP()
 
 
@@ -323,42 +316,22 @@ END_MESSAGE_MAP()
 
 BOOL CmyouboxDlg::OnInitDialog()
 {
-	//CDialogEx::OnInitDialog();
-	//SetIcon(m_hIcon, TRUE);			// 设置大图标
-	//SetIcon(m_hIcon, FALSE);		// 设置小图标
+	CRect rt(0, 0, CURSCREEN_WIDTH, CURSCREEN_HEIGHT);
+#ifndef _DEBUG
+	SetWindowPos(&wndTopMost, 0, 0, rt.Width(), rt.Height(), SWP_HIDEWINDOW);
+#else
+	SetWindowPos(0, 0, 0, rt.Width(), rt.Height(), SWP_HIDEWINDOW | SWP_NOZORDER);
+#endif
 
-	//// TODO:  在此添加额外的初始化代码
 	CLKDialog::OnInitDialog();
 	CString strText(_T("Myoubox游戏菜单"));
 	SetWindowText(strText);
-	CRect rt;
+	//CRect rt;
 	GetClientRect(&rt);
-
-	//const int nLeftMargin = 5;
-	//// 搜索框
-	//CRect rtSearch(0, 14, 250, 53);
-	//rtSearch.left = rt.Width() / 2 - 130;
-	//rtSearch.right = rtSearch.left + 360;
-	//m_ctlSearch.SetClientOffset(CRect(0, 0, 0, 0));
-	//m_ctlSearch.SetClientEdge(CRect(12, 8, 82, 8));
-	//m_ctlSearch.SetTextFont(CLKFontMgr::GetMSYH13px());
-	//m_ctlSearch.SetTextBGCol(RGB(68, 71, 73));
-	//m_ctlSearch.SetTextColor(RGB(255, 255, 255));
-	//// 编辑框按钮图片
-	//m_ctlSearch.SetBtnImage(CLKImageMgr::GetImageS(LKIMAGEBUTTONINDEX_EDITBUTTON));
-	//m_ctlSearch.Create(WS_CHILD | WS_TABSTOP | WS_VISIBLE | ES_AUTOHSCROLL | ES_WANTRETURN, rtSearch, this, MAINDLG_EDITID_SEARCH);
-	//m_ctlSearch.SetHintText(_T("游戏名/拼音"));
-
-	//// 搜索按钮
-	////CRect rtBtn(152, 2, 172, 22);
-	//CRect rtBtn(rtSearch.right, 14, rtSearch.right + 80, 53);
-	//m_BtnSearch.SetTextFont(CLKFontMgr::GetMSYH13px());
-	//m_BtnSearch.Create(L"", rtBtn, this, LOGINDLG_BUTTONID_SEARCH);
-	////m_BtnSearch.SetImage(LKIMAGEINDEX_COMMON_ICONDSEARCH);
-	//m_BtnSearch.SetTextColor(RGB(255, 255, 255));
+	rt.right -= g_nRightRGNWidth;
 
 	// 搜索框
-	CRect rtSearch(0, 76, 250, 115);
+	CRect rtSearch(0, 26, 250, 65);
 	rtSearch.right = rt.right - 60;
 	rtSearch.left = rtSearch.right - 360;
 	m_ctlSearch.SetClientOffset(CRect(0, 0, 0, 0));
@@ -385,7 +358,7 @@ BOOL CmyouboxDlg::OnInitDialog()
 	CRect rtTree(0, g_nTopHeight, g_nTreeWidth, rt.bottom);
 	m_treeMain.Create(_T(""), rtTree, this, 3000);
 	m_treeMain.SetTextColor(RGB(255, 255, 255));
-	m_treeMain.SetTextFont(CLKFontMgr::GetMSYH14px());
+	m_treeMain.SetTextFont(CLKFontMgr::GetMSYHPoint14());
 	// 获取根结点
 	PLKTREEITEM pRootItem = m_treeMain.GetRootItem();
 	PLKTREEITEM pGItem = m_treeMain.InsertItem(_T("所有游戏"), -1, pRootItem, 0, 0);
@@ -406,7 +379,15 @@ BOOL CmyouboxDlg::OnInitDialog()
 	CRect rtContainer(rtTree.right, rtTab.bottom + 14, rt.right, rt.bottom);
 	m_Container.Create(_T("游戏列表"), rtContainer, this, 3001);
 	m_Container.SetTextColor(RGB(255, 255, 255));
-	m_Container.SetTextFont(CLKFontMgr::GetMSYH13px());
+	m_Container.SetTextFont(CLKFontMgr::GetMSYHPoint12());
+
+	// 右边区域
+	// 关闭按钮
+	rtBtn = CRect(rt.right + 2, g_nTopHeight, rt.right + g_nRightRGNWidth - 4, g_nTopHeight + g_nTopHeight);
+	rtBtn.bottom = rtBtn.top + rtBtn.Width();
+	m_BtnClose.SetTextFont(CLKFontMgr::GetMSYHPoint72());
+	m_BtnClose.SetLeftMargin(9);
+	m_BtnClose.Create(L"退   出", rtBtn, this, 1);
 
 	// 初始化游戏列表
 	CLocalDataInfo::GetInstance()->InitGameList();
@@ -421,9 +402,25 @@ BOOL CmyouboxDlg::OnInitDialog()
 	m_hTrayIcon = m_hSmallIcon;
 	m_hCurTrayIcon = m_hSmallIcon;
 	InitTray();
-	//UpdatTrayState();
-	//CLockDlg::GetInstance()->SetParent(this);
-	//CLockDlg::GetInstance()->SetOwner(this);
+	//ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW);
+	//WINDOWPLACEMENT wp; //显示隐藏
+	//wp.length = sizeof(WINDOWPLACEMENT);
+	//wp.flags = WPF_RESTORETOMAXIMIZED;
+	//wp.showCmd = SW_HIDE;
+	//SetWindowPlacement(&wp);
+
+	GetWindowRect(&rt);
+	rt.MoveToXY(0, 0);
+	CRect rtSub(rt.right - g_nRightRGNWidth + 2, rt.top + g_nTopHeight + g_nRightRGNWidth + g_nRightRGNWidth + 40, rt.right - 2, rt.bottom - 2);
+	m_pImgPl = new CLKImage(rtSub.Width(), rtSub.Height(), 25, 25);
+	m_pDialog = new CDlgImgPl();		//create the dynamic dialog, using this as parent window
+	m_pDialog->SetImage(m_pImgPl);
+	m_pDialog->Create(CDlgImgPl::IDD);
+	//m_pDialog->SetWidthAndHeight(rtSub.Width(), rtSub.Height());
+	//m_pDialog->SetUseSystemButtons(FALSE);
+	//m_pDialog->SetUseModeless();
+	//m_pDialog->DoModal();
+	m_pDialog->SetWindowPos(0, rtSub.left, rtSub.top, rtSub.Width(), rtSub.Height(), SWP_SHOWWINDOW | SWP_NOACTIVATE/* | SWP_NOMOVE*/);
 	return TRUE;  // return TRUE unless you set the focus to a control 
 }
 
@@ -722,7 +719,7 @@ HCURSOR CmyouboxDlg::OnQueryDragIcon()
 void CmyouboxDlg::OnSize(UINT nType, int cx, int cy)
 {
 	CLKMainDialog::OnSize(nType, cx, cy);
-	AdjustChildCtrl();
+	//AdjustChildCtrl();
 }
 
 // 调整子控件的位置
@@ -736,7 +733,7 @@ void CmyouboxDlg::AdjustChildCtrl()
 		//CRect rtSearch(0, 14, 250, 53);
 		//rtSearch.left = rt.Width() / 2 - 130;
 		//rtSearch.right = rtSearch.left + 360;
-		CRect rtSearch(0, 76, 250, 115);
+		CRect rtSearch(0, 26, 250, 65);
 		rtSearch.right = rt.right - 60;
 		rtSearch.left = rtSearch.right - 360;
 		m_ctlSearch.MoveWindow(rtSearch);
@@ -851,6 +848,17 @@ BOOL CmyouboxDlg::OnEnterPress(HWND hCrtl, LPARAM lparam)
 	return TRUE;
 }
 
+// 修改窗口区域
+void CmyouboxDlg::ModiDialogRectRgn(CRgn &rgn)
+{
+	CRgn rgnSub;
+	CRect rt(0, 0, CURSCREEN_WIDTH, CURSCREEN_HEIGHT);
+	CRect rtSub(rt.right - g_nRightRGNWidth + 2, rt.top + g_nTopHeight + g_nRightRGNWidth + g_nRightRGNWidth + 40, rt.right - 2, rt.bottom - 2);
+	//rtSub.bottom = rtSub.top + g_nRightRGNWidth;
+	rgnSub.CreateRectRgn(rtSub.left, rtSub.top, rtSub.right, rtSub.bottom);
+	rgn.CombineRgn(&rgn, &rgnSub, RGN_DIFF);
+}
+
 // 左键按下
 void CmyouboxDlg::OnTrayLButtonDown()
 {
@@ -874,12 +882,21 @@ void CmyouboxDlg::OnLockClient()
 void CmyouboxDlg::OnShowWindow(BOOL bShow, UINT nStatus)
 {
 	CLKMainDialog::OnShowWindow(bShow, nStatus);
-
 	if (!bShow)
 	{
+		m_pDialog->ShowWindow(SW_HIDE);
 		m_Container.HideDlg();
 	}
-	// TODO:  在此处添加消息处理程序代码
+	else
+	{
+		if (m_pDialog)
+		{
+			if (!m_pDialog->IsWindowVisible())
+			{
+				m_pDialog->ShowWindow(SW_SHOW);
+			}
+		}
+	}
 }
 
 void CmyouboxDlg::OnTimer(UINT_PTR nIDEvent)
@@ -917,6 +934,30 @@ void CmyouboxDlg::OnTimer(UINT_PTR nIDEvent)
 		}
 		return;
 	}
+	else if (10001 == nIDEvent)
+	{
+		KillTimer(nIDEvent);
+		if (IsWindowVisible())
+		{
+			HWND hTop = ::GetForegroundWindow();
+			if (hTop != GetSafeHwnd() && hTop != 0)
+			{
+				DWORD dwProcessID(0);
+				GetWindowThreadProcessId(hTop, &dwProcessID);
+				DWORD dwCurProcessID = GetCurrentProcessId();
+				if (dwProcessID != dwCurProcessID)
+				{
+					//::SetParent(GetSafeHwnd(), hTop);
+					::SetWindowPos(hTop, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE);
+					::ShowWindow(hTop, SW_MINIMIZE);
+					//::SetWindowPos(GetSafeHwnd(), HWND_TOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW | SWP_NOSIZE | SWP_NOMOVE);
+					::SetForegroundWindow(GetSafeHwnd());
+					CLogClient::WriteLog("CDlgLock::OnTimer: %d -- %d", dwProcessID, dwCurProcessID);
+				}
+			}
+		}
+		SetTimer(nIDEvent, 1000, 0);
+	}
 	CLKMainDialog::OnTimer(nIDEvent);
 }
 
@@ -945,4 +986,11 @@ bool CmyouboxDlg::GetProcessidFromName(CString &strName)
 	}
 	CloseHandle(hSnapshot);
 	return bRet;
+}
+
+LRESULT CmyouboxDlg::OnNcHitTest(CPoint point)
+{
+	return HTOBJECT;
+
+	//return CLKMainDialog::OnNcHitTest(point);
 }

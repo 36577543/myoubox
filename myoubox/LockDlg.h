@@ -13,6 +13,12 @@ public:
 	static CLockDlg *GetInstance(){ return m_pDlgLock; }
 	// 锁屏
 	static void LockScreen(bool bLock);
+	// 是否锁屏
+	static bool IsLockScreen();
+	// 是否隐藏任务栏
+	static void HideTaskbar(bool bHide);
+	// 最小化窗口
+	static void MinmizeZDlg(HWND hSelf);
 public:
 	CLockDlg(CWnd* pParent = NULL);   // 标准构造函数
 	virtual ~CLockDlg();
@@ -39,11 +45,9 @@ private:
 	CRect m_rtCode;
 	// 登录按钮
 	CLKButton	m_BtnLogin;
-	void HideTaskbar(bool bHide);
 	afx_msg void OnBnClickedButtonLogin();
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	afx_msg LRESULT OnNcHitTest(CPoint point);
-	afx_msg LRESULT OnCenterEvent(WPARAM wParam, LPARAM lParam);
 };
