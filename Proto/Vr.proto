@@ -1,4 +1,4 @@
-// version	1.11
+// version	1.12
 // protoc.exe --cpp_out=.  vr.proto
 
 syntax = "proto3";
@@ -34,16 +34,14 @@ message Notification {		// 公告
 // 接  口：PeriodPriceList GetPeriodPriceList()	获取门店所有时间段价格列表
 message PeriodPriceList {	// 门店所有时间段价格列表
 	repeated PeriodPrice periodPrices = 1;
-	repeated PriceGroup priceGroups = 2;
 }
 // 某时间段的价格
 message PeriodPrice {
 	int32 timeKey = 1;
-	int64 priceGroupId = 2;	// PriceGroup.id
+	PriceGroup priceGroup = 2;
 }
 // 价格组
 message PriceGroup {
-	int64 id = 1;		// 
 	string name = 2;	// 名称
 	repeated Price prices = 3;	// 价格list
 }
