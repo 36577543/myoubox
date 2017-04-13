@@ -1,22 +1,22 @@
-// LockDlg.cpp : 实现文件
+// DlgLockScreen.cpp : 实现文件
 //
 
 #include "stdafx.h"
 #include "myoubox.h"
-#include "LockDlg.h"
+#include "DlgLockScreen.h"
 #include "afxdialogex.h"
 #include "LKFontMgr.h"
 #include "ConfigFile.h"
-#include "DlgLogin.h"
+#include "DlgAdminLogin.h"
 #include "myouboxDlg.h"
 
 #include "log.h"
 #include "CenterComm.h"
 
-// CLockDlg 对话框
-CLockDlg *CLockDlg::m_pDlgLock = 0;
+// CDlgLockScreen 对话框
+CDlgLockScreen *CDlgLockScreen::m_pDlgLock = 0;
 // 是否锁屏
-bool CLockDlg::IsLockScreen()
+bool CDlgLockScreen::IsLockScreen()
 {
 	if (m_pDlgLock)
 	{
@@ -29,7 +29,7 @@ bool CLockDlg::IsLockScreen()
 }
 
 // 锁屏
-void CLockDlg::LockScreen(bool bLock)
+void CDlgLockScreen::LockScreen(bool bLock)
 {
 	CLogClient::WriteLog("锁屏: %d", bLock);
 	if (bLock)
@@ -52,7 +52,7 @@ void CLockDlg::LockScreen(bool bLock)
 		//}
 		if (!m_pDlgLock)
 		{
-			m_pDlgLock = new CLockDlg();
+			m_pDlgLock = new CDlgLockScreen();
 		}
 		//CLogClient::WriteLog("设置关机定时器");
 		//m_pDlgLock->SetTimer(1, 5 * 60 * 1000, 0);
@@ -60,7 +60,7 @@ void CLockDlg::LockScreen(bool bLock)
 		{
 			if (!m_pDlgLock->GetSafeHwnd())
 			{
-				m_pDlgLock->Create(CLockDlg::IDD);
+				m_pDlgLock->Create(CDlgLockScreen::IDD);
 			}
 			CLogClient::WriteLog("显示锁屏界面1: %d", m_pDlgLock);
 			if (m_pDlgLock->GetSafeHwnd())
@@ -111,13 +111,13 @@ void CLockDlg::LockScreen(bool bLock)
 	}
 }
 
-IMPLEMENT_DYNAMIC(CLockDlg, CDialogEx)
+IMPLEMENT_DYNAMIC(CDlgLockScreen, CDialogEx)
 
-CLockDlg::CLockDlg(CWnd* pParent /*=NULL*/)
-: CLKDialog(CLockDlg::IDD, pParent)
+CDlgLockScreen::CDlgLockScreen(CWnd* pParent /*=NULL*/)
+: CLKDialog(CDlgLockScreen::IDD, pParent)
 {
 #ifndef _DEBUG
-	CLockDlg::HideTaskbar(true);
+	CDlgLockScreen::HideTaskbar(true);
 #endif
 	m_rtCode = CRect(0, 0, 0, 0);
 	InitImageList();
@@ -125,18 +125,18 @@ CLockDlg::CLockDlg(CWnd* pParent /*=NULL*/)
 	SetNCClientRect(rt);
 }
 
-CLockDlg::~CLockDlg()
+CDlgLockScreen::~CDlgLockScreen()
 {
-	//CLockDlg::HideTaskbar(false);
+	//CDlgLockScreen::HideTaskbar(false);
 }
 
-void CLockDlg::DoDataExchange(CDataExchange* pDX)
+void CDlgLockScreen::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 }
 
 // 初始化图片列表
-void CLockDlg::InitImageList()
+void CDlgLockScreen::InitImageList()
 {
 	// 初始化图片列表
 	CLKDialog::InitImageList();
@@ -148,7 +148,7 @@ void CLockDlg::InitImageList()
 }
 
 // 初始化窗口前景图片
-void CLockDlg::OnInitMemImg()
+void CDlgLockScreen::OnInitMemImg()
 {
 	// 背景
 	CRect rt(0, 0, CURSCREEN_WIDTH, CURSCREEN_HEIGHT);
@@ -206,7 +206,7 @@ void CLockDlg::OnInitMemImg()
 	}
 }
 
-void CLockDlg::OnPaint(CDC *pDC)
+void CDlgLockScreen::OnPaint(CDC *pDC)
 {
 	if (!m_rtCode.IsRectEmpty())
 	{
@@ -221,22 +221,22 @@ void CLockDlg::OnPaint(CDC *pDC)
 	}
 }
 
-LRESULT CLockDlg::OnCommonMsg(WPARAM wParam, LPARAM lParam)
+LRESULT CDlgLockScreen::OnCommonMsg(WPARAM wParam, LPARAM lParam)
 {
 	//return ((CmyouboxDlg *)::AfxGetApp()->GetMainWnd())->OnCommonMsg(wParam, lParam);
 	return CLKDialog::OnCommonMsg(wParam, lParam);
 }
 
-BEGIN_MESSAGE_MAP(CLockDlg, CLKDialog)
-	ON_BN_CLICKED(100, &CLockDlg::OnBnClickedButtonLogin)
+BEGIN_MESSAGE_MAP(CDlgLockScreen, CLKDialog)
+	ON_BN_CLICKED(100, &CDlgLockScreen::OnBnClickedButtonLogin)
 	ON_WM_TIMER()
 	ON_WM_NCHITTEST()
 END_MESSAGE_MAP()
 
 
-// CLockDlg 消息处理程序
+// CDlgLockScreen 消息处理程序
 
-BOOL CLockDlg::OnInitDialog()
+BOOL CDlgLockScreen::OnInitDialog()
 {
 	CRect rt(0, 0, CURSCREEN_WIDTH, CURSCREEN_HEIGHT);
 #ifndef _DEBUG
@@ -259,9 +259,9 @@ BOOL CLockDlg::OnInitDialog()
 	// 异常:  OCX 属性页应返回 FALSE
 }
 
-void CLockDlg::OnBnClickedButtonLogin()
+void CDlgLockScreen::OnBnClickedButtonLogin()
 {
-	CDlgLogin dlg(this);// ::AfxGetMainWnd());
+	CDlgAdminLogin dlg(this);// ::AfxGetMainWnd());
 	//dlg.SetParent(this);
 	if (IDOK == dlg.DoModal())
 	{
@@ -269,7 +269,7 @@ void CLockDlg::OnBnClickedButtonLogin()
 	}
 }
 
-void CLockDlg::HideTaskbar(bool bHide)
+void CDlgLockScreen::HideTaskbar(bool bHide)
 {
 	CString s = _T("Shell_TrayWnd");
 	HWND Htaskbar = ::FindWindow((LPCTSTR)s, NULL);
@@ -288,7 +288,7 @@ void CLockDlg::HideTaskbar(bool bHide)
 
 
 
-void CLockDlg::OnTimer(UINT_PTR nIDEvent)
+void CDlgLockScreen::OnTimer(UINT_PTR nIDEvent)
 {
 	KillTimer(nIDEvent);
 	// TODO:  在此添加消息处理程序代码和/或调用默认值 
@@ -338,7 +338,7 @@ void CLockDlg::OnTimer(UINT_PTR nIDEvent)
 	CLKDialog::OnTimer(nIDEvent);
 }
 
-void CLockDlg::MinmizeZDlg(HWND hSelf)
+void CDlgLockScreen::MinmizeZDlg(HWND hSelf)
 {
 	HWND hTop = ::GetForegroundWindow();
 	if (hTop != hSelf && hTop != 0)
@@ -358,7 +358,7 @@ void CLockDlg::MinmizeZDlg(HWND hSelf)
 	}
 }
 
-BOOL CLockDlg::PreTranslateMessage(MSG* pMsg)
+BOOL CDlgLockScreen::PreTranslateMessage(MSG* pMsg)
 {
 	// 屏蔽ALT+F4
 #ifndef _DEBUG
@@ -371,7 +371,7 @@ BOOL CLockDlg::PreTranslateMessage(MSG* pMsg)
 }
 
 
-LRESULT CLockDlg::OnNcHitTest(CPoint point)
+LRESULT CDlgLockScreen::OnNcHitTest(CPoint point)
 {
 	// TODO:  在此添加消息处理程序代码和/或调用默认值
 	return HTOBJECT;

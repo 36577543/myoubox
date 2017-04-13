@@ -4,13 +4,13 @@
 #include "LKButton.h"
 #include "LKContainer.h"
 
-// CLockDlg 对话框
+// CDlgLockScreen 对话框
 
-class CLockDlg : public CLKDialog
+class CDlgLockScreen : public CLKDialog
 {
-	DECLARE_DYNAMIC(CLockDlg)
+	DECLARE_DYNAMIC(CDlgLockScreen)
 public:
-	static CLockDlg *GetInstance(){ return m_pDlgLock; }
+	static CDlgLockScreen *GetInstance(){ return m_pDlgLock; }
 	// 锁屏
 	static void LockScreen(bool bLock);
 	// 是否锁屏
@@ -20,8 +20,8 @@ public:
 	// 最小化窗口
 	static void MinmizeZDlg(HWND hSelf);
 public:
-	CLockDlg(CWnd* pParent = NULL);   // 标准构造函数
-	virtual ~CLockDlg();
+	CDlgLockScreen(CWnd* pParent = NULL);   // 标准构造函数
+	virtual ~CDlgLockScreen();
 
 // 对话框数据
 	enum { IDD = IDD_LOCK_DIALOG };
@@ -40,7 +40,7 @@ protected:
 	virtual LRESULT OnCommonMsg(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()
 private:
-	static CLockDlg *m_pDlgLock;
+	static CDlgLockScreen *m_pDlgLock;
 	// 二维码区域
 	CRect m_rtCode;
 	// 登录按钮

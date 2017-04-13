@@ -13,10 +13,10 @@
 #include "LKImageMgr.h"
 #include "LKConst.h" 
 
-#include "LockDlg.h"
+#include "DlgLockScreen.h"
 #include "ConfigFile.h"
 #include "log.h"
-#include "DlgUnlockSetting.h"
+#include "DlgAdminRegister.h"
 #include "StoreConfig.h"
 #include "DlgWeb.h"
 
@@ -120,7 +120,7 @@ BOOL CmyouboxApp::InitInstance()
 	}
 	if (config._username == "" || config._password == "")
 	{
-		CDlgUnlockSetting dlg;
+		CDlgAdminRegister dlg;
 		if (IDOK != dlg.DoModal())
 			return FALSE;
 	}
@@ -132,7 +132,7 @@ BOOL CmyouboxApp::InitInstance()
 	if (config._storeId == 0 || config._deviceID == 0)
 		return FALSE;
 
-	CLockDlg::LockScreen(true);
+	CDlgLockScreen::LockScreen(true);
 	CmyouboxDlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
@@ -158,7 +158,7 @@ BOOL CmyouboxApp::InitInstance()
 		delete pShellManager;
 	}
 
-	CLockDlg::LockScreen(false);
+	CDlgLockScreen::LockScreen(false);
 	// 释放图片列表
 	CLKImageMgr::FreeInstance();
 	// 由于对话框已关闭，所以将返回 FALSE 以便退出应用程序，

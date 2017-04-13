@@ -4,15 +4,15 @@
 #include "LKButton.h"
 #include "LKEdit.h"
 
-// CDlgLogin 对话框
+// CDlgAdminLogin 对话框
 
-class CDlgLogin : public CLKDialog
+class CDlgAdminLogin : public CLKDialog
 {
-	DECLARE_DYNAMIC(CDlgLogin)
+	DECLARE_DYNAMIC(CDlgAdminLogin)
 
 public:
-	CDlgLogin(CWnd* pParent = NULL);   // 标准构造函数
-	virtual ~CDlgLogin();
+	CDlgAdminLogin(CWnd* pParent = NULL);   // 标准构造函数
+	virtual ~CDlgAdminLogin();
 
 // 对话框数据
 	enum { IDD = IDD_DIALOG_LOGIN };

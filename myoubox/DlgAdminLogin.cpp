@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "myoubox.h"
-#include "DlgUnlockSetting.h"
+#include "DlgAdminLogin.h"
 #include "afxdialogex.h"
 #include "myouboxConst.h"
 
@@ -11,17 +11,16 @@
 #include "LKImageMgr.h"
 
 #include "StoreConfig.h"
+#include "md5.hh"
 #include "AtlBase.h"
 #include "AtlConv.h"
-#include "md5.hh"
 
-// CDlgUnlockSetting 对话框
-IMPLEMENT_DYNAMIC(CDlgUnlockSetting, CLKDialog)
+// CDlgAdminLogin 对话框
 
-CDlgUnlockSetting::CDlgUnlockSetting(CWnd* pParent /*=NULL*/)
-: CLKDialog(CDlgUnlockSetting::IDD, pParent)
-, m_tip1(L"请设置解锁密码")
-//, m_BtnCancel(2)
+IMPLEMENT_DYNAMIC(CDlgAdminLogin, CLKDialog)
+
+CDlgAdminLogin::CDlgAdminLogin(CWnd* pParent /*=NULL*/)
+: CLKDialog(CDlgAdminLogin::IDD, pParent)
 {
 	SetTopOffset(22);
 	SetRightOffset(10);
@@ -30,17 +29,17 @@ CDlgUnlockSetting::CDlgUnlockSetting(CWnd* pParent /*=NULL*/)
 	SetNCClientRect(rt);
 }
 
-CDlgUnlockSetting::~CDlgUnlockSetting()
+CDlgAdminLogin::~CDlgAdminLogin()
 {
 }
 
-void CDlgUnlockSetting::DoDataExchange(CDataExchange* pDX)
+void CDlgAdminLogin::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 }
 
 // 初始化图片列表
-void CDlgUnlockSetting::InitImageList()
+void CDlgAdminLogin::InitImageList()
 {
 	// 初始化图片列表
 	CLKDialog::InitImageList();
@@ -52,7 +51,7 @@ void CDlgUnlockSetting::InitImageList()
 }
 
 // 初始化窗口前景图片
-void CDlgUnlockSetting::OnInitMemImg()
+void CDlgAdminLogin::OnInitMemImg()
 {
 	//// 头部背景
 	//CLKImage *pImgHBG = CLKImageMgr::GetImageS(LKIMAMYOUBOX_DIALOG_HEAD);
@@ -70,46 +69,59 @@ void CDlgUnlockSetting::OnInitMemImg()
 		rtHL.MoveToXY(20, 10);
 		pImgHL->DrawToImage(pImg, rtHL);
 	}
+	//// 分隔条
+	//CLKImage *pImgSplit = CLKImageMgr::GetImageS(LKIMAGELISTINDEX_COMMON_SPLIT);
+	//if (pImgSplit && pImg)
+	//{
+	//	CRect rtS(0, 67, m_rtWnd.Width(), pImgSplit->GetHeight() + 67);
+	//	//pImgSplit->DrawToImageLR(pImg, rtS);
+	//	//CLKImage img(rtS.Width(), rtS.Height());
+	//	//pImgSplit->StretchBilinear(&img, rtS.Width(), rtS.Height(), pImgSplit->GetWidth(), pImgSplit->GetHeight());
+	//	pImgSplit->DrawToImage(pImg, rtS);
+	//}
 }
 
 // 处理窗口wm_paint消息
-void CDlgUnlockSetting::OnPaint(CDC *pDC)
+void CDlgAdminLogin::OnPaint(CDC *pDC)
 {
-	pDC->SetBkMode(TRANSPARENT);
-	pDC->SetTextColor(RGB(255, 255, 255));
-	pDC->SelectObject(CLKFontMgr::GetSTPoint16());
-
-	CRect rect;
-	GetClientRect(&rect);
-	rect.bottom = 30;
-	rect.OffsetRect(0, 60);
-	pDC->DrawText(m_tip1, rect, DT_CENTER | DT_VCENTER);
-
 	CRect rt(20, 120, 0, 0);
 	rt.right = rt.left + 160;
 	rt.bottom = rt.top + 30;
 	CString strText = L"用户名：";
+	pDC->SetBkMode(TRANSPARENT);
+	pDC->SetTextColor(RGB(255, 255, 255));
 	CFont *pFt = pDC->SelectObject(CLKFontMgr::GetSTPoint22());
 	pDC->DrawText(strText, rt, DT_RIGHT | DT_VCENTER);
 	strText = L"密  码：";
 	rt.OffsetRect(0, 60);
 	pDC->DrawText(strText, rt, DT_RIGHT | DT_VCENTER);
 	pDC->SelectObject(pFt);
+
+	CRect rect;
+	GetClientRect(&rect);
+	rt.left = 0;
+	rt.right = rect.right;
+	rt.OffsetRect(0, 60);
+	pDC->SetTextColor(RGB(255, 0, 0));
+	pFt = pDC->SelectObject(CLKFontMgr::GetSTPoint16());
+	pDC->DrawText(m_tip, rt, DT_CENTER | DT_VCENTER);
+	pDC->SelectObject(pFt);
 }
 
-BEGIN_MESSAGE_MAP(CDlgUnlockSetting, CLKDialog)
-	ON_BN_CLICKED(103, &CDlgUnlockSetting::OnBnClickedButtonOk)
-	ON_BN_CLICKED(104, &CDlgUnlockSetting::OnBnClickedButtonCancel)
+BEGIN_MESSAGE_MAP(CDlgAdminLogin, CLKDialog)
+	ON_BN_CLICKED(103, &CDlgAdminLogin::OnBnClickedButtonOk)
+	ON_BN_CLICKED(104, &CDlgAdminLogin::OnBnClickedButtonCancel)
 END_MESSAGE_MAP()
 
 
-// CDlgUnlockSetting 消息处理程序
+// CDlgAdminLogin 消息处理程序
 
 
-BOOL CDlgUnlockSetting::OnInitDialog()
+BOOL CDlgAdminLogin::OnInitDialog()
 {
 	CLKDialog::OnInitDialog();
 
+	// TODO:  在此添加额外的初始化
 	CRect rt(180, 120, 0, 0);
 	rt.right = rt.left + 160;
 	rt.bottom = rt.top + 30;
@@ -131,30 +143,40 @@ BOOL CDlgUnlockSetting::OnInitDialog()
 	m_BtnCancel.SetTextFont(CLKFontMgr::GetSTPoint16());
 	m_BtnCancel.SetLeftMargin(16);
 	m_BtnCancel.Create(L"取消", rtBtn, this, 104);
-	return TRUE; 
+	return TRUE;  // return TRUE unless you set the focus to a control
+	// 异常:  OCX 属性页应返回 FALSE
 }
 
-void CDlgUnlockSetting::OnBnClickedButtonOk()
+void CDlgAdminLogin::OnBnClickedButtonOk()
 {
-	CString username, password;
-	username = m_ctlUserName.GetText();
-	password = m_ctlUserPass.GetPassword();
+	std::string username, password;
+	username = CW2A(m_ctlUserName.GetText());
+	password = CW2A(m_ctlUserPass.GetPassword());
 
 	auto & config = StoreConfig::getInstance();
-	config._username = CW2A((LPCWSTR)username);
-	config._password = CW2A((LPCWSTR)password);
+	if (config._username != username)
+	{
+		static int n = 1;
+		m_tip.Format(L"用户名输入错误！%d次", n++);
+		Invalidate();
+		return;
+	}
 
 	MD5 context;
-	context.update((unsigned char *)config._password.c_str(), config._password.length());
+	context.update((unsigned char *)password.c_str(), password.length());
 	context.finalize();
-	config._password = context.hex_digest();
-
-	config.save();
+	if (config._password != context.hex_digest())
+	{
+		static int n = 1;
+		m_tip.Format(L"密码输入错误！%d次", n++);
+		Invalidate();
+		return;
+	}
 
 	OnOK();
 }
 
-void CDlgUnlockSetting::OnBnClickedButtonCancel()
+void CDlgAdminLogin::OnBnClickedButtonCancel()
 {
 	OnCancel();
 }

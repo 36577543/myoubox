@@ -160,11 +160,11 @@
     <ClInclude Include="CenterComm.h" />
     <ClInclude Include="ChangeSkinDlg.h" />
     <ClInclude Include="DlgImgPl.h" />
-    <ClInclude Include="DlgLogin.h" />
-    <ClInclude Include="DlgUnlockSetting.h" />
+    <ClInclude Include="DlgLockScreen.h" />
+    <ClInclude Include="DlgAdminLogin.h" />
+    <ClInclude Include="DlgAdminRegister.h" />
     <ClInclude Include="DlgWeb.h" />
     <ClInclude Include="LocalDataInfo.h" />
-    <ClInclude Include="LockDlg.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="md5.hh" />
     <ClInclude Include="myoubox.h" />
@@ -322,11 +322,11 @@
     <ClCompile Include="CenterComm.cpp" />
     <ClCompile Include="ChangeSkinDlg.cpp" />
     <ClCompile Include="DlgImgPl.cpp" />
-    <ClCompile Include="DlgLogin.cpp" />
-    <ClCompile Include="DlgUnlockSetting.cpp" />
+    <ClCompile Include="DlgLockScreen.cpp" />
+    <ClCompile Include="DlgAdminLogin.cpp" />
+    <ClCompile Include="DlgAdminRegister.cpp" />
     <ClCompile Include="DlgWeb.cpp" />
     <ClCompile Include="LocalDataInfo.cpp" />
-    <ClCompile Include="LockDlg.cpp" />
     <ClCompile Include="Logger.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>

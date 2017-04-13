@@ -14,7 +14,7 @@
 #include "TrayMainMenu.h"
 #include "myouboxConst.h"
 #include <TlHelp32.h>
-#include "LockDlg.h"
+#include "DlgLockScreen.h"
 
 #include "LKImage.h"
 #include "LKImageMgr.h"
@@ -110,7 +110,7 @@ CmyouboxDlg::CmyouboxDlg(CWnd* pParent /*=NULL*/)
 
 CmyouboxDlg::~CmyouboxDlg()
 {
-	CLockDlg::HideTaskbar(false);
+	CDlgLockScreen::HideTaskbar(false);
 	if (m_pImgPl)
 	{
 		delete m_pImgPl;
@@ -387,7 +387,8 @@ BOOL CmyouboxDlg::OnInitDialog()
 	rtBtn.bottom = rtBtn.top + rtBtn.Width();
 	m_BtnClose.SetTextFont(CLKFontMgr::GetMSYHPoint72());
 	m_BtnClose.SetLeftMargin(9);
-	m_BtnClose.Create(L"退   出", rtBtn, this, 1);
+//	m_BtnClose.Create(L"结   帐", rtBtn, this, 1);
+	m_BtnClose.Create(L"退   出", rtBtn, this, TRAYMAINMENUITEM_ID_LOCKSYS);
 
 	// 初始化游戏列表
 	CLocalDataInfo::GetInstance()->InitGameList();
@@ -412,7 +413,7 @@ BOOL CmyouboxDlg::OnInitDialog()
 	GetWindowRect(&rt);
 	rt.MoveToXY(0, 0);
 	CRect rtSub(rt.right - g_nRightRGNWidth + 2, rt.top + g_nTopHeight + g_nRightRGNWidth + g_nRightRGNWidth + 40, rt.right - 2, rt.bottom - 2);
-	m_pImgPl = new CLKImage(rtSub.Width(), rtSub.Height(), 25, 25);
+	m_pImgPl = new CLKImage(rtSub.Width(), rtSub.Height(), 25, 100);	//	25，25是起始透明度到终点透明度（由上至下）,取值1到255
 	m_pDialog = new CDlgImgPl();		//create the dynamic dialog, using this as parent window
 	m_pDialog->SetImage(m_pImgPl);
 	m_pDialog->Create(CDlgImgPl::IDD);
@@ -876,7 +877,7 @@ void CmyouboxDlg::OnOpenMainPanel()
 }
 void CmyouboxDlg::OnLockClient()
 {
-	CLockDlg::LockScreen(true);
+	CDlgLockScreen::LockScreen(true);
 }
 
 void CmyouboxDlg::OnShowWindow(BOOL bShow, UINT nStatus)

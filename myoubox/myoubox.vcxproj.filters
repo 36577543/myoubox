@@ -198,12 +198,6 @@
     <ClInclude Include="myouboxConst.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="LockDlg.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="DlgLogin.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -225,9 +219,6 @@
     <ClInclude Include="CenterComm.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="DlgUnlockSetting.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="StoreConfig.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -235,6 +226,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="DlgImgPl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgLockScreen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgAdminLogin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgAdminRegister.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -356,12 +356,6 @@
     <ClCompile Include="TrayMainMenu.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="LockDlg.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="DlgLogin.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Logger.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -383,9 +377,6 @@
     <ClCompile Include="CenterComm.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="DlgUnlockSetting.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="StoreConfig.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -393,6 +384,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DlgImgPl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgLockScreen.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgAdminLogin.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgAdminRegister.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

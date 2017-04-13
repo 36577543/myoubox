@@ -5,15 +5,15 @@
 #include "LKEdit.h"
 #include "LKStatic.h"
 
-// CDlgUnlockSetting 对话框
+// CDlgAdminRegister 对话框
 
-class CDlgUnlockSetting : public CLKDialog
+class CDlgAdminRegister : public CLKDialog
 {
-	DECLARE_DYNAMIC(CDlgUnlockSetting)
+	DECLARE_DYNAMIC(CDlgAdminRegister)
 
 public:
-	CDlgUnlockSetting(CWnd* pParent = NULL);   // 标准构造函数
-	virtual ~CDlgUnlockSetting();
+	CDlgAdminRegister(CWnd* pParent = NULL);   // 标准构造函数
+	virtual ~CDlgAdminRegister();
 
 // 对话框数据
 	enum { IDD = IDD_DIALOG_UNLOCK_SETTING };
