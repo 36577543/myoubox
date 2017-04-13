@@ -45,9 +45,6 @@
     <ClInclude Include="myoubox.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="myouboxDlg.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -237,12 +234,12 @@
     <ClInclude Include="DlgAdminRegister.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DlgGameMenu.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="myoubox.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="myouboxDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
@@ -395,6 +392,9 @@
     <ClCompile Include="DlgAdminRegister.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="DlgGameMenu.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="myoubox.rc">
@@ -417,7 +417,6 @@
     <None Include="..\Proto\Vr.proto">
       <Filter>Proto</Filter>
     </None>
-    <None Include="store.cfg" />
     <None Include="res\html_dlg.htm" />
   </ItemGroup>
   <ItemGroup>

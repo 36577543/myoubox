@@ -14,13 +14,13 @@
 
 #include "DlgImgPl.h"
 
-// CmyouboxDlg 对话框
-class CmyouboxDlg : public CLKMainDialog
+// CDlgGameMenu 对话框
+class CDlgGameMenu : public CLKMainDialog
 {
 // 构造
 public:
-	CmyouboxDlg(CWnd* pParent = NULL);	// 标准构造函数
-	~CmyouboxDlg();
+	CDlgGameMenu(CWnd* pParent = NULL);	// 标准构造函数
+	~CDlgGameMenu();
 
 // 对话框数据
 	enum { IDD = IDD_MYOUBOX_DIALOG };

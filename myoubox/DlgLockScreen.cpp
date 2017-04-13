@@ -8,7 +8,7 @@
 #include "LKFontMgr.h"
 #include "ConfigFile.h"
 #include "DlgAdminLogin.h"
-#include "myouboxDlg.h"
+#include "DlgGameMenu.h"
 #include "TrayMainMenu.h"
 
 #include "log.h"
@@ -265,7 +265,7 @@ void CDlgLockScreen::OnBnClickedButtonLogin()
 	CDlgAdminLogin dlg(this);
 	if (IDOK == dlg.DoModal())
 	{
-		auto button = (CmyouboxDlg *)::AfxGetApp()->GetMainWnd()->GetDescendantWindow(TRAYMAINMENUITEM_ID_LOCKSYS);
+		auto button = (CDlgGameMenu *)::AfxGetApp()->GetMainWnd()->GetDescendantWindow(TRAYMAINMENUITEM_ID_LOCKSYS);
 		if (button)
 		{
 			button->SetDlgCtrlID(1);

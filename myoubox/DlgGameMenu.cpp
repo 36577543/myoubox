@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "myoubox.h"
-#include "myouboxDlg.h"
+#include "DlgGameMenu.h"
 #include "afxdialogex.h"
 #include "ConfigFile.h"
 #include "log.h"
@@ -78,9 +78,9 @@ void test()
 	exit(0);
 }
 
-CmyouboxDlg::CmyouboxDlg(CWnd* pParent /*=NULL*/)
-	//: CDialogEx(CmyouboxDlg::IDD, pParent)
-	: CLKMainDialog(CmyouboxDlg::IDD, pParent)
+CDlgGameMenu::CDlgGameMenu(CWnd* pParent /*=NULL*/)
+	//: CDialogEx(CDlgGameMenu::IDD, pParent)
+	: CLKMainDialog(CDlgGameMenu::IDD, pParent)
 	, m_ctlSearch(2)
 	, m_treeMain(0)
 	// 游戏列表
@@ -108,7 +108,7 @@ CmyouboxDlg::CmyouboxDlg(CWnd* pParent /*=NULL*/)
 	SetNCClientRect(rt);
 }
 
-CmyouboxDlg::~CmyouboxDlg()
+CDlgGameMenu::~CDlgGameMenu()
 {
 	CDlgLockScreen::HideTaskbar(false);
 	if (m_pImgPl)
@@ -131,13 +131,13 @@ CmyouboxDlg::~CmyouboxDlg()
 	CLocalDataInfo::FreeInstance();
 }
 
-void CmyouboxDlg::DoDataExchange(CDataExchange* pDX)
+void CDlgGameMenu::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 }
 
 // 初始化图片列表
-void CmyouboxDlg::InitImageList()
+void CDlgGameMenu::InitImageList()
 {
 	// 初始化图片列表
 	CLKDialog::InitImageList();
@@ -155,7 +155,7 @@ void CmyouboxDlg::InitImageList()
 }
 
 // 初始化窗口前景图片
-void CmyouboxDlg::OnInitMemImg()
+void CDlgGameMenu::OnInitMemImg()
 {
 	// 二维码
 	// 获取二维码图片 
@@ -180,7 +180,7 @@ void CmyouboxDlg::OnInitMemImg()
 
 }
 
-LRESULT CmyouboxDlg::OnCommonMsg(WPARAM wParam, LPARAM lParam)
+LRESULT CDlgGameMenu::OnCommonMsg(WPARAM wParam, LPARAM lParam)
 {
 	if (LKBUTTONEX_MSG_WPARAM_SELECTED == wParam)
 	{
@@ -274,14 +274,14 @@ LRESULT CmyouboxDlg::OnCommonMsg(WPARAM wParam, LPARAM lParam)
 }
 
 // 自定义菜单按钮被按下
-void CmyouboxDlg::OnMenuClick()
+void CDlgGameMenu::OnMenuClick()
 {
 	CChangeSkinDlg dlg;
 	dlg.DoModal();
 	Invalidate();
 }
 // 判断鼠标是否在其它自定义区域范围内
-bool CmyouboxDlg::IsInOther(CPoint point)
+bool CDlgGameMenu::IsInOther(CPoint point)
 {
 	CRect rtWindow(m_rtWnd);
 	rtWindow.MoveToXY(0, 0);
@@ -293,15 +293,15 @@ bool CmyouboxDlg::IsInOther(CPoint point)
 	return false;
 }
 
-BEGIN_MESSAGE_MAP(CmyouboxDlg, CLKMainDialog)
+BEGIN_MESSAGE_MAP(CDlgGameMenu, CLKMainDialog)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_WM_SIZE()
-	ON_BN_CLICKED(MAINDLG_EDITID_SEARCH, &CmyouboxDlg::OnEBnClickedButtonSearch)
-	ON_EN_CHANGE(MAINDLG_EDITID_SEARCH, &CmyouboxDlg::OnEnChangeEdit)
+	ON_BN_CLICKED(MAINDLG_EDITID_SEARCH, &CDlgGameMenu::OnEBnClickedButtonSearch)
+	ON_EN_CHANGE(MAINDLG_EDITID_SEARCH, &CDlgGameMenu::OnEnChangeEdit)
 
-	ON_BN_CLICKED(LOGINDLG_BUTTONID_SEARCH, &CmyouboxDlg::OnBnClickedButtonSearch)
+	ON_BN_CLICKED(LOGINDLG_BUTTONID_SEARCH, &CDlgGameMenu::OnBnClickedButtonSearch)
 	// 打开面板
 	ON_COMMAND(TRAYMAINMENUITEM_ID_OPENMAINPANEL, OnOpenMainPanel)
 	// 锁屏
@@ -312,9 +312,9 @@ BEGIN_MESSAGE_MAP(CmyouboxDlg, CLKMainDialog)
 END_MESSAGE_MAP()
 
 
-// CmyouboxDlg 消息处理程序
+// CDlgGameMenu 消息处理程序
 
-BOOL CmyouboxDlg::OnInitDialog()
+BOOL CDlgGameMenu::OnInitDialog()
 {
 	CRect rt(0, 0, CURSCREEN_WIDTH, CURSCREEN_HEIGHT);
 #ifndef _DEBUG
@@ -425,7 +425,7 @@ BOOL CmyouboxDlg::OnInitDialog()
 }
 
 // 加载游戏数据
-void CmyouboxDlg::LoadGameInfo()
+void CDlgGameMenu::LoadGameInfo()
 {
 	list<PGameItem> lt;
 	CLocalDataInfo::GetInstance()->GetGameList(lt);
@@ -515,7 +515,7 @@ void CmyouboxDlg::LoadGameInfo()
 }
 
 // 加载游戏类型数据
-void CmyouboxDlg::LoadGameTypeInfo()
+void CDlgGameMenu::LoadGameTypeInfo()
 {
 	// 获取游戏类型第一级数据列表
 	list<PGameTypeItem> lt;
@@ -562,7 +562,7 @@ void CmyouboxDlg::LoadGameTypeInfo()
 }
 
 // 处理树形控件选择项改变
-void CmyouboxDlg::OnTreeCtrlSelectedChanged(PLKTREEITEM pOldItem)
+void CDlgGameMenu::OnTreeCtrlSelectedChanged(PLKTREEITEM pOldItem)
 {
 	// 获取当前选中项
 	PLKTREEITEM pItem = m_treeMain.GetCurSelected();
@@ -590,7 +590,7 @@ void CmyouboxDlg::OnTreeCtrlSelectedChanged(PLKTREEITEM pOldItem)
 }
 
 // 处理TAB控件选择项改变
-void CmyouboxDlg::OnTabCtrlSelectedChanged()
+void CDlgGameMenu::OnTabCtrlSelectedChanged()
 {
 	//// 获取当前选中项
 	m_Container.DeleteAllItem();
@@ -667,7 +667,7 @@ void CmyouboxDlg::OnTabCtrlSelectedChanged()
 	//m_Container.Invalidate();
 }
 
-void CmyouboxDlg::OnSysCommand(UINT nID, LPARAM lParam)
+void CDlgGameMenu::OnSysCommand(UINT nID, LPARAM lParam)
 {
 	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
 	{
@@ -684,7 +684,7 @@ void CmyouboxDlg::OnSysCommand(UINT nID, LPARAM lParam)
 //  来绘制该图标。  对于使用文档/视图模型的 MFC 应用程序，
 //  这将由框架自动完成。
 
-void CmyouboxDlg::OnPaint()
+void CDlgGameMenu::OnPaint()
 {
 	if (IsIconic())
 	{
@@ -711,19 +711,19 @@ void CmyouboxDlg::OnPaint()
 
 //当用户拖动最小化窗口时系统调用此函数取得光标
 //显示。
-HCURSOR CmyouboxDlg::OnQueryDragIcon()
+HCURSOR CDlgGameMenu::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-void CmyouboxDlg::OnSize(UINT nType, int cx, int cy)
+void CDlgGameMenu::OnSize(UINT nType, int cx, int cy)
 {
 	CLKMainDialog::OnSize(nType, cx, cy);
 	//AdjustChildCtrl();
 }
 
 // 调整子控件的位置
-void CmyouboxDlg::AdjustChildCtrl()
+void CDlgGameMenu::AdjustChildCtrl()
 {
 	CRect rt;
 	GetClientRect(&rt);
@@ -756,7 +756,7 @@ void CmyouboxDlg::AdjustChildCtrl()
 }
 
 // 更新其它窗口
-void CmyouboxDlg::UpdateAllDlgBGImg()
+void CDlgGameMenu::UpdateAllDlgBGImg()
 {
 	m_ctlSearch.SendMessage(LKCOMMON_MSG, LKCOMMON_MSG_WPARAM_RESETMEM, 0);
 
@@ -765,7 +765,7 @@ void CmyouboxDlg::UpdateAllDlgBGImg()
 	// 
 }
 
-void CmyouboxDlg::OnBnClickedButtonSearch()
+void CDlgGameMenu::OnBnClickedButtonSearch()
 {
 	//m_BtnSearch.ShowWindow(SW_HIDE);
 	if (m_ctlSearch.IsWindowVisible())
@@ -774,7 +774,7 @@ void CmyouboxDlg::OnBnClickedButtonSearch()
 	}
 	m_ctlSearch.ShowWindow(m_ctlSearch.IsWindowVisible() ? SW_HIDE : SW_SHOW);
 }
-void CmyouboxDlg::OnEnChangeEdit()
+void CDlgGameMenu::OnEnChangeEdit()
 {
 	if (!m_ctlSearch.IsWindowVisible())
 	{
@@ -787,14 +787,14 @@ void CmyouboxDlg::OnEnChangeEdit()
 	OnEBnClickedButtonSearchI();
 }
 
-void CmyouboxDlg::OnEBnClickedButtonSearch()
+void CDlgGameMenu::OnEBnClickedButtonSearch()
 {
 	//OnEBnClickedButtonSearchI();
 	//m_ctlSearch.SetWindowText(L"");
 	//m_ctlSearch.ShowWindow(SW_HIDE);
 	//m_BtnSearch.ShowWindow(SW_SHOW);
 }
-void CmyouboxDlg::OnEBnClickedButtonSearchI()
+void CDlgGameMenu::OnEBnClickedButtonSearchI()
 {
 	m_tabMain.DelAllItem();
 	list<PGameItem> lt;
@@ -829,27 +829,27 @@ void CmyouboxDlg::OnEBnClickedButtonSearchI()
 }
 
 // 右键处理
-void CmyouboxDlg::OnTrayRButtonUp()
+void CDlgGameMenu::OnTrayRButtonUp()
 {
 	CTrayMainMenu menu;
 	menu.Show(this);
 }
 
 // 最小化按钮被按下
-void CmyouboxDlg::OnMinClick()
+void CDlgGameMenu::OnMinClick()
 {
 	CLKDialog::OnMinClick();
 }
 
 // 事件
-BOOL CmyouboxDlg::OnEnterPress(HWND hCrtl, LPARAM lparam)
+BOOL CDlgGameMenu::OnEnterPress(HWND hCrtl, LPARAM lparam)
 {
 	OnEBnClickedButtonSearch();
 	return TRUE;
 }
 
 // 修改窗口区域
-void CmyouboxDlg::ModiDialogRectRgn(CRgn &rgn)
+void CDlgGameMenu::ModiDialogRectRgn(CRgn &rgn)
 {
 	CRgn rgnSub;
 	CRect rt(0, 0, CURSCREEN_WIDTH, CURSCREEN_HEIGHT);
@@ -860,12 +860,12 @@ void CmyouboxDlg::ModiDialogRectRgn(CRgn &rgn)
 }
 
 // 左键按下
-void CmyouboxDlg::OnTrayLButtonDown()
+void CDlgGameMenu::OnTrayLButtonDown()
 {
 	OnOpenMainPanel();
 }
 
-void CmyouboxDlg::OnOpenMainPanel()
+void CDlgGameMenu::OnOpenMainPanel()
 {
 	OpenMainPanel();
 	//if (!IsWindowVisible())
@@ -874,12 +874,12 @@ void CmyouboxDlg::OnOpenMainPanel()
 	//}
 	//SetForegroundWindow();
 }
-void CmyouboxDlg::OnLockClient()
+void CDlgGameMenu::OnLockClient()
 {
 	CDlgLockScreen::LockScreen(true);
 }
 
-void CmyouboxDlg::OnShowWindow(BOOL bShow, UINT nStatus)
+void CDlgGameMenu::OnShowWindow(BOOL bShow, UINT nStatus)
 {
 	CLKMainDialog::OnShowWindow(bShow, nStatus);
 	if (!bShow)
@@ -899,7 +899,7 @@ void CmyouboxDlg::OnShowWindow(BOOL bShow, UINT nStatus)
 	}
 }
 
-void CmyouboxDlg::OnTimer(UINT_PTR nIDEvent)
+void CDlgGameMenu::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO:  在此添加消息处理程序代码和/或调用默认值
 	if (10000 == nIDEvent)
@@ -961,7 +961,7 @@ void CmyouboxDlg::OnTimer(UINT_PTR nIDEvent)
 	CLKMainDialog::OnTimer(nIDEvent);
 }
 
-bool CmyouboxDlg::GetProcessidFromName(CString &strName)
+bool CDlgGameMenu::GetProcessidFromName(CString &strName)
 {
 	PROCESSENTRY32 pe;
 	bool bRet = false;
@@ -988,7 +988,7 @@ bool CmyouboxDlg::GetProcessidFromName(CString &strName)
 	return bRet;
 }
 
-LRESULT CmyouboxDlg::OnNcHitTest(CPoint point)
+LRESULT CDlgGameMenu::OnNcHitTest(CPoint point)
 {
 	return HTOBJECT;
 

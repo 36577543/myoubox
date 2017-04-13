@@ -169,7 +169,7 @@
     <ClInclude Include="md5.hh" />
     <ClInclude Include="myoubox.h" />
     <ClInclude Include="myouboxConst.h" />
-    <ClInclude Include="myouboxDlg.h" />
+    <ClInclude Include="DlgGameMenu.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StoreConfig.h" />
@@ -336,7 +336,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="myoubox.cpp" />
-    <ClCompile Include="myouboxDlg.cpp" />
+    <ClCompile Include="DlgGameMenu.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -364,7 +364,6 @@
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="res\myoubox.rc2" />
-    <None Include="store.cfg" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\common\res\jpg\dlg_bg.jpg" />

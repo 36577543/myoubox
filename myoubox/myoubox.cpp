@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "myoubox.h"
-#include "myouboxDlg.h"
+#include "DlgGameMenu.h"
 #include "myouboxConst.h"
 #include "TrayMainMenu.h"
 
@@ -133,7 +133,7 @@ BOOL CmyouboxApp::InitInstance()
 		return FALSE;
 
 	CDlgLockScreen::LockScreen(true);
-	CmyouboxDlg dlg;
+	CDlgGameMenu dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)
