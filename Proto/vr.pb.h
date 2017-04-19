@@ -34,27 +34,36 @@
 class Activity;
 class ActivityDefaultTypeInternal;
 extern ActivityDefaultTypeInternal _Activity_default_instance_;
+class AuthInfo;
+class AuthInfoDefaultTypeInternal;
+extern AuthInfoDefaultTypeInternal _AuthInfo_default_instance_;
+class Bill;
+class BillDefaultTypeInternal;
+extern BillDefaultTypeInternal _Bill_default_instance_;
 class Config;
 class ConfigDefaultTypeInternal;
 extern ConfigDefaultTypeInternal _Config_default_instance_;
 class Coupon;
 class CouponDefaultTypeInternal;
 extern CouponDefaultTypeInternal _Coupon_default_instance_;
-class DayPrice;
-class DayPriceDefaultTypeInternal;
-extern DayPriceDefaultTypeInternal _DayPrice_default_instance_;
-class DayPrice_PeriodPrice;
-class DayPrice_PeriodPriceDefaultTypeInternal;
-extern DayPrice_PeriodPriceDefaultTypeInternal _DayPrice_PeriodPrice_default_instance_;
 class DeviceInfo;
 class DeviceInfoDefaultTypeInternal;
 extern DeviceInfoDefaultTypeInternal _DeviceInfo_default_instance_;
 class Notification;
 class NotificationDefaultTypeInternal;
 extern NotificationDefaultTypeInternal _Notification_default_instance_;
-class PricePolicy;
-class PricePolicyDefaultTypeInternal;
-extern PricePolicyDefaultTypeInternal _PricePolicy_default_instance_;
+class PeriodPrice;
+class PeriodPriceDefaultTypeInternal;
+extern PeriodPriceDefaultTypeInternal _PeriodPrice_default_instance_;
+class PeriodPriceList;
+class PeriodPriceListDefaultTypeInternal;
+extern PeriodPriceListDefaultTypeInternal _PeriodPriceList_default_instance_;
+class Price;
+class PriceDefaultTypeInternal;
+extern PriceDefaultTypeInternal _Price_default_instance_;
+class PriceGroup;
+class PriceGroupDefaultTypeInternal;
+extern PriceGroupDefaultTypeInternal _PriceGroup_default_instance_;
 class RemoteControl;
 class RemoteControlDefaultTypeInternal;
 extern RemoteControlDefaultTypeInternal _RemoteControl_default_instance_;
@@ -77,6 +86,1091 @@ void InitDefaults();
 }  // namespace protobuf_vr_2eproto
 
 // ===================================================================
+
+class AuthInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:AuthInfo) */ {
+ public:
+  AuthInfo();
+  virtual ~AuthInfo();
+
+  AuthInfo(const AuthInfo& from);
+
+  inline AuthInfo& operator=(const AuthInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AuthInfo& default_instance();
+
+  static inline const AuthInfo* internal_default_instance() {
+    return reinterpret_cast<const AuthInfo*>(
+               &_AuthInfo_default_instance_);
+  }
+
+  void Swap(AuthInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  inline AuthInfo* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  AuthInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const AuthInfo& from);
+  void MergeFrom(const AuthInfo& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(AuthInfo* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string when = 2;
+  void clear_when();
+  static const int kWhenFieldNumber = 2;
+  const ::std::string& when() const;
+  void set_when(const ::std::string& value);
+  #if LANG_CXX11
+  void set_when(::std::string&& value);
+  #endif
+  void set_when(const char* value);
+  void set_when(const char* value, size_t size);
+  ::std::string* mutable_when();
+  ::std::string* release_when();
+  void set_allocated_when(::std::string* when);
+
+  // string sign = 3;
+  void clear_sign();
+  static const int kSignFieldNumber = 3;
+  const ::std::string& sign() const;
+  void set_sign(const ::std::string& value);
+  #if LANG_CXX11
+  void set_sign(::std::string&& value);
+  #endif
+  void set_sign(const char* value);
+  void set_sign(const char* value, size_t size);
+  ::std::string* mutable_sign();
+  ::std::string* release_sign();
+  void set_allocated_sign(::std::string* sign);
+
+  // int64 storeID = 1;
+  void clear_storeid();
+  static const int kStoreIDFieldNumber = 1;
+  ::google::protobuf::int64 storeid() const;
+  void set_storeid(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:AuthInfo)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr when_;
+  ::google::protobuf::internal::ArenaStringPtr sign_;
+  ::google::protobuf::int64 storeid_;
+  mutable int _cached_size_;
+  friend struct  protobuf_vr_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class Config : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Config) */ {
+ public:
+  Config();
+  virtual ~Config();
+
+  Config(const Config& from);
+
+  inline Config& operator=(const Config& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Config& default_instance();
+
+  static inline const Config* internal_default_instance() {
+    return reinterpret_cast<const Config*>(
+               &_Config_default_instance_);
+  }
+
+  void Swap(Config* other);
+
+  // implements Message ----------------------------------------------
+
+  inline Config* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  Config* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const Config& from);
+  void MergeFrom(const Config& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(Config* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .Notification notices = 3;
+  int notices_size() const;
+  void clear_notices();
+  static const int kNoticesFieldNumber = 3;
+  const ::Notification& notices(int index) const;
+  ::Notification* mutable_notices(int index);
+  ::Notification* add_notices();
+  ::google::protobuf::RepeatedPtrField< ::Notification >*
+      mutable_notices();
+  const ::google::protobuf::RepeatedPtrField< ::Notification >&
+      notices() const;
+
+  // string storeName = 1;
+  void clear_storename();
+  static const int kStoreNameFieldNumber = 1;
+  const ::std::string& storename() const;
+  void set_storename(const ::std::string& value);
+  #if LANG_CXX11
+  void set_storename(::std::string&& value);
+  #endif
+  void set_storename(const char* value);
+  void set_storename(const char* value, size_t size);
+  ::std::string* mutable_storename();
+  ::std::string* release_storename();
+  void set_allocated_storename(::std::string* storename);
+
+  // int32 freeMinutes = 2;
+  void clear_freeminutes();
+  static const int kFreeMinutesFieldNumber = 2;
+  ::google::protobuf::int32 freeminutes() const;
+  void set_freeminutes(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Config)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::Notification > notices_;
+  ::google::protobuf::internal::ArenaStringPtr storename_;
+  ::google::protobuf::int32 freeminutes_;
+  mutable int _cached_size_;
+  friend struct  protobuf_vr_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class Notification : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Notification) */ {
+ public:
+  Notification();
+  virtual ~Notification();
+
+  Notification(const Notification& from);
+
+  inline Notification& operator=(const Notification& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Notification& default_instance();
+
+  static inline const Notification* internal_default_instance() {
+    return reinterpret_cast<const Notification*>(
+               &_Notification_default_instance_);
+  }
+
+  void Swap(Notification* other);
+
+  // implements Message ----------------------------------------------
+
+  inline Notification* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  Notification* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const Notification& from);
+  void MergeFrom(const Notification& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(Notification* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string msg = 2;
+  void clear_msg();
+  static const int kMsgFieldNumber = 2;
+  const ::std::string& msg() const;
+  void set_msg(const ::std::string& value);
+  #if LANG_CXX11
+  void set_msg(::std::string&& value);
+  #endif
+  void set_msg(const char* value);
+  void set_msg(const char* value, size_t size);
+  ::std::string* mutable_msg();
+  ::std::string* release_msg();
+  void set_allocated_msg(::std::string* msg);
+
+  // bytes image = 3;
+  void clear_image();
+  static const int kImageFieldNumber = 3;
+  const ::std::string& image() const;
+  void set_image(const ::std::string& value);
+  #if LANG_CXX11
+  void set_image(::std::string&& value);
+  #endif
+  void set_image(const char* value);
+  void set_image(const void* value, size_t size);
+  ::std::string* mutable_image();
+  ::std::string* release_image();
+  void set_allocated_image(::std::string* image);
+
+  // string Url = 4;
+  void clear_url();
+  static const int kUrlFieldNumber = 4;
+  const ::std::string& url() const;
+  void set_url(const ::std::string& value);
+  #if LANG_CXX11
+  void set_url(::std::string&& value);
+  #endif
+  void set_url(const char* value);
+  void set_url(const char* value, size_t size);
+  ::std::string* mutable_url();
+  ::std::string* release_url();
+  void set_allocated_url(::std::string* url);
+
+  // int32 type = 1;
+  void clear_type();
+  static const int kTypeFieldNumber = 1;
+  ::google::protobuf::int32 type() const;
+  void set_type(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Notification)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr msg_;
+  ::google::protobuf::internal::ArenaStringPtr image_;
+  ::google::protobuf::internal::ArenaStringPtr url_;
+  ::google::protobuf::int32 type_;
+  mutable int _cached_size_;
+  friend struct  protobuf_vr_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class PeriodPriceList : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:PeriodPriceList) */ {
+ public:
+  PeriodPriceList();
+  virtual ~PeriodPriceList();
+
+  PeriodPriceList(const PeriodPriceList& from);
+
+  inline PeriodPriceList& operator=(const PeriodPriceList& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PeriodPriceList& default_instance();
+
+  static inline const PeriodPriceList* internal_default_instance() {
+    return reinterpret_cast<const PeriodPriceList*>(
+               &_PeriodPriceList_default_instance_);
+  }
+
+  void Swap(PeriodPriceList* other);
+
+  // implements Message ----------------------------------------------
+
+  inline PeriodPriceList* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  PeriodPriceList* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const PeriodPriceList& from);
+  void MergeFrom(const PeriodPriceList& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(PeriodPriceList* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .PeriodPrice periodPrices = 1;
+  int periodprices_size() const;
+  void clear_periodprices();
+  static const int kPeriodPricesFieldNumber = 1;
+  const ::PeriodPrice& periodprices(int index) const;
+  ::PeriodPrice* mutable_periodprices(int index);
+  ::PeriodPrice* add_periodprices();
+  ::google::protobuf::RepeatedPtrField< ::PeriodPrice >*
+      mutable_periodprices();
+  const ::google::protobuf::RepeatedPtrField< ::PeriodPrice >&
+      periodprices() const;
+
+  // @@protoc_insertion_point(class_scope:PeriodPriceList)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::PeriodPrice > periodprices_;
+  mutable int _cached_size_;
+  friend struct  protobuf_vr_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class PeriodPrice : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:PeriodPrice) */ {
+ public:
+  PeriodPrice();
+  virtual ~PeriodPrice();
+
+  PeriodPrice(const PeriodPrice& from);
+
+  inline PeriodPrice& operator=(const PeriodPrice& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PeriodPrice& default_instance();
+
+  static inline const PeriodPrice* internal_default_instance() {
+    return reinterpret_cast<const PeriodPrice*>(
+               &_PeriodPrice_default_instance_);
+  }
+
+  void Swap(PeriodPrice* other);
+
+  // implements Message ----------------------------------------------
+
+  inline PeriodPrice* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  PeriodPrice* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const PeriodPrice& from);
+  void MergeFrom(const PeriodPrice& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(PeriodPrice* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .PriceGroup priceGroup = 2;
+  bool has_pricegroup() const;
+  void clear_pricegroup();
+  static const int kPriceGroupFieldNumber = 2;
+  const ::PriceGroup& pricegroup() const;
+  ::PriceGroup* mutable_pricegroup();
+  ::PriceGroup* release_pricegroup();
+  void set_allocated_pricegroup(::PriceGroup* pricegroup);
+
+  // int32 timeKey = 1;
+  void clear_timekey();
+  static const int kTimeKeyFieldNumber = 1;
+  ::google::protobuf::int32 timekey() const;
+  void set_timekey(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:PeriodPrice)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PriceGroup* pricegroup_;
+  ::google::protobuf::int32 timekey_;
+  mutable int _cached_size_;
+  friend struct  protobuf_vr_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class PriceGroup : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:PriceGroup) */ {
+ public:
+  PriceGroup();
+  virtual ~PriceGroup();
+
+  PriceGroup(const PriceGroup& from);
+
+  inline PriceGroup& operator=(const PriceGroup& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PriceGroup& default_instance();
+
+  static inline const PriceGroup* internal_default_instance() {
+    return reinterpret_cast<const PriceGroup*>(
+               &_PriceGroup_default_instance_);
+  }
+
+  void Swap(PriceGroup* other);
+
+  // implements Message ----------------------------------------------
+
+  inline PriceGroup* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  PriceGroup* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const PriceGroup& from);
+  void MergeFrom(const PriceGroup& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(PriceGroup* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .Price prices = 3;
+  int prices_size() const;
+  void clear_prices();
+  static const int kPricesFieldNumber = 3;
+  const ::Price& prices(int index) const;
+  ::Price* mutable_prices(int index);
+  ::Price* add_prices();
+  ::google::protobuf::RepeatedPtrField< ::Price >*
+      mutable_prices();
+  const ::google::protobuf::RepeatedPtrField< ::Price >&
+      prices() const;
+
+  // string name = 2;
+  void clear_name();
+  static const int kNameFieldNumber = 2;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
+  // @@protoc_insertion_point(class_scope:PriceGroup)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::Price > prices_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
+  mutable int _cached_size_;
+  friend struct  protobuf_vr_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class Price : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Price) */ {
+ public:
+  Price();
+  virtual ~Price();
+
+  Price(const Price& from);
+
+  inline Price& operator=(const Price& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Price& default_instance();
+
+  static inline const Price* internal_default_instance() {
+    return reinterpret_cast<const Price*>(
+               &_Price_default_instance_);
+  }
+
+  void Swap(Price* other);
+
+  // implements Message ----------------------------------------------
+
+  inline Price* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  Price* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const Price& from);
+  void MergeFrom(const Price& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(Price* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // int32 duration = 1;
+  void clear_duration();
+  static const int kDurationFieldNumber = 1;
+  ::google::protobuf::int32 duration() const;
+  void set_duration(::google::protobuf::int32 value);
+
+  // int32 money = 2;
+  void clear_money();
+  static const int kMoneyFieldNumber = 2;
+  ::google::protobuf::int32 money() const;
+  void set_money(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Price)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::int32 duration_;
+  ::google::protobuf::int32 money_;
+  mutable int _cached_size_;
+  friend struct  protobuf_vr_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class Bill : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Bill) */ {
+ public:
+  Bill();
+  virtual ~Bill();
+
+  Bill(const Bill& from);
+
+  inline Bill& operator=(const Bill& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Bill& default_instance();
+
+  static inline const Bill* internal_default_instance() {
+    return reinterpret_cast<const Bill*>(
+               &_Bill_default_instance_);
+  }
+
+  void Swap(Bill* other);
+
+  // implements Message ----------------------------------------------
+
+  inline Bill* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  Bill* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const Bill& from);
+  void MergeFrom(const Bill& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(Bill* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // int32 balance = 1;
+  void clear_balance();
+  static const int kBalanceFieldNumber = 1;
+  ::google::protobuf::int32 balance() const;
+  void set_balance(::google::protobuf::int32 value);
+
+  // int32 consume = 2;
+  void clear_consume();
+  static const int kConsumeFieldNumber = 2;
+  ::google::protobuf::int32 consume() const;
+  void set_consume(::google::protobuf::int32 value);
+
+  // int32 duration = 3;
+  void clear_duration();
+  static const int kDurationFieldNumber = 3;
+  ::google::protobuf::int32 duration() const;
+  void set_duration(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Bill)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::int32 balance_;
+  ::google::protobuf::int32 consume_;
+  ::google::protobuf::int32 duration_;
+  mutable int _cached_size_;
+  friend struct  protobuf_vr_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class UserInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:UserInfo) */ {
+ public:
+  UserInfo();
+  virtual ~UserInfo();
+
+  UserInfo(const UserInfo& from);
+
+  inline UserInfo& operator=(const UserInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UserInfo& default_instance();
+
+  static inline const UserInfo* internal_default_instance() {
+    return reinterpret_cast<const UserInfo*>(
+               &_UserInfo_default_instance_);
+  }
+
+  void Swap(UserInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  inline UserInfo* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  UserInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const UserInfo& from);
+  void MergeFrom(const UserInfo& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(UserInfo* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .Coupon coupons = 6;
+  int coupons_size() const;
+  void clear_coupons();
+  static const int kCouponsFieldNumber = 6;
+  const ::Coupon& coupons(int index) const;
+  ::Coupon* mutable_coupons(int index);
+  ::Coupon* add_coupons();
+  ::google::protobuf::RepeatedPtrField< ::Coupon >*
+      mutable_coupons();
+  const ::google::protobuf::RepeatedPtrField< ::Coupon >&
+      coupons() const;
+
+  // string openid = 2;
+  void clear_openid();
+  static const int kOpenidFieldNumber = 2;
+  const ::std::string& openid() const;
+  void set_openid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_openid(::std::string&& value);
+  #endif
+  void set_openid(const char* value);
+  void set_openid(const char* value, size_t size);
+  ::std::string* mutable_openid();
+  ::std::string* release_openid();
+  void set_allocated_openid(::std::string* openid);
+
+  // string nickname = 3;
+  void clear_nickname();
+  static const int kNicknameFieldNumber = 3;
+  const ::std::string& nickname() const;
+  void set_nickname(const ::std::string& value);
+  #if LANG_CXX11
+  void set_nickname(::std::string&& value);
+  #endif
+  void set_nickname(const char* value);
+  void set_nickname(const char* value, size_t size);
+  ::std::string* mutable_nickname();
+  ::std::string* release_nickname();
+  void set_allocated_nickname(::std::string* nickname);
+
+  // bytes headImage = 4;
+  void clear_headimage();
+  static const int kHeadImageFieldNumber = 4;
+  const ::std::string& headimage() const;
+  void set_headimage(const ::std::string& value);
+  #if LANG_CXX11
+  void set_headimage(::std::string&& value);
+  #endif
+  void set_headimage(const char* value);
+  void set_headimage(const void* value, size_t size);
+  ::std::string* mutable_headimage();
+  ::std::string* release_headimage();
+  void set_allocated_headimage(::std::string* headimage);
+
+  // int64 userID = 1;
+  void clear_userid();
+  static const int kUserIDFieldNumber = 1;
+  ::google::protobuf::int64 userid() const;
+  void set_userid(::google::protobuf::int64 value);
+
+  // float balance = 5;
+  void clear_balance();
+  static const int kBalanceFieldNumber = 5;
+  float balance() const;
+  void set_balance(float value);
+
+  // @@protoc_insertion_point(class_scope:UserInfo)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::Coupon > coupons_;
+  ::google::protobuf::internal::ArenaStringPtr openid_;
+  ::google::protobuf::internal::ArenaStringPtr nickname_;
+  ::google::protobuf::internal::ArenaStringPtr headimage_;
+  ::google::protobuf::int64 userid_;
+  float balance_;
+  mutable int _cached_size_;
+  friend struct  protobuf_vr_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class Coupon : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Coupon) */ {
+ public:
+  Coupon();
+  virtual ~Coupon();
+
+  Coupon(const Coupon& from);
+
+  inline Coupon& operator=(const Coupon& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Coupon& default_instance();
+
+  static inline const Coupon* internal_default_instance() {
+    return reinterpret_cast<const Coupon*>(
+               &_Coupon_default_instance_);
+  }
+
+  void Swap(Coupon* other);
+
+  // implements Message ----------------------------------------------
+
+  inline Coupon* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  Coupon* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const Coupon& from);
+  void MergeFrom(const Coupon& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(Coupon* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string comment = 4;
+  void clear_comment();
+  static const int kCommentFieldNumber = 4;
+  const ::std::string& comment() const;
+  void set_comment(const ::std::string& value);
+  #if LANG_CXX11
+  void set_comment(::std::string&& value);
+  #endif
+  void set_comment(const char* value);
+  void set_comment(const char* value, size_t size);
+  ::std::string* mutable_comment();
+  ::std::string* release_comment();
+  void set_allocated_comment(::std::string* comment);
+
+  // int32 type = 1;
+  void clear_type();
+  static const int kTypeFieldNumber = 1;
+  ::google::protobuf::int32 type() const;
+  void set_type(::google::protobuf::int32 value);
+
+  // float price = 2;
+  void clear_price();
+  static const int kPriceFieldNumber = 2;
+  float price() const;
+  void set_price(float value);
+
+  // float discounts = 3;
+  void clear_discounts();
+  static const int kDiscountsFieldNumber = 3;
+  float discounts() const;
+  void set_discounts(float value);
+
+  // @@protoc_insertion_point(class_scope:Coupon)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr comment_;
+  ::google::protobuf::int32 type_;
+  float price_;
+  float discounts_;
+  mutable int _cached_size_;
+  friend struct  protobuf_vr_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
 
 
 // -------------------------------------------------------------------
@@ -291,400 +1385,6 @@ class DeviceInfo : public ::google::protobuf::Message /* @@protoc_insertion_poin
 };
 // -------------------------------------------------------------------
 
-class UserInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:UserInfo) */ {
- public:
-  UserInfo();
-  virtual ~UserInfo();
-
-  UserInfo(const UserInfo& from);
-
-  inline UserInfo& operator=(const UserInfo& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const UserInfo& default_instance();
-
-  static inline const UserInfo* internal_default_instance() {
-    return reinterpret_cast<const UserInfo*>(
-               &_UserInfo_default_instance_);
-  }
-
-  void Swap(UserInfo* other);
-
-  // implements Message ----------------------------------------------
-
-  inline UserInfo* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  UserInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const UserInfo& from);
-  void MergeFrom(const UserInfo& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
-      const PROTOBUF_FINAL {
-    return InternalSerializeWithCachedSizesToArray(
-        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
-  }
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(UserInfo* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // repeated .Coupon coupons = 6;
-  int coupons_size() const;
-  void clear_coupons();
-  static const int kCouponsFieldNumber = 6;
-  const ::Coupon& coupons(int index) const;
-  ::Coupon* mutable_coupons(int index);
-  ::Coupon* add_coupons();
-  ::google::protobuf::RepeatedPtrField< ::Coupon >*
-      mutable_coupons();
-  const ::google::protobuf::RepeatedPtrField< ::Coupon >&
-      coupons() const;
-
-  // string openid = 1;
-  void clear_openid();
-  static const int kOpenidFieldNumber = 1;
-  const ::std::string& openid() const;
-  void set_openid(const ::std::string& value);
-  #if LANG_CXX11
-  void set_openid(::std::string&& value);
-  #endif
-  void set_openid(const char* value);
-  void set_openid(const char* value, size_t size);
-  ::std::string* mutable_openid();
-  ::std::string* release_openid();
-  void set_allocated_openid(::std::string* openid);
-
-  // string nickname = 2;
-  void clear_nickname();
-  static const int kNicknameFieldNumber = 2;
-  const ::std::string& nickname() const;
-  void set_nickname(const ::std::string& value);
-  #if LANG_CXX11
-  void set_nickname(::std::string&& value);
-  #endif
-  void set_nickname(const char* value);
-  void set_nickname(const char* value, size_t size);
-  ::std::string* mutable_nickname();
-  ::std::string* release_nickname();
-  void set_allocated_nickname(::std::string* nickname);
-
-  // string headimgUrl = 3;
-  void clear_headimgurl();
-  static const int kHeadimgUrlFieldNumber = 3;
-  const ::std::string& headimgurl() const;
-  void set_headimgurl(const ::std::string& value);
-  #if LANG_CXX11
-  void set_headimgurl(::std::string&& value);
-  #endif
-  void set_headimgurl(const char* value);
-  void set_headimgurl(const char* value, size_t size);
-  ::std::string* mutable_headimgurl();
-  ::std::string* release_headimgurl();
-  void set_allocated_headimgurl(::std::string* headimgurl);
-
-  // float balance = 4;
-  void clear_balance();
-  static const int kBalanceFieldNumber = 4;
-  float balance() const;
-  void set_balance(float value);
-
-  // int32 playMinutes = 5;
-  void clear_playminutes();
-  static const int kPlayMinutesFieldNumber = 5;
-  ::google::protobuf::int32 playminutes() const;
-  void set_playminutes(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:UserInfo)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::Coupon > coupons_;
-  ::google::protobuf::internal::ArenaStringPtr openid_;
-  ::google::protobuf::internal::ArenaStringPtr nickname_;
-  ::google::protobuf::internal::ArenaStringPtr headimgurl_;
-  float balance_;
-  ::google::protobuf::int32 playminutes_;
-  mutable int _cached_size_;
-  friend struct  protobuf_vr_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-class Config : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Config) */ {
- public:
-  Config();
-  virtual ~Config();
-
-  Config(const Config& from);
-
-  inline Config& operator=(const Config& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const Config& default_instance();
-
-  static inline const Config* internal_default_instance() {
-    return reinterpret_cast<const Config*>(
-               &_Config_default_instance_);
-  }
-
-  void Swap(Config* other);
-
-  // implements Message ----------------------------------------------
-
-  inline Config* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  Config* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const Config& from);
-  void MergeFrom(const Config& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
-      const PROTOBUF_FINAL {
-    return InternalSerializeWithCachedSizesToArray(
-        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
-  }
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(Config* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // repeated .Notification notices = 4;
-  int notices_size() const;
-  void clear_notices();
-  static const int kNoticesFieldNumber = 4;
-  const ::Notification& notices(int index) const;
-  ::Notification* mutable_notices(int index);
-  ::Notification* add_notices();
-  ::google::protobuf::RepeatedPtrField< ::Notification >*
-      mutable_notices();
-  const ::google::protobuf::RepeatedPtrField< ::Notification >&
-      notices() const;
-
-  // string storeName = 1;
-  void clear_storename();
-  static const int kStoreNameFieldNumber = 1;
-  const ::std::string& storename() const;
-  void set_storename(const ::std::string& value);
-  #if LANG_CXX11
-  void set_storename(::std::string&& value);
-  #endif
-  void set_storename(const char* value);
-  void set_storename(const char* value, size_t size);
-  ::std::string* mutable_storename();
-  ::std::string* release_storename();
-  void set_allocated_storename(::std::string* storename);
-
-  // int32 storeId = 2;
-  void clear_storeid();
-  static const int kStoreIdFieldNumber = 2;
-  ::google::protobuf::int32 storeid() const;
-  void set_storeid(::google::protobuf::int32 value);
-
-  // int32 freeMinutes = 3;
-  void clear_freeminutes();
-  static const int kFreeMinutesFieldNumber = 3;
-  ::google::protobuf::int32 freeminutes() const;
-  void set_freeminutes(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:Config)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::Notification > notices_;
-  ::google::protobuf::internal::ArenaStringPtr storename_;
-  ::google::protobuf::int32 storeid_;
-  ::google::protobuf::int32 freeminutes_;
-  mutable int _cached_size_;
-  friend struct  protobuf_vr_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-class Notification : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Notification) */ {
- public:
-  Notification();
-  virtual ~Notification();
-
-  Notification(const Notification& from);
-
-  inline Notification& operator=(const Notification& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const Notification& default_instance();
-
-  static inline const Notification* internal_default_instance() {
-    return reinterpret_cast<const Notification*>(
-               &_Notification_default_instance_);
-  }
-
-  void Swap(Notification* other);
-
-  // implements Message ----------------------------------------------
-
-  inline Notification* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  Notification* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const Notification& from);
-  void MergeFrom(const Notification& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
-      const PROTOBUF_FINAL {
-    return InternalSerializeWithCachedSizesToArray(
-        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
-  }
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(Notification* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // string msg = 2;
-  void clear_msg();
-  static const int kMsgFieldNumber = 2;
-  const ::std::string& msg() const;
-  void set_msg(const ::std::string& value);
-  #if LANG_CXX11
-  void set_msg(::std::string&& value);
-  #endif
-  void set_msg(const char* value);
-  void set_msg(const char* value, size_t size);
-  ::std::string* mutable_msg();
-  ::std::string* release_msg();
-  void set_allocated_msg(::std::string* msg);
-
-  // bytes image = 3;
-  void clear_image();
-  static const int kImageFieldNumber = 3;
-  const ::std::string& image() const;
-  void set_image(const ::std::string& value);
-  #if LANG_CXX11
-  void set_image(::std::string&& value);
-  #endif
-  void set_image(const char* value);
-  void set_image(const void* value, size_t size);
-  ::std::string* mutable_image();
-  ::std::string* release_image();
-  void set_allocated_image(::std::string* image);
-
-  // string Url = 4;
-  void clear_url();
-  static const int kUrlFieldNumber = 4;
-  const ::std::string& url() const;
-  void set_url(const ::std::string& value);
-  #if LANG_CXX11
-  void set_url(::std::string&& value);
-  #endif
-  void set_url(const char* value);
-  void set_url(const char* value, size_t size);
-  ::std::string* mutable_url();
-  ::std::string* release_url();
-  void set_allocated_url(::std::string* url);
-
-  // int32 type = 1;
-  void clear_type();
-  static const int kTypeFieldNumber = 1;
-  ::google::protobuf::int32 type() const;
-  void set_type(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:Notification)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr msg_;
-  ::google::protobuf::internal::ArenaStringPtr image_;
-  ::google::protobuf::internal::ArenaStringPtr url_;
-  ::google::protobuf::int32 type_;
-  mutable int _cached_size_;
-  friend struct  protobuf_vr_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
 class RemoteControl : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:RemoteControl) */ {
  public:
   RemoteControl();
@@ -770,118 +1470,6 @@ class RemoteControl : public ::google::protobuf::Message /* @@protoc_insertion_p
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::int32 action_;
   ::google::protobuf::int32 command_;
-  mutable int _cached_size_;
-  friend struct  protobuf_vr_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-class Coupon : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Coupon) */ {
- public:
-  Coupon();
-  virtual ~Coupon();
-
-  Coupon(const Coupon& from);
-
-  inline Coupon& operator=(const Coupon& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const Coupon& default_instance();
-
-  static inline const Coupon* internal_default_instance() {
-    return reinterpret_cast<const Coupon*>(
-               &_Coupon_default_instance_);
-  }
-
-  void Swap(Coupon* other);
-
-  // implements Message ----------------------------------------------
-
-  inline Coupon* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  Coupon* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const Coupon& from);
-  void MergeFrom(const Coupon& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
-      const PROTOBUF_FINAL {
-    return InternalSerializeWithCachedSizesToArray(
-        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
-  }
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(Coupon* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // string comment = 4;
-  void clear_comment();
-  static const int kCommentFieldNumber = 4;
-  const ::std::string& comment() const;
-  void set_comment(const ::std::string& value);
-  #if LANG_CXX11
-  void set_comment(::std::string&& value);
-  #endif
-  void set_comment(const char* value);
-  void set_comment(const char* value, size_t size);
-  ::std::string* mutable_comment();
-  ::std::string* release_comment();
-  void set_allocated_comment(::std::string* comment);
-
-  // int32 type = 1;
-  void clear_type();
-  static const int kTypeFieldNumber = 1;
-  ::google::protobuf::int32 type() const;
-  void set_type(::google::protobuf::int32 value);
-
-  // float price = 2;
-  void clear_price();
-  static const int kPriceFieldNumber = 2;
-  float price() const;
-  void set_price(float value);
-
-  // float discounts = 3;
-  void clear_discounts();
-  static const int kDiscountsFieldNumber = 3;
-  float discounts() const;
-  void set_discounts(float value);
-
-  // @@protoc_insertion_point(class_scope:Coupon)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr comment_;
-  ::google::protobuf::int32 type_;
-  float price_;
-  float discounts_;
   mutable int _cached_size_;
   friend struct  protobuf_vr_2eproto::TableStruct;
 };
@@ -993,677 +1581,130 @@ class Activity : public ::google::protobuf::Message /* @@protoc_insertion_point(
   mutable int _cached_size_;
   friend struct  protobuf_vr_2eproto::TableStruct;
 };
-// -------------------------------------------------------------------
-
-
-// -------------------------------------------------------------------
-
-class PricePolicy : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:PricePolicy) */ {
- public:
-  PricePolicy();
-  virtual ~PricePolicy();
-
-  PricePolicy(const PricePolicy& from);
-
-  inline PricePolicy& operator=(const PricePolicy& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const PricePolicy& default_instance();
-
-  static inline const PricePolicy* internal_default_instance() {
-    return reinterpret_cast<const PricePolicy*>(
-               &_PricePolicy_default_instance_);
-  }
-
-  void Swap(PricePolicy* other);
-
-  // implements Message ----------------------------------------------
-
-  inline PricePolicy* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  PricePolicy* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const PricePolicy& from);
-  void MergeFrom(const PricePolicy& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
-      const PROTOBUF_FINAL {
-    return InternalSerializeWithCachedSizesToArray(
-        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
-  }
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(PricePolicy* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-
-  // accessors -------------------------------------------------------
-
-  // map<int32, .DayPrice> dayPrices = 1;
-  int dayprices_size() const;
-  void clear_dayprices();
-  static const int kDayPricesFieldNumber = 1;
-  const ::google::protobuf::Map< ::google::protobuf::int32, ::DayPrice >&
-      dayprices() const;
-  ::google::protobuf::Map< ::google::protobuf::int32, ::DayPrice >*
-      mutable_dayprices();
-
-  // @@protoc_insertion_point(class_scope:PricePolicy)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  typedef ::google::protobuf::internal::MapEntryLite<
-      ::google::protobuf::int32, ::DayPrice,
-      ::google::protobuf::internal::WireFormatLite::TYPE_INT32,
-      ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
-      0 >
-      PricePolicy_DayPricesEntry;
-  ::google::protobuf::internal::MapField<
-      ::google::protobuf::int32, ::DayPrice,
-      ::google::protobuf::internal::WireFormatLite::TYPE_INT32,
-      ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
-      0 > dayprices_;
-  mutable int _cached_size_;
-  friend struct  protobuf_vr_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-
-// -------------------------------------------------------------------
-
-class DayPrice_PeriodPrice : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DayPrice.PeriodPrice) */ {
- public:
-  DayPrice_PeriodPrice();
-  virtual ~DayPrice_PeriodPrice();
-
-  DayPrice_PeriodPrice(const DayPrice_PeriodPrice& from);
-
-  inline DayPrice_PeriodPrice& operator=(const DayPrice_PeriodPrice& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const DayPrice_PeriodPrice& default_instance();
-
-  static inline const DayPrice_PeriodPrice* internal_default_instance() {
-    return reinterpret_cast<const DayPrice_PeriodPrice*>(
-               &_DayPrice_PeriodPrice_default_instance_);
-  }
-
-  void Swap(DayPrice_PeriodPrice* other);
-
-  // implements Message ----------------------------------------------
-
-  inline DayPrice_PeriodPrice* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  DayPrice_PeriodPrice* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const DayPrice_PeriodPrice& from);
-  void MergeFrom(const DayPrice_PeriodPrice& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
-      const PROTOBUF_FINAL {
-    return InternalSerializeWithCachedSizesToArray(
-        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
-  }
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(DayPrice_PeriodPrice* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-
-  // accessors -------------------------------------------------------
-
-  // map<int32, int32> prices = 3;
-  int prices_size() const;
-  void clear_prices();
-  static const int kPricesFieldNumber = 3;
-  const ::google::protobuf::Map< ::google::protobuf::int32, ::google::protobuf::int32 >&
-      prices() const;
-  ::google::protobuf::Map< ::google::protobuf::int32, ::google::protobuf::int32 >*
-      mutable_prices();
-
-  // int32 beginTime = 1;
-  void clear_begintime();
-  static const int kBeginTimeFieldNumber = 1;
-  ::google::protobuf::int32 begintime() const;
-  void set_begintime(::google::protobuf::int32 value);
-
-  // int32 endTime = 2;
-  void clear_endtime();
-  static const int kEndTimeFieldNumber = 2;
-  ::google::protobuf::int32 endtime() const;
-  void set_endtime(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:DayPrice.PeriodPrice)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  typedef ::google::protobuf::internal::MapEntryLite<
-      ::google::protobuf::int32, ::google::protobuf::int32,
-      ::google::protobuf::internal::WireFormatLite::TYPE_INT32,
-      ::google::protobuf::internal::WireFormatLite::TYPE_INT32,
-      0 >
-      DayPrice_PeriodPrice_PricesEntry;
-  ::google::protobuf::internal::MapField<
-      ::google::protobuf::int32, ::google::protobuf::int32,
-      ::google::protobuf::internal::WireFormatLite::TYPE_INT32,
-      ::google::protobuf::internal::WireFormatLite::TYPE_INT32,
-      0 > prices_;
-  ::google::protobuf::int32 begintime_;
-  ::google::protobuf::int32 endtime_;
-  mutable int _cached_size_;
-  friend struct  protobuf_vr_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
-class DayPrice : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DayPrice) */ {
- public:
-  DayPrice();
-  virtual ~DayPrice();
-
-  DayPrice(const DayPrice& from);
-
-  inline DayPrice& operator=(const DayPrice& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const DayPrice& default_instance();
-
-  static inline const DayPrice* internal_default_instance() {
-    return reinterpret_cast<const DayPrice*>(
-               &_DayPrice_default_instance_);
-  }
-
-  void Swap(DayPrice* other);
-
-  // implements Message ----------------------------------------------
-
-  inline DayPrice* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  DayPrice* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const DayPrice& from);
-  void MergeFrom(const DayPrice& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
-      const PROTOBUF_FINAL {
-    return InternalSerializeWithCachedSizesToArray(
-        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
-  }
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(DayPrice* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  typedef DayPrice_PeriodPrice PeriodPrice;
-
-  // accessors -------------------------------------------------------
-
-  // repeated .DayPrice.PeriodPrice periodPrices = 1;
-  int periodprices_size() const;
-  void clear_periodprices();
-  static const int kPeriodPricesFieldNumber = 1;
-  const ::DayPrice_PeriodPrice& periodprices(int index) const;
-  ::DayPrice_PeriodPrice* mutable_periodprices(int index);
-  ::DayPrice_PeriodPrice* add_periodprices();
-  ::google::protobuf::RepeatedPtrField< ::DayPrice_PeriodPrice >*
-      mutable_periodprices();
-  const ::google::protobuf::RepeatedPtrField< ::DayPrice_PeriodPrice >&
-      periodprices() const;
-
-  // @@protoc_insertion_point(class_scope:DayPrice)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::DayPrice_PeriodPrice > periodprices_;
-  mutable int _cached_size_;
-  friend struct  protobuf_vr_2eproto::TableStruct;
-};
 // ===================================================================
 
 
 // ===================================================================
 
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
-// -------------------------------------------------------------------
+// AuthInfo
 
-// StoreList
-
-// map<int32, string> stores = 1;
-inline int StoreList::stores_size() const {
-  return stores_.size();
+// int64 storeID = 1;
+inline void AuthInfo::clear_storeid() {
+  storeid_ = GOOGLE_LONGLONG(0);
 }
-inline void StoreList::clear_stores() {
-  stores_.Clear();
-}
-inline const ::google::protobuf::Map< ::google::protobuf::int32, ::std::string >&
-StoreList::stores() const {
-  // @@protoc_insertion_point(field_map:StoreList.stores)
-  return stores_.GetMap();
-}
-inline ::google::protobuf::Map< ::google::protobuf::int32, ::std::string >*
-StoreList::mutable_stores() {
-  // @@protoc_insertion_point(field_mutable_map:StoreList.stores)
-  return stores_.MutableMap();
-}
-
-// -------------------------------------------------------------------
-
-// DeviceInfo
-
-// int32 storeId = 1;
-inline void DeviceInfo::clear_storeid() {
-  storeid_ = 0;
-}
-inline ::google::protobuf::int32 DeviceInfo::storeid() const {
-  // @@protoc_insertion_point(field_get:DeviceInfo.storeId)
+inline ::google::protobuf::int64 AuthInfo::storeid() const {
+  // @@protoc_insertion_point(field_get:AuthInfo.storeID)
   return storeid_;
 }
-inline void DeviceInfo::set_storeid(::google::protobuf::int32 value) {
+inline void AuthInfo::set_storeid(::google::protobuf::int64 value) {
   
   storeid_ = value;
-  // @@protoc_insertion_point(field_set:DeviceInfo.storeId)
+  // @@protoc_insertion_point(field_set:AuthInfo.storeID)
 }
 
-// string deviceId = 2;
-inline void DeviceInfo::clear_deviceid() {
-  deviceid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string when = 2;
+inline void AuthInfo::clear_when() {
+  when_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& DeviceInfo::deviceid() const {
-  // @@protoc_insertion_point(field_get:DeviceInfo.deviceId)
-  return deviceid_.GetNoArena();
+inline const ::std::string& AuthInfo::when() const {
+  // @@protoc_insertion_point(field_get:AuthInfo.when)
+  return when_.GetNoArena();
 }
-inline void DeviceInfo::set_deviceid(const ::std::string& value) {
+inline void AuthInfo::set_when(const ::std::string& value) {
   
-  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DeviceInfo.deviceId)
+  when_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:AuthInfo.when)
 }
 #if LANG_CXX11
-inline void DeviceInfo::set_deviceid(::std::string&& value) {
+inline void AuthInfo::set_when(::std::string&& value) {
   
-  deviceid_.SetNoArena(
+  when_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DeviceInfo.deviceId)
+  // @@protoc_insertion_point(field_set_rvalue:AuthInfo.when)
 }
 #endif
-inline void DeviceInfo::set_deviceid(const char* value) {
+inline void AuthInfo::set_when(const char* value) {
   
-  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DeviceInfo.deviceId)
+  when_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:AuthInfo.when)
 }
-inline void DeviceInfo::set_deviceid(const char* value, size_t size) {
+inline void AuthInfo::set_when(const char* value, size_t size) {
   
-  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  when_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DeviceInfo.deviceId)
+  // @@protoc_insertion_point(field_set_pointer:AuthInfo.when)
 }
-inline ::std::string* DeviceInfo::mutable_deviceid() {
+inline ::std::string* AuthInfo::mutable_when() {
   
-  // @@protoc_insertion_point(field_mutable:DeviceInfo.deviceId)
-  return deviceid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:AuthInfo.when)
+  return when_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* DeviceInfo::release_deviceid() {
-  // @@protoc_insertion_point(field_release:DeviceInfo.deviceId)
+inline ::std::string* AuthInfo::release_when() {
+  // @@protoc_insertion_point(field_release:AuthInfo.when)
   
-  return deviceid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return when_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void DeviceInfo::set_allocated_deviceid(::std::string* deviceid) {
-  if (deviceid != NULL) {
+inline void AuthInfo::set_allocated_when(::std::string* when) {
+  if (when != NULL) {
     
   } else {
     
   }
-  deviceid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), deviceid);
-  // @@protoc_insertion_point(field_set_allocated:DeviceInfo.deviceId)
+  when_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), when);
+  // @@protoc_insertion_point(field_set_allocated:AuthInfo.when)
 }
 
-// string deviceName = 3;
-inline void DeviceInfo::clear_devicename() {
-  devicename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string sign = 3;
+inline void AuthInfo::clear_sign() {
+  sign_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& DeviceInfo::devicename() const {
-  // @@protoc_insertion_point(field_get:DeviceInfo.deviceName)
-  return devicename_.GetNoArena();
+inline const ::std::string& AuthInfo::sign() const {
+  // @@protoc_insertion_point(field_get:AuthInfo.sign)
+  return sign_.GetNoArena();
 }
-inline void DeviceInfo::set_devicename(const ::std::string& value) {
+inline void AuthInfo::set_sign(const ::std::string& value) {
   
-  devicename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:DeviceInfo.deviceName)
+  sign_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:AuthInfo.sign)
 }
 #if LANG_CXX11
-inline void DeviceInfo::set_devicename(::std::string&& value) {
+inline void AuthInfo::set_sign(::std::string&& value) {
   
-  devicename_.SetNoArena(
+  sign_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:DeviceInfo.deviceName)
+  // @@protoc_insertion_point(field_set_rvalue:AuthInfo.sign)
 }
 #endif
-inline void DeviceInfo::set_devicename(const char* value) {
+inline void AuthInfo::set_sign(const char* value) {
   
-  devicename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:DeviceInfo.deviceName)
+  sign_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:AuthInfo.sign)
 }
-inline void DeviceInfo::set_devicename(const char* value, size_t size) {
+inline void AuthInfo::set_sign(const char* value, size_t size) {
   
-  devicename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  sign_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:DeviceInfo.deviceName)
+  // @@protoc_insertion_point(field_set_pointer:AuthInfo.sign)
 }
-inline ::std::string* DeviceInfo::mutable_devicename() {
+inline ::std::string* AuthInfo::mutable_sign() {
   
-  // @@protoc_insertion_point(field_mutable:DeviceInfo.deviceName)
-  return devicename_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:AuthInfo.sign)
+  return sign_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* DeviceInfo::release_devicename() {
-  // @@protoc_insertion_point(field_release:DeviceInfo.deviceName)
+inline ::std::string* AuthInfo::release_sign() {
+  // @@protoc_insertion_point(field_release:AuthInfo.sign)
   
-  return devicename_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return sign_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void DeviceInfo::set_allocated_devicename(::std::string* devicename) {
-  if (devicename != NULL) {
+inline void AuthInfo::set_allocated_sign(::std::string* sign) {
+  if (sign != NULL) {
     
   } else {
     
   }
-  devicename_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), devicename);
-  // @@protoc_insertion_point(field_set_allocated:DeviceInfo.deviceName)
-}
-
-// -------------------------------------------------------------------
-
-// UserInfo
-
-// string openid = 1;
-inline void UserInfo::clear_openid() {
-  openid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& UserInfo::openid() const {
-  // @@protoc_insertion_point(field_get:UserInfo.openid)
-  return openid_.GetNoArena();
-}
-inline void UserInfo::set_openid(const ::std::string& value) {
-  
-  openid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:UserInfo.openid)
-}
-#if LANG_CXX11
-inline void UserInfo::set_openid(::std::string&& value) {
-  
-  openid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:UserInfo.openid)
-}
-#endif
-inline void UserInfo::set_openid(const char* value) {
-  
-  openid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:UserInfo.openid)
-}
-inline void UserInfo::set_openid(const char* value, size_t size) {
-  
-  openid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:UserInfo.openid)
-}
-inline ::std::string* UserInfo::mutable_openid() {
-  
-  // @@protoc_insertion_point(field_mutable:UserInfo.openid)
-  return openid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* UserInfo::release_openid() {
-  // @@protoc_insertion_point(field_release:UserInfo.openid)
-  
-  return openid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void UserInfo::set_allocated_openid(::std::string* openid) {
-  if (openid != NULL) {
-    
-  } else {
-    
-  }
-  openid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), openid);
-  // @@protoc_insertion_point(field_set_allocated:UserInfo.openid)
-}
-
-// string nickname = 2;
-inline void UserInfo::clear_nickname() {
-  nickname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& UserInfo::nickname() const {
-  // @@protoc_insertion_point(field_get:UserInfo.nickname)
-  return nickname_.GetNoArena();
-}
-inline void UserInfo::set_nickname(const ::std::string& value) {
-  
-  nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:UserInfo.nickname)
-}
-#if LANG_CXX11
-inline void UserInfo::set_nickname(::std::string&& value) {
-  
-  nickname_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:UserInfo.nickname)
-}
-#endif
-inline void UserInfo::set_nickname(const char* value) {
-  
-  nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:UserInfo.nickname)
-}
-inline void UserInfo::set_nickname(const char* value, size_t size) {
-  
-  nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:UserInfo.nickname)
-}
-inline ::std::string* UserInfo::mutable_nickname() {
-  
-  // @@protoc_insertion_point(field_mutable:UserInfo.nickname)
-  return nickname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* UserInfo::release_nickname() {
-  // @@protoc_insertion_point(field_release:UserInfo.nickname)
-  
-  return nickname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void UserInfo::set_allocated_nickname(::std::string* nickname) {
-  if (nickname != NULL) {
-    
-  } else {
-    
-  }
-  nickname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), nickname);
-  // @@protoc_insertion_point(field_set_allocated:UserInfo.nickname)
-}
-
-// string headimgUrl = 3;
-inline void UserInfo::clear_headimgurl() {
-  headimgurl_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& UserInfo::headimgurl() const {
-  // @@protoc_insertion_point(field_get:UserInfo.headimgUrl)
-  return headimgurl_.GetNoArena();
-}
-inline void UserInfo::set_headimgurl(const ::std::string& value) {
-  
-  headimgurl_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:UserInfo.headimgUrl)
-}
-#if LANG_CXX11
-inline void UserInfo::set_headimgurl(::std::string&& value) {
-  
-  headimgurl_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:UserInfo.headimgUrl)
-}
-#endif
-inline void UserInfo::set_headimgurl(const char* value) {
-  
-  headimgurl_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:UserInfo.headimgUrl)
-}
-inline void UserInfo::set_headimgurl(const char* value, size_t size) {
-  
-  headimgurl_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:UserInfo.headimgUrl)
-}
-inline ::std::string* UserInfo::mutable_headimgurl() {
-  
-  // @@protoc_insertion_point(field_mutable:UserInfo.headimgUrl)
-  return headimgurl_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* UserInfo::release_headimgurl() {
-  // @@protoc_insertion_point(field_release:UserInfo.headimgUrl)
-  
-  return headimgurl_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void UserInfo::set_allocated_headimgurl(::std::string* headimgurl) {
-  if (headimgurl != NULL) {
-    
-  } else {
-    
-  }
-  headimgurl_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), headimgurl);
-  // @@protoc_insertion_point(field_set_allocated:UserInfo.headimgUrl)
-}
-
-// float balance = 4;
-inline void UserInfo::clear_balance() {
-  balance_ = 0;
-}
-inline float UserInfo::balance() const {
-  // @@protoc_insertion_point(field_get:UserInfo.balance)
-  return balance_;
-}
-inline void UserInfo::set_balance(float value) {
-  
-  balance_ = value;
-  // @@protoc_insertion_point(field_set:UserInfo.balance)
-}
-
-// int32 playMinutes = 5;
-inline void UserInfo::clear_playminutes() {
-  playminutes_ = 0;
-}
-inline ::google::protobuf::int32 UserInfo::playminutes() const {
-  // @@protoc_insertion_point(field_get:UserInfo.playMinutes)
-  return playminutes_;
-}
-inline void UserInfo::set_playminutes(::google::protobuf::int32 value) {
-  
-  playminutes_ = value;
-  // @@protoc_insertion_point(field_set:UserInfo.playMinutes)
-}
-
-// repeated .Coupon coupons = 6;
-inline int UserInfo::coupons_size() const {
-  return coupons_.size();
-}
-inline void UserInfo::clear_coupons() {
-  coupons_.Clear();
-}
-inline const ::Coupon& UserInfo::coupons(int index) const {
-  // @@protoc_insertion_point(field_get:UserInfo.coupons)
-  return coupons_.Get(index);
-}
-inline ::Coupon* UserInfo::mutable_coupons(int index) {
-  // @@protoc_insertion_point(field_mutable:UserInfo.coupons)
-  return coupons_.Mutable(index);
-}
-inline ::Coupon* UserInfo::add_coupons() {
-  // @@protoc_insertion_point(field_add:UserInfo.coupons)
-  return coupons_.Add();
-}
-inline ::google::protobuf::RepeatedPtrField< ::Coupon >*
-UserInfo::mutable_coupons() {
-  // @@protoc_insertion_point(field_mutable_list:UserInfo.coupons)
-  return &coupons_;
-}
-inline const ::google::protobuf::RepeatedPtrField< ::Coupon >&
-UserInfo::coupons() const {
-  // @@protoc_insertion_point(field_list:UserInfo.coupons)
-  return coupons_;
+  sign_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), sign);
+  // @@protoc_insertion_point(field_set_allocated:AuthInfo.sign)
 }
 
 // -------------------------------------------------------------------
@@ -1722,21 +1763,7 @@ inline void Config::set_allocated_storename(::std::string* storename) {
   // @@protoc_insertion_point(field_set_allocated:Config.storeName)
 }
 
-// int32 storeId = 2;
-inline void Config::clear_storeid() {
-  storeid_ = 0;
-}
-inline ::google::protobuf::int32 Config::storeid() const {
-  // @@protoc_insertion_point(field_get:Config.storeId)
-  return storeid_;
-}
-inline void Config::set_storeid(::google::protobuf::int32 value) {
-  
-  storeid_ = value;
-  // @@protoc_insertion_point(field_set:Config.storeId)
-}
-
-// int32 freeMinutes = 3;
+// int32 freeMinutes = 2;
 inline void Config::clear_freeminutes() {
   freeminutes_ = 0;
 }
@@ -1750,7 +1777,7 @@ inline void Config::set_freeminutes(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:Config.freeMinutes)
 }
 
-// repeated .Notification notices = 4;
+// repeated .Notification notices = 3;
 inline int Config::notices_size() const {
   return notices_.size();
 }
@@ -1956,34 +1983,475 @@ inline void Notification::set_allocated_url(::std::string* url) {
 
 // -------------------------------------------------------------------
 
-// RemoteControl
+// PeriodPriceList
 
-// int32 action = 1;
-inline void RemoteControl::clear_action() {
-  action_ = 0;
+// repeated .PeriodPrice periodPrices = 1;
+inline int PeriodPriceList::periodprices_size() const {
+  return periodprices_.size();
 }
-inline ::google::protobuf::int32 RemoteControl::action() const {
-  // @@protoc_insertion_point(field_get:RemoteControl.action)
-  return action_;
+inline void PeriodPriceList::clear_periodprices() {
+  periodprices_.Clear();
 }
-inline void RemoteControl::set_action(::google::protobuf::int32 value) {
-  
-  action_ = value;
-  // @@protoc_insertion_point(field_set:RemoteControl.action)
+inline const ::PeriodPrice& PeriodPriceList::periodprices(int index) const {
+  // @@protoc_insertion_point(field_get:PeriodPriceList.periodPrices)
+  return periodprices_.Get(index);
+}
+inline ::PeriodPrice* PeriodPriceList::mutable_periodprices(int index) {
+  // @@protoc_insertion_point(field_mutable:PeriodPriceList.periodPrices)
+  return periodprices_.Mutable(index);
+}
+inline ::PeriodPrice* PeriodPriceList::add_periodprices() {
+  // @@protoc_insertion_point(field_add:PeriodPriceList.periodPrices)
+  return periodprices_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::PeriodPrice >*
+PeriodPriceList::mutable_periodprices() {
+  // @@protoc_insertion_point(field_mutable_list:PeriodPriceList.periodPrices)
+  return &periodprices_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::PeriodPrice >&
+PeriodPriceList::periodprices() const {
+  // @@protoc_insertion_point(field_list:PeriodPriceList.periodPrices)
+  return periodprices_;
 }
 
-// int32 command = 2;
-inline void RemoteControl::clear_command() {
-  command_ = 0;
+// -------------------------------------------------------------------
+
+// PeriodPrice
+
+// int32 timeKey = 1;
+inline void PeriodPrice::clear_timekey() {
+  timekey_ = 0;
 }
-inline ::google::protobuf::int32 RemoteControl::command() const {
-  // @@protoc_insertion_point(field_get:RemoteControl.command)
-  return command_;
+inline ::google::protobuf::int32 PeriodPrice::timekey() const {
+  // @@protoc_insertion_point(field_get:PeriodPrice.timeKey)
+  return timekey_;
 }
-inline void RemoteControl::set_command(::google::protobuf::int32 value) {
+inline void PeriodPrice::set_timekey(::google::protobuf::int32 value) {
   
-  command_ = value;
-  // @@protoc_insertion_point(field_set:RemoteControl.command)
+  timekey_ = value;
+  // @@protoc_insertion_point(field_set:PeriodPrice.timeKey)
+}
+
+// .PriceGroup priceGroup = 2;
+inline bool PeriodPrice::has_pricegroup() const {
+  return this != internal_default_instance() && pricegroup_ != NULL;
+}
+inline void PeriodPrice::clear_pricegroup() {
+  if (GetArenaNoVirtual() == NULL && pricegroup_ != NULL) delete pricegroup_;
+  pricegroup_ = NULL;
+}
+inline const ::PriceGroup& PeriodPrice::pricegroup() const {
+  // @@protoc_insertion_point(field_get:PeriodPrice.priceGroup)
+  return pricegroup_ != NULL ? *pricegroup_
+                         : *::PriceGroup::internal_default_instance();
+}
+inline ::PriceGroup* PeriodPrice::mutable_pricegroup() {
+  
+  if (pricegroup_ == NULL) {
+    pricegroup_ = new ::PriceGroup;
+  }
+  // @@protoc_insertion_point(field_mutable:PeriodPrice.priceGroup)
+  return pricegroup_;
+}
+inline ::PriceGroup* PeriodPrice::release_pricegroup() {
+  // @@protoc_insertion_point(field_release:PeriodPrice.priceGroup)
+  
+  ::PriceGroup* temp = pricegroup_;
+  pricegroup_ = NULL;
+  return temp;
+}
+inline void PeriodPrice::set_allocated_pricegroup(::PriceGroup* pricegroup) {
+  delete pricegroup_;
+  pricegroup_ = pricegroup;
+  if (pricegroup) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:PeriodPrice.priceGroup)
+}
+
+// -------------------------------------------------------------------
+
+// PriceGroup
+
+// string name = 2;
+inline void PriceGroup::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& PriceGroup::name() const {
+  // @@protoc_insertion_point(field_get:PriceGroup.name)
+  return name_.GetNoArena();
+}
+inline void PriceGroup::set_name(const ::std::string& value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:PriceGroup.name)
+}
+#if LANG_CXX11
+inline void PriceGroup::set_name(::std::string&& value) {
+  
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:PriceGroup.name)
+}
+#endif
+inline void PriceGroup::set_name(const char* value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:PriceGroup.name)
+}
+inline void PriceGroup::set_name(const char* value, size_t size) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:PriceGroup.name)
+}
+inline ::std::string* PriceGroup::mutable_name() {
+  
+  // @@protoc_insertion_point(field_mutable:PriceGroup.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* PriceGroup::release_name() {
+  // @@protoc_insertion_point(field_release:PriceGroup.name)
+  
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PriceGroup::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:PriceGroup.name)
+}
+
+// repeated .Price prices = 3;
+inline int PriceGroup::prices_size() const {
+  return prices_.size();
+}
+inline void PriceGroup::clear_prices() {
+  prices_.Clear();
+}
+inline const ::Price& PriceGroup::prices(int index) const {
+  // @@protoc_insertion_point(field_get:PriceGroup.prices)
+  return prices_.Get(index);
+}
+inline ::Price* PriceGroup::mutable_prices(int index) {
+  // @@protoc_insertion_point(field_mutable:PriceGroup.prices)
+  return prices_.Mutable(index);
+}
+inline ::Price* PriceGroup::add_prices() {
+  // @@protoc_insertion_point(field_add:PriceGroup.prices)
+  return prices_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::Price >*
+PriceGroup::mutable_prices() {
+  // @@protoc_insertion_point(field_mutable_list:PriceGroup.prices)
+  return &prices_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::Price >&
+PriceGroup::prices() const {
+  // @@protoc_insertion_point(field_list:PriceGroup.prices)
+  return prices_;
+}
+
+// -------------------------------------------------------------------
+
+// Price
+
+// int32 duration = 1;
+inline void Price::clear_duration() {
+  duration_ = 0;
+}
+inline ::google::protobuf::int32 Price::duration() const {
+  // @@protoc_insertion_point(field_get:Price.duration)
+  return duration_;
+}
+inline void Price::set_duration(::google::protobuf::int32 value) {
+  
+  duration_ = value;
+  // @@protoc_insertion_point(field_set:Price.duration)
+}
+
+// int32 money = 2;
+inline void Price::clear_money() {
+  money_ = 0;
+}
+inline ::google::protobuf::int32 Price::money() const {
+  // @@protoc_insertion_point(field_get:Price.money)
+  return money_;
+}
+inline void Price::set_money(::google::protobuf::int32 value) {
+  
+  money_ = value;
+  // @@protoc_insertion_point(field_set:Price.money)
+}
+
+// -------------------------------------------------------------------
+
+// Bill
+
+// int32 balance = 1;
+inline void Bill::clear_balance() {
+  balance_ = 0;
+}
+inline ::google::protobuf::int32 Bill::balance() const {
+  // @@protoc_insertion_point(field_get:Bill.balance)
+  return balance_;
+}
+inline void Bill::set_balance(::google::protobuf::int32 value) {
+  
+  balance_ = value;
+  // @@protoc_insertion_point(field_set:Bill.balance)
+}
+
+// int32 consume = 2;
+inline void Bill::clear_consume() {
+  consume_ = 0;
+}
+inline ::google::protobuf::int32 Bill::consume() const {
+  // @@protoc_insertion_point(field_get:Bill.consume)
+  return consume_;
+}
+inline void Bill::set_consume(::google::protobuf::int32 value) {
+  
+  consume_ = value;
+  // @@protoc_insertion_point(field_set:Bill.consume)
+}
+
+// int32 duration = 3;
+inline void Bill::clear_duration() {
+  duration_ = 0;
+}
+inline ::google::protobuf::int32 Bill::duration() const {
+  // @@protoc_insertion_point(field_get:Bill.duration)
+  return duration_;
+}
+inline void Bill::set_duration(::google::protobuf::int32 value) {
+  
+  duration_ = value;
+  // @@protoc_insertion_point(field_set:Bill.duration)
+}
+
+// -------------------------------------------------------------------
+
+// UserInfo
+
+// int64 userID = 1;
+inline void UserInfo::clear_userid() {
+  userid_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 UserInfo::userid() const {
+  // @@protoc_insertion_point(field_get:UserInfo.userID)
+  return userid_;
+}
+inline void UserInfo::set_userid(::google::protobuf::int64 value) {
+  
+  userid_ = value;
+  // @@protoc_insertion_point(field_set:UserInfo.userID)
+}
+
+// string openid = 2;
+inline void UserInfo::clear_openid() {
+  openid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& UserInfo::openid() const {
+  // @@protoc_insertion_point(field_get:UserInfo.openid)
+  return openid_.GetNoArena();
+}
+inline void UserInfo::set_openid(const ::std::string& value) {
+  
+  openid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:UserInfo.openid)
+}
+#if LANG_CXX11
+inline void UserInfo::set_openid(::std::string&& value) {
+  
+  openid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserInfo.openid)
+}
+#endif
+inline void UserInfo::set_openid(const char* value) {
+  
+  openid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserInfo.openid)
+}
+inline void UserInfo::set_openid(const char* value, size_t size) {
+  
+  openid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserInfo.openid)
+}
+inline ::std::string* UserInfo::mutable_openid() {
+  
+  // @@protoc_insertion_point(field_mutable:UserInfo.openid)
+  return openid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserInfo::release_openid() {
+  // @@protoc_insertion_point(field_release:UserInfo.openid)
+  
+  return openid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserInfo::set_allocated_openid(::std::string* openid) {
+  if (openid != NULL) {
+    
+  } else {
+    
+  }
+  openid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), openid);
+  // @@protoc_insertion_point(field_set_allocated:UserInfo.openid)
+}
+
+// string nickname = 3;
+inline void UserInfo::clear_nickname() {
+  nickname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& UserInfo::nickname() const {
+  // @@protoc_insertion_point(field_get:UserInfo.nickname)
+  return nickname_.GetNoArena();
+}
+inline void UserInfo::set_nickname(const ::std::string& value) {
+  
+  nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:UserInfo.nickname)
+}
+#if LANG_CXX11
+inline void UserInfo::set_nickname(::std::string&& value) {
+  
+  nickname_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserInfo.nickname)
+}
+#endif
+inline void UserInfo::set_nickname(const char* value) {
+  
+  nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserInfo.nickname)
+}
+inline void UserInfo::set_nickname(const char* value, size_t size) {
+  
+  nickname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserInfo.nickname)
+}
+inline ::std::string* UserInfo::mutable_nickname() {
+  
+  // @@protoc_insertion_point(field_mutable:UserInfo.nickname)
+  return nickname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserInfo::release_nickname() {
+  // @@protoc_insertion_point(field_release:UserInfo.nickname)
+  
+  return nickname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserInfo::set_allocated_nickname(::std::string* nickname) {
+  if (nickname != NULL) {
+    
+  } else {
+    
+  }
+  nickname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), nickname);
+  // @@protoc_insertion_point(field_set_allocated:UserInfo.nickname)
+}
+
+// bytes headImage = 4;
+inline void UserInfo::clear_headimage() {
+  headimage_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& UserInfo::headimage() const {
+  // @@protoc_insertion_point(field_get:UserInfo.headImage)
+  return headimage_.GetNoArena();
+}
+inline void UserInfo::set_headimage(const ::std::string& value) {
+  
+  headimage_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:UserInfo.headImage)
+}
+#if LANG_CXX11
+inline void UserInfo::set_headimage(::std::string&& value) {
+  
+  headimage_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:UserInfo.headImage)
+}
+#endif
+inline void UserInfo::set_headimage(const char* value) {
+  
+  headimage_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:UserInfo.headImage)
+}
+inline void UserInfo::set_headimage(const void* value, size_t size) {
+  
+  headimage_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:UserInfo.headImage)
+}
+inline ::std::string* UserInfo::mutable_headimage() {
+  
+  // @@protoc_insertion_point(field_mutable:UserInfo.headImage)
+  return headimage_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* UserInfo::release_headimage() {
+  // @@protoc_insertion_point(field_release:UserInfo.headImage)
+  
+  return headimage_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void UserInfo::set_allocated_headimage(::std::string* headimage) {
+  if (headimage != NULL) {
+    
+  } else {
+    
+  }
+  headimage_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), headimage);
+  // @@protoc_insertion_point(field_set_allocated:UserInfo.headImage)
+}
+
+// float balance = 5;
+inline void UserInfo::clear_balance() {
+  balance_ = 0;
+}
+inline float UserInfo::balance() const {
+  // @@protoc_insertion_point(field_get:UserInfo.balance)
+  return balance_;
+}
+inline void UserInfo::set_balance(float value) {
+  
+  balance_ = value;
+  // @@protoc_insertion_point(field_set:UserInfo.balance)
+}
+
+// repeated .Coupon coupons = 6;
+inline int UserInfo::coupons_size() const {
+  return coupons_.size();
+}
+inline void UserInfo::clear_coupons() {
+  coupons_.Clear();
+}
+inline const ::Coupon& UserInfo::coupons(int index) const {
+  // @@protoc_insertion_point(field_get:UserInfo.coupons)
+  return coupons_.Get(index);
+}
+inline ::Coupon* UserInfo::mutable_coupons(int index) {
+  // @@protoc_insertion_point(field_mutable:UserInfo.coupons)
+  return coupons_.Mutable(index);
+}
+inline ::Coupon* UserInfo::add_coupons() {
+  // @@protoc_insertion_point(field_add:UserInfo.coupons)
+  return coupons_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::Coupon >*
+UserInfo::mutable_coupons() {
+  // @@protoc_insertion_point(field_mutable_list:UserInfo.coupons)
+  return &coupons_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::Coupon >&
+UserInfo::coupons() const {
+  // @@protoc_insertion_point(field_list:UserInfo.coupons)
+  return coupons_;
 }
 
 // -------------------------------------------------------------------
@@ -2082,6 +2550,184 @@ inline void Coupon::set_allocated_comment(::std::string* comment) {
   }
   comment_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), comment);
   // @@protoc_insertion_point(field_set_allocated:Coupon.comment)
+}
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// StoreList
+
+// map<int32, string> stores = 1;
+inline int StoreList::stores_size() const {
+  return stores_.size();
+}
+inline void StoreList::clear_stores() {
+  stores_.Clear();
+}
+inline const ::google::protobuf::Map< ::google::protobuf::int32, ::std::string >&
+StoreList::stores() const {
+  // @@protoc_insertion_point(field_map:StoreList.stores)
+  return stores_.GetMap();
+}
+inline ::google::protobuf::Map< ::google::protobuf::int32, ::std::string >*
+StoreList::mutable_stores() {
+  // @@protoc_insertion_point(field_mutable_map:StoreList.stores)
+  return stores_.MutableMap();
+}
+
+// -------------------------------------------------------------------
+
+// DeviceInfo
+
+// int32 storeId = 1;
+inline void DeviceInfo::clear_storeid() {
+  storeid_ = 0;
+}
+inline ::google::protobuf::int32 DeviceInfo::storeid() const {
+  // @@protoc_insertion_point(field_get:DeviceInfo.storeId)
+  return storeid_;
+}
+inline void DeviceInfo::set_storeid(::google::protobuf::int32 value) {
+  
+  storeid_ = value;
+  // @@protoc_insertion_point(field_set:DeviceInfo.storeId)
+}
+
+// string deviceId = 2;
+inline void DeviceInfo::clear_deviceid() {
+  deviceid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& DeviceInfo::deviceid() const {
+  // @@protoc_insertion_point(field_get:DeviceInfo.deviceId)
+  return deviceid_.GetNoArena();
+}
+inline void DeviceInfo::set_deviceid(const ::std::string& value) {
+  
+  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:DeviceInfo.deviceId)
+}
+#if LANG_CXX11
+inline void DeviceInfo::set_deviceid(::std::string&& value) {
+  
+  deviceid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:DeviceInfo.deviceId)
+}
+#endif
+inline void DeviceInfo::set_deviceid(const char* value) {
+  
+  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:DeviceInfo.deviceId)
+}
+inline void DeviceInfo::set_deviceid(const char* value, size_t size) {
+  
+  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:DeviceInfo.deviceId)
+}
+inline ::std::string* DeviceInfo::mutable_deviceid() {
+  
+  // @@protoc_insertion_point(field_mutable:DeviceInfo.deviceId)
+  return deviceid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* DeviceInfo::release_deviceid() {
+  // @@protoc_insertion_point(field_release:DeviceInfo.deviceId)
+  
+  return deviceid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void DeviceInfo::set_allocated_deviceid(::std::string* deviceid) {
+  if (deviceid != NULL) {
+    
+  } else {
+    
+  }
+  deviceid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), deviceid);
+  // @@protoc_insertion_point(field_set_allocated:DeviceInfo.deviceId)
+}
+
+// string deviceName = 3;
+inline void DeviceInfo::clear_devicename() {
+  devicename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& DeviceInfo::devicename() const {
+  // @@protoc_insertion_point(field_get:DeviceInfo.deviceName)
+  return devicename_.GetNoArena();
+}
+inline void DeviceInfo::set_devicename(const ::std::string& value) {
+  
+  devicename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:DeviceInfo.deviceName)
+}
+#if LANG_CXX11
+inline void DeviceInfo::set_devicename(::std::string&& value) {
+  
+  devicename_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:DeviceInfo.deviceName)
+}
+#endif
+inline void DeviceInfo::set_devicename(const char* value) {
+  
+  devicename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:DeviceInfo.deviceName)
+}
+inline void DeviceInfo::set_devicename(const char* value, size_t size) {
+  
+  devicename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:DeviceInfo.deviceName)
+}
+inline ::std::string* DeviceInfo::mutable_devicename() {
+  
+  // @@protoc_insertion_point(field_mutable:DeviceInfo.deviceName)
+  return devicename_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* DeviceInfo::release_devicename() {
+  // @@protoc_insertion_point(field_release:DeviceInfo.deviceName)
+  
+  return devicename_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void DeviceInfo::set_allocated_devicename(::std::string* devicename) {
+  if (devicename != NULL) {
+    
+  } else {
+    
+  }
+  devicename_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), devicename);
+  // @@protoc_insertion_point(field_set_allocated:DeviceInfo.deviceName)
+}
+
+// -------------------------------------------------------------------
+
+// RemoteControl
+
+// int32 action = 1;
+inline void RemoteControl::clear_action() {
+  action_ = 0;
+}
+inline ::google::protobuf::int32 RemoteControl::action() const {
+  // @@protoc_insertion_point(field_get:RemoteControl.action)
+  return action_;
+}
+inline void RemoteControl::set_action(::google::protobuf::int32 value) {
+  
+  action_ = value;
+  // @@protoc_insertion_point(field_set:RemoteControl.action)
+}
+
+// int32 command = 2;
+inline void RemoteControl::clear_command() {
+  command_ = 0;
+}
+inline ::google::protobuf::int32 RemoteControl::command() const {
+  // @@protoc_insertion_point(field_get:RemoteControl.command)
+  return command_;
+}
+inline void RemoteControl::set_command(::google::protobuf::int32 value) {
+  
+  command_ = value;
+  // @@protoc_insertion_point(field_set:RemoteControl.command)
 }
 
 // -------------------------------------------------------------------
@@ -2193,117 +2839,9 @@ inline void Activity::set_allocated_comment(::std::string* comment) {
   // @@protoc_insertion_point(field_set_allocated:Activity.comment)
 }
 
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
-// PricePolicy
-
-// map<int32, .DayPrice> dayPrices = 1;
-inline int PricePolicy::dayprices_size() const {
-  return dayprices_.size();
-}
-inline void PricePolicy::clear_dayprices() {
-  dayprices_.Clear();
-}
-inline const ::google::protobuf::Map< ::google::protobuf::int32, ::DayPrice >&
-PricePolicy::dayprices() const {
-  // @@protoc_insertion_point(field_map:PricePolicy.dayPrices)
-  return dayprices_.GetMap();
-}
-inline ::google::protobuf::Map< ::google::protobuf::int32, ::DayPrice >*
-PricePolicy::mutable_dayprices() {
-  // @@protoc_insertion_point(field_mutable_map:PricePolicy.dayPrices)
-  return dayprices_.MutableMap();
-}
-
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
-// DayPrice_PeriodPrice
-
-// int32 beginTime = 1;
-inline void DayPrice_PeriodPrice::clear_begintime() {
-  begintime_ = 0;
-}
-inline ::google::protobuf::int32 DayPrice_PeriodPrice::begintime() const {
-  // @@protoc_insertion_point(field_get:DayPrice.PeriodPrice.beginTime)
-  return begintime_;
-}
-inline void DayPrice_PeriodPrice::set_begintime(::google::protobuf::int32 value) {
-  
-  begintime_ = value;
-  // @@protoc_insertion_point(field_set:DayPrice.PeriodPrice.beginTime)
-}
-
-// int32 endTime = 2;
-inline void DayPrice_PeriodPrice::clear_endtime() {
-  endtime_ = 0;
-}
-inline ::google::protobuf::int32 DayPrice_PeriodPrice::endtime() const {
-  // @@protoc_insertion_point(field_get:DayPrice.PeriodPrice.endTime)
-  return endtime_;
-}
-inline void DayPrice_PeriodPrice::set_endtime(::google::protobuf::int32 value) {
-  
-  endtime_ = value;
-  // @@protoc_insertion_point(field_set:DayPrice.PeriodPrice.endTime)
-}
-
-// map<int32, int32> prices = 3;
-inline int DayPrice_PeriodPrice::prices_size() const {
-  return prices_.size();
-}
-inline void DayPrice_PeriodPrice::clear_prices() {
-  prices_.Clear();
-}
-inline const ::google::protobuf::Map< ::google::protobuf::int32, ::google::protobuf::int32 >&
-DayPrice_PeriodPrice::prices() const {
-  // @@protoc_insertion_point(field_map:DayPrice.PeriodPrice.prices)
-  return prices_.GetMap();
-}
-inline ::google::protobuf::Map< ::google::protobuf::int32, ::google::protobuf::int32 >*
-DayPrice_PeriodPrice::mutable_prices() {
-  // @@protoc_insertion_point(field_mutable_map:DayPrice.PeriodPrice.prices)
-  return prices_.MutableMap();
-}
-
-// -------------------------------------------------------------------
-
-// DayPrice
-
-// repeated .DayPrice.PeriodPrice periodPrices = 1;
-inline int DayPrice::periodprices_size() const {
-  return periodprices_.size();
-}
-inline void DayPrice::clear_periodprices() {
-  periodprices_.Clear();
-}
-inline const ::DayPrice_PeriodPrice& DayPrice::periodprices(int index) const {
-  // @@protoc_insertion_point(field_get:DayPrice.periodPrices)
-  return periodprices_.Get(index);
-}
-inline ::DayPrice_PeriodPrice* DayPrice::mutable_periodprices(int index) {
-  // @@protoc_insertion_point(field_mutable:DayPrice.periodPrices)
-  return periodprices_.Mutable(index);
-}
-inline ::DayPrice_PeriodPrice* DayPrice::add_periodprices() {
-  // @@protoc_insertion_point(field_add:DayPrice.periodPrices)
-  return periodprices_.Add();
-}
-inline ::google::protobuf::RepeatedPtrField< ::DayPrice_PeriodPrice >*
-DayPrice::mutable_periodprices() {
-  // @@protoc_insertion_point(field_mutable_list:DayPrice.periodPrices)
-  return &periodprices_;
-}
-inline const ::google::protobuf::RepeatedPtrField< ::DayPrice_PeriodPrice >&
-DayPrice::periodprices() const {
-  // @@protoc_insertion_point(field_list:DayPrice.periodPrices)
-  return periodprices_;
-}
-
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

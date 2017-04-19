@@ -35,11 +35,11 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   ~0u,  // no _oneof_case_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, method_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, content_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, exceptcode_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, exceptmsg_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, storeid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, deviceid_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, content_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, returncode_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Message, returnmsg_),
 };
 
 static const ::google::protobuf::internal::MigrationSchema schemas[] = {
@@ -93,9 +93,9 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] = {
       "\n\rMessage.proto\"\200\001\n\007Message\022\n\n\002id\030\001 \001(\003\022"
-      "\016\n\006method\030\002 \001(\t\022\017\n\007storeId\030\003 \001(\005\022\020\n\010devi"
-      "ceId\030\004 \001(\t\022\017\n\007content\030\005 \001(\014\022\022\n\nreturnCod"
-      "e\030\006 \001(\005\022\021\n\treturnMsg\030\007 \001(\tB-\n\031com.oddmu."
+      "\016\n\006method\030\002 \001(\t\022\017\n\007content\030\003 \001(\014\022\022\n\nexce"
+      "ptCode\030\004 \001(\005\022\021\n\texceptMsg\030\005 \001(\t\022\017\n\007store"
+      "Id\030\006 \001(\003\022\020\n\010deviceId\030\007 \001(\tB-\n\031com.oddmu."
       "vrdreamer.protoB\020MessageMsgProtosb\006proto"
       "3"
   };
@@ -125,11 +125,11 @@ struct StaticDescriptorInitializer {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Message::kIdFieldNumber;
 const int Message::kMethodFieldNumber;
+const int Message::kContentFieldNumber;
+const int Message::kExceptCodeFieldNumber;
+const int Message::kExceptMsgFieldNumber;
 const int Message::kStoreIdFieldNumber;
 const int Message::kDeviceIdFieldNumber;
-const int Message::kContentFieldNumber;
-const int Message::kReturnCodeFieldNumber;
-const int Message::kReturnMsgFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Message::Message()
@@ -149,31 +149,31 @@ Message::Message(const Message& from)
   if (from.method().size() > 0) {
     method_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.method_);
   }
-  deviceid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.deviceid().size() > 0) {
-    deviceid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.deviceid_);
-  }
   content_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.content().size() > 0) {
     content_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.content_);
   }
-  returnmsg_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.returnmsg().size() > 0) {
-    returnmsg_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.returnmsg_);
+  exceptmsg_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.exceptmsg().size() > 0) {
+    exceptmsg_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.exceptmsg_);
+  }
+  deviceid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.deviceid().size() > 0) {
+    deviceid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.deviceid_);
   }
   ::memcpy(&id_, &from.id_,
-    reinterpret_cast<char*>(&returncode_) -
-    reinterpret_cast<char*>(&id_) + sizeof(returncode_));
+    reinterpret_cast<char*>(&exceptcode_) -
+    reinterpret_cast<char*>(&id_) + sizeof(exceptcode_));
   // @@protoc_insertion_point(copy_constructor:Message)
 }
 
 void Message::SharedCtor() {
   method_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  deviceid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   content_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  returnmsg_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&id_, 0, reinterpret_cast<char*>(&returncode_) -
-    reinterpret_cast<char*>(&id_) + sizeof(returncode_));
+  exceptmsg_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  deviceid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&id_, 0, reinterpret_cast<char*>(&exceptcode_) -
+    reinterpret_cast<char*>(&id_) + sizeof(exceptcode_));
   _cached_size_ = 0;
 }
 
@@ -184,9 +184,9 @@ Message::~Message() {
 
 void Message::SharedDtor() {
   method_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  deviceid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   content_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  returnmsg_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  exceptmsg_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  deviceid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void Message::SetCachedSize(int size) const {
@@ -215,11 +215,11 @@ Message* Message::New(::google::protobuf::Arena* arena) const {
 void Message::Clear() {
 // @@protoc_insertion_point(message_clear_start:Message)
   method_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  deviceid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   content_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  returnmsg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&id_, 0, reinterpret_cast<char*>(&returncode_) -
-    reinterpret_cast<char*>(&id_) + sizeof(returncode_));
+  exceptmsg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  deviceid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(&id_, 0, reinterpret_cast<char*>(&exceptcode_) -
+    reinterpret_cast<char*>(&id_) + sizeof(exceptcode_));
 }
 
 bool Message::MergePartialFromCodedStream(
@@ -260,37 +260,9 @@ bool Message::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 storeId = 3;
+      // bytes content = 3;
       case 3: {
-        if (tag == 24u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &storeid_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string deviceId = 4;
-      case 4: {
-        if (tag == 34u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_deviceid()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->deviceid().data(), this->deviceid().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "Message.deviceId"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // bytes content = 5;
-      case 5: {
-        if (tag == 42u) {
+        if (tag == 26u) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_content()));
         } else {
@@ -299,28 +271,56 @@ bool Message::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 returnCode = 6;
-      case 6: {
-        if (tag == 48u) {
+      // int32 exceptCode = 4;
+      case 4: {
+        if (tag == 32u) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &returncode_)));
+                 input, &exceptcode_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // string returnMsg = 7;
+      // string exceptMsg = 5;
+      case 5: {
+        if (tag == 42u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_exceptmsg()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->exceptmsg().data(), this->exceptmsg().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "Message.exceptMsg"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int64 storeId = 6;
+      case 6: {
+        if (tag == 48u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &storeid_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string deviceId = 7;
       case 7: {
         if (tag == 58u) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_returnmsg()));
+                input, this->mutable_deviceid()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->returnmsg().data(), this->returnmsg().length(),
+            this->deviceid().data(), this->deviceid().length(),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "Message.returnMsg"));
+            "Message.deviceId"));
         } else {
           goto handle_unusual;
         }
@@ -366,40 +366,40 @@ void Message::SerializeWithCachedSizes(
       2, this->method(), output);
   }
 
-  // int32 storeId = 3;
-  if (this->storeid() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->storeid(), output);
+  // bytes content = 3;
+  if (this->content().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      3, this->content(), output);
   }
 
-  // string deviceId = 4;
+  // int32 exceptCode = 4;
+  if (this->exceptcode() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->exceptcode(), output);
+  }
+
+  // string exceptMsg = 5;
+  if (this->exceptmsg().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->exceptmsg().data(), this->exceptmsg().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "Message.exceptMsg");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      5, this->exceptmsg(), output);
+  }
+
+  // int64 storeId = 6;
+  if (this->storeid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(6, this->storeid(), output);
+  }
+
+  // string deviceId = 7;
   if (this->deviceid().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->deviceid().data(), this->deviceid().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
       "Message.deviceId");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->deviceid(), output);
-  }
-
-  // bytes content = 5;
-  if (this->content().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      5, this->content(), output);
-  }
-
-  // int32 returnCode = 6;
-  if (this->returncode() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->returncode(), output);
-  }
-
-  // string returnMsg = 7;
-  if (this->returnmsg().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->returnmsg().data(), this->returnmsg().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Message.returnMsg");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      7, this->returnmsg(), output);
+      7, this->deviceid(), output);
   }
 
   // @@protoc_insertion_point(serialize_end:Message)
@@ -425,12 +425,35 @@ void Message::SerializeWithCachedSizes(
         2, this->method(), target);
   }
 
-  // int32 storeId = 3;
-  if (this->storeid() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->storeid(), target);
+  // bytes content = 3;
+  if (this->content().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        3, this->content(), target);
   }
 
-  // string deviceId = 4;
+  // int32 exceptCode = 4;
+  if (this->exceptcode() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->exceptcode(), target);
+  }
+
+  // string exceptMsg = 5;
+  if (this->exceptmsg().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->exceptmsg().data(), this->exceptmsg().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "Message.exceptMsg");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->exceptmsg(), target);
+  }
+
+  // int64 storeId = 6;
+  if (this->storeid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(6, this->storeid(), target);
+  }
+
+  // string deviceId = 7;
   if (this->deviceid().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->deviceid().data(), this->deviceid().length(),
@@ -438,30 +461,7 @@ void Message::SerializeWithCachedSizes(
       "Message.deviceId");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->deviceid(), target);
-  }
-
-  // bytes content = 5;
-  if (this->content().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        5, this->content(), target);
-  }
-
-  // int32 returnCode = 6;
-  if (this->returncode() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->returncode(), target);
-  }
-
-  // string returnMsg = 7;
-  if (this->returnmsg().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->returnmsg().data(), this->returnmsg().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Message.returnMsg");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        7, this->returnmsg(), target);
+        7, this->deviceid(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:Message)
@@ -479,25 +479,25 @@ size_t Message::ByteSizeLong() const {
         this->method());
   }
 
-  // string deviceId = 4;
-  if (this->deviceid().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->deviceid());
-  }
-
-  // bytes content = 5;
+  // bytes content = 3;
   if (this->content().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->content());
   }
 
-  // string returnMsg = 7;
-  if (this->returnmsg().size() > 0) {
+  // string exceptMsg = 5;
+  if (this->exceptmsg().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->returnmsg());
+        this->exceptmsg());
+  }
+
+  // string deviceId = 7;
+  if (this->deviceid().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->deviceid());
   }
 
   // int64 id = 1;
@@ -507,18 +507,18 @@ size_t Message::ByteSizeLong() const {
         this->id());
   }
 
-  // int32 storeId = 3;
+  // int64 storeId = 6;
   if (this->storeid() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
         this->storeid());
   }
 
-  // int32 returnCode = 6;
-  if (this->returncode() != 0) {
+  // int32 exceptCode = 4;
+  if (this->exceptcode() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->returncode());
+        this->exceptcode());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -551,17 +551,17 @@ void Message::MergeFrom(const Message& from) {
 
     method_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.method_);
   }
-  if (from.deviceid().size() > 0) {
-
-    deviceid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.deviceid_);
-  }
   if (from.content().size() > 0) {
 
     content_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.content_);
   }
-  if (from.returnmsg().size() > 0) {
+  if (from.exceptmsg().size() > 0) {
 
-    returnmsg_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.returnmsg_);
+    exceptmsg_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.exceptmsg_);
+  }
+  if (from.deviceid().size() > 0) {
+
+    deviceid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.deviceid_);
   }
   if (from.id() != 0) {
     set_id(from.id());
@@ -569,8 +569,8 @@ void Message::MergeFrom(const Message& from) {
   if (from.storeid() != 0) {
     set_storeid(from.storeid());
   }
-  if (from.returncode() != 0) {
-    set_returncode(from.returncode());
+  if (from.exceptcode() != 0) {
+    set_exceptcode(from.exceptcode());
   }
 }
 
@@ -598,12 +598,12 @@ void Message::Swap(Message* other) {
 }
 void Message::InternalSwap(Message* other) {
   method_.Swap(&other->method_);
-  deviceid_.Swap(&other->deviceid_);
   content_.Swap(&other->content_);
-  returnmsg_.Swap(&other->returnmsg_);
+  exceptmsg_.Swap(&other->exceptmsg_);
+  deviceid_.Swap(&other->deviceid_);
   std::swap(id_, other->id_);
   std::swap(storeid_, other->storeid_);
-  std::swap(returncode_, other->returncode_);
+  std::swap(exceptcode_, other->exceptcode_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
@@ -681,73 +681,7 @@ void Message::set_allocated_method(::std::string* method) {
   // @@protoc_insertion_point(field_set_allocated:Message.method)
 }
 
-// int32 storeId = 3;
-void Message::clear_storeid() {
-  storeid_ = 0;
-}
-::google::protobuf::int32 Message::storeid() const {
-  // @@protoc_insertion_point(field_get:Message.storeId)
-  return storeid_;
-}
-void Message::set_storeid(::google::protobuf::int32 value) {
-  
-  storeid_ = value;
-  // @@protoc_insertion_point(field_set:Message.storeId)
-}
-
-// string deviceId = 4;
-void Message::clear_deviceid() {
-  deviceid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-const ::std::string& Message::deviceid() const {
-  // @@protoc_insertion_point(field_get:Message.deviceId)
-  return deviceid_.GetNoArena();
-}
-void Message::set_deviceid(const ::std::string& value) {
-  
-  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Message.deviceId)
-}
-#if LANG_CXX11
-void Message::set_deviceid(::std::string&& value) {
-  
-  deviceid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Message.deviceId)
-}
-#endif
-void Message::set_deviceid(const char* value) {
-  
-  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Message.deviceId)
-}
-void Message::set_deviceid(const char* value, size_t size) {
-  
-  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Message.deviceId)
-}
-::std::string* Message::mutable_deviceid() {
-  
-  // @@protoc_insertion_point(field_mutable:Message.deviceId)
-  return deviceid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* Message::release_deviceid() {
-  // @@protoc_insertion_point(field_release:Message.deviceId)
-  
-  return deviceid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void Message::set_allocated_deviceid(::std::string* deviceid) {
-  if (deviceid != NULL) {
-    
-  } else {
-    
-  }
-  deviceid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), deviceid);
-  // @@protoc_insertion_point(field_set_allocated:Message.deviceId)
-}
-
-// bytes content = 5;
+// bytes content = 3;
 void Message::clear_content() {
   content_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -799,70 +733,136 @@ void Message::set_allocated_content(::std::string* content) {
   // @@protoc_insertion_point(field_set_allocated:Message.content)
 }
 
-// int32 returnCode = 6;
-void Message::clear_returncode() {
-  returncode_ = 0;
+// int32 exceptCode = 4;
+void Message::clear_exceptcode() {
+  exceptcode_ = 0;
 }
-::google::protobuf::int32 Message::returncode() const {
-  // @@protoc_insertion_point(field_get:Message.returnCode)
-  return returncode_;
+::google::protobuf::int32 Message::exceptcode() const {
+  // @@protoc_insertion_point(field_get:Message.exceptCode)
+  return exceptcode_;
 }
-void Message::set_returncode(::google::protobuf::int32 value) {
+void Message::set_exceptcode(::google::protobuf::int32 value) {
   
-  returncode_ = value;
-  // @@protoc_insertion_point(field_set:Message.returnCode)
+  exceptcode_ = value;
+  // @@protoc_insertion_point(field_set:Message.exceptCode)
 }
 
-// string returnMsg = 7;
-void Message::clear_returnmsg() {
-  returnmsg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string exceptMsg = 5;
+void Message::clear_exceptmsg() {
+  exceptmsg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-const ::std::string& Message::returnmsg() const {
-  // @@protoc_insertion_point(field_get:Message.returnMsg)
-  return returnmsg_.GetNoArena();
+const ::std::string& Message::exceptmsg() const {
+  // @@protoc_insertion_point(field_get:Message.exceptMsg)
+  return exceptmsg_.GetNoArena();
 }
-void Message::set_returnmsg(const ::std::string& value) {
+void Message::set_exceptmsg(const ::std::string& value) {
   
-  returnmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Message.returnMsg)
+  exceptmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Message.exceptMsg)
 }
 #if LANG_CXX11
-void Message::set_returnmsg(::std::string&& value) {
+void Message::set_exceptmsg(::std::string&& value) {
   
-  returnmsg_.SetNoArena(
+  exceptmsg_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Message.returnMsg)
+  // @@protoc_insertion_point(field_set_rvalue:Message.exceptMsg)
 }
 #endif
-void Message::set_returnmsg(const char* value) {
+void Message::set_exceptmsg(const char* value) {
   
-  returnmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Message.returnMsg)
+  exceptmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Message.exceptMsg)
 }
-void Message::set_returnmsg(const char* value, size_t size) {
+void Message::set_exceptmsg(const char* value, size_t size) {
   
-  returnmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  exceptmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Message.returnMsg)
+  // @@protoc_insertion_point(field_set_pointer:Message.exceptMsg)
 }
-::std::string* Message::mutable_returnmsg() {
+::std::string* Message::mutable_exceptmsg() {
   
-  // @@protoc_insertion_point(field_mutable:Message.returnMsg)
-  return returnmsg_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:Message.exceptMsg)
+  return exceptmsg_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-::std::string* Message::release_returnmsg() {
-  // @@protoc_insertion_point(field_release:Message.returnMsg)
+::std::string* Message::release_exceptmsg() {
+  // @@protoc_insertion_point(field_release:Message.exceptMsg)
   
-  return returnmsg_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return exceptmsg_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-void Message::set_allocated_returnmsg(::std::string* returnmsg) {
-  if (returnmsg != NULL) {
+void Message::set_allocated_exceptmsg(::std::string* exceptmsg) {
+  if (exceptmsg != NULL) {
     
   } else {
     
   }
-  returnmsg_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), returnmsg);
-  // @@protoc_insertion_point(field_set_allocated:Message.returnMsg)
+  exceptmsg_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), exceptmsg);
+  // @@protoc_insertion_point(field_set_allocated:Message.exceptMsg)
+}
+
+// int64 storeId = 6;
+void Message::clear_storeid() {
+  storeid_ = GOOGLE_LONGLONG(0);
+}
+::google::protobuf::int64 Message::storeid() const {
+  // @@protoc_insertion_point(field_get:Message.storeId)
+  return storeid_;
+}
+void Message::set_storeid(::google::protobuf::int64 value) {
+  
+  storeid_ = value;
+  // @@protoc_insertion_point(field_set:Message.storeId)
+}
+
+// string deviceId = 7;
+void Message::clear_deviceid() {
+  deviceid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+const ::std::string& Message::deviceid() const {
+  // @@protoc_insertion_point(field_get:Message.deviceId)
+  return deviceid_.GetNoArena();
+}
+void Message::set_deviceid(const ::std::string& value) {
+  
+  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Message.deviceId)
+}
+#if LANG_CXX11
+void Message::set_deviceid(::std::string&& value) {
+  
+  deviceid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Message.deviceId)
+}
+#endif
+void Message::set_deviceid(const char* value) {
+  
+  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Message.deviceId)
+}
+void Message::set_deviceid(const char* value, size_t size) {
+  
+  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Message.deviceId)
+}
+::std::string* Message::mutable_deviceid() {
+  
+  // @@protoc_insertion_point(field_mutable:Message.deviceId)
+  return deviceid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* Message::release_deviceid() {
+  // @@protoc_insertion_point(field_release:Message.deviceId)
+  
+  return deviceid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void Message::set_allocated_deviceid(::std::string* deviceid) {
+  if (deviceid != NULL) {
+    
+  } else {
+    
+  }
+  deviceid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), deviceid);
+  // @@protoc_insertion_point(field_set_allocated:Message.deviceId)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

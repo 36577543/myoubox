@@ -13,7 +13,7 @@ message Message {
 	int32 exceptCode = 4;	// 调用异常码，0-正常，其它数字-异常
 	string exceptMsg = 5;	// 调用异常信息，是对调用状态码的文字说明
 	int64 storeId = 6;		// 营业点ID
-	int64 deviceId = 7;		// 设备ID
+	string deviceId = 7;		// 设备ID
 }
 
 // ***	网络数据流说明	***

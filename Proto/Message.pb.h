@@ -127,23 +127,9 @@ class Message : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::std::string* release_method();
   void set_allocated_method(::std::string* method);
 
-  // string deviceId = 4;
-  void clear_deviceid();
-  static const int kDeviceIdFieldNumber = 4;
-  const ::std::string& deviceid() const;
-  void set_deviceid(const ::std::string& value);
-  #if LANG_CXX11
-  void set_deviceid(::std::string&& value);
-  #endif
-  void set_deviceid(const char* value);
-  void set_deviceid(const char* value, size_t size);
-  ::std::string* mutable_deviceid();
-  ::std::string* release_deviceid();
-  void set_allocated_deviceid(::std::string* deviceid);
-
-  // bytes content = 5;
+  // bytes content = 3;
   void clear_content();
-  static const int kContentFieldNumber = 5;
+  static const int kContentFieldNumber = 3;
   const ::std::string& content() const;
   void set_content(const ::std::string& value);
   #if LANG_CXX11
@@ -155,19 +141,33 @@ class Message : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::std::string* release_content();
   void set_allocated_content(::std::string* content);
 
-  // string returnMsg = 7;
-  void clear_returnmsg();
-  static const int kReturnMsgFieldNumber = 7;
-  const ::std::string& returnmsg() const;
-  void set_returnmsg(const ::std::string& value);
+  // string exceptMsg = 5;
+  void clear_exceptmsg();
+  static const int kExceptMsgFieldNumber = 5;
+  const ::std::string& exceptmsg() const;
+  void set_exceptmsg(const ::std::string& value);
   #if LANG_CXX11
-  void set_returnmsg(::std::string&& value);
+  void set_exceptmsg(::std::string&& value);
   #endif
-  void set_returnmsg(const char* value);
-  void set_returnmsg(const char* value, size_t size);
-  ::std::string* mutable_returnmsg();
-  ::std::string* release_returnmsg();
-  void set_allocated_returnmsg(::std::string* returnmsg);
+  void set_exceptmsg(const char* value);
+  void set_exceptmsg(const char* value, size_t size);
+  ::std::string* mutable_exceptmsg();
+  ::std::string* release_exceptmsg();
+  void set_allocated_exceptmsg(::std::string* exceptmsg);
+
+  // string deviceId = 7;
+  void clear_deviceid();
+  static const int kDeviceIdFieldNumber = 7;
+  const ::std::string& deviceid() const;
+  void set_deviceid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_deviceid(::std::string&& value);
+  #endif
+  void set_deviceid(const char* value);
+  void set_deviceid(const char* value, size_t size);
+  ::std::string* mutable_deviceid();
+  ::std::string* release_deviceid();
+  void set_allocated_deviceid(::std::string* deviceid);
 
   // int64 id = 1;
   void clear_id();
@@ -175,29 +175,29 @@ class Message : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::google::protobuf::int64 id() const;
   void set_id(::google::protobuf::int64 value);
 
-  // int32 storeId = 3;
+  // int64 storeId = 6;
   void clear_storeid();
-  static const int kStoreIdFieldNumber = 3;
-  ::google::protobuf::int32 storeid() const;
-  void set_storeid(::google::protobuf::int32 value);
+  static const int kStoreIdFieldNumber = 6;
+  ::google::protobuf::int64 storeid() const;
+  void set_storeid(::google::protobuf::int64 value);
 
-  // int32 returnCode = 6;
-  void clear_returncode();
-  static const int kReturnCodeFieldNumber = 6;
-  ::google::protobuf::int32 returncode() const;
-  void set_returncode(::google::protobuf::int32 value);
+  // int32 exceptCode = 4;
+  void clear_exceptcode();
+  static const int kExceptCodeFieldNumber = 4;
+  ::google::protobuf::int32 exceptcode() const;
+  void set_exceptcode(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:Message)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr method_;
-  ::google::protobuf::internal::ArenaStringPtr deviceid_;
   ::google::protobuf::internal::ArenaStringPtr content_;
-  ::google::protobuf::internal::ArenaStringPtr returnmsg_;
+  ::google::protobuf::internal::ArenaStringPtr exceptmsg_;
+  ::google::protobuf::internal::ArenaStringPtr deviceid_;
   ::google::protobuf::int64 id_;
-  ::google::protobuf::int32 storeid_;
-  ::google::protobuf::int32 returncode_;
+  ::google::protobuf::int64 storeid_;
+  ::google::protobuf::int32 exceptcode_;
   mutable int _cached_size_;
   friend struct  protobuf_Message_2eproto::TableStruct;
 };
@@ -275,73 +275,7 @@ inline void Message::set_allocated_method(::std::string* method) {
   // @@protoc_insertion_point(field_set_allocated:Message.method)
 }
 
-// int32 storeId = 3;
-inline void Message::clear_storeid() {
-  storeid_ = 0;
-}
-inline ::google::protobuf::int32 Message::storeid() const {
-  // @@protoc_insertion_point(field_get:Message.storeId)
-  return storeid_;
-}
-inline void Message::set_storeid(::google::protobuf::int32 value) {
-  
-  storeid_ = value;
-  // @@protoc_insertion_point(field_set:Message.storeId)
-}
-
-// string deviceId = 4;
-inline void Message::clear_deviceid() {
-  deviceid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& Message::deviceid() const {
-  // @@protoc_insertion_point(field_get:Message.deviceId)
-  return deviceid_.GetNoArena();
-}
-inline void Message::set_deviceid(const ::std::string& value) {
-  
-  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Message.deviceId)
-}
-#if LANG_CXX11
-inline void Message::set_deviceid(::std::string&& value) {
-  
-  deviceid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Message.deviceId)
-}
-#endif
-inline void Message::set_deviceid(const char* value) {
-  
-  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Message.deviceId)
-}
-inline void Message::set_deviceid(const char* value, size_t size) {
-  
-  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Message.deviceId)
-}
-inline ::std::string* Message::mutable_deviceid() {
-  
-  // @@protoc_insertion_point(field_mutable:Message.deviceId)
-  return deviceid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* Message::release_deviceid() {
-  // @@protoc_insertion_point(field_release:Message.deviceId)
-  
-  return deviceid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void Message::set_allocated_deviceid(::std::string* deviceid) {
-  if (deviceid != NULL) {
-    
-  } else {
-    
-  }
-  deviceid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), deviceid);
-  // @@protoc_insertion_point(field_set_allocated:Message.deviceId)
-}
-
-// bytes content = 5;
+// bytes content = 3;
 inline void Message::clear_content() {
   content_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -393,70 +327,136 @@ inline void Message::set_allocated_content(::std::string* content) {
   // @@protoc_insertion_point(field_set_allocated:Message.content)
 }
 
-// int32 returnCode = 6;
-inline void Message::clear_returncode() {
-  returncode_ = 0;
+// int32 exceptCode = 4;
+inline void Message::clear_exceptcode() {
+  exceptcode_ = 0;
 }
-inline ::google::protobuf::int32 Message::returncode() const {
-  // @@protoc_insertion_point(field_get:Message.returnCode)
-  return returncode_;
+inline ::google::protobuf::int32 Message::exceptcode() const {
+  // @@protoc_insertion_point(field_get:Message.exceptCode)
+  return exceptcode_;
 }
-inline void Message::set_returncode(::google::protobuf::int32 value) {
+inline void Message::set_exceptcode(::google::protobuf::int32 value) {
   
-  returncode_ = value;
-  // @@protoc_insertion_point(field_set:Message.returnCode)
+  exceptcode_ = value;
+  // @@protoc_insertion_point(field_set:Message.exceptCode)
 }
 
-// string returnMsg = 7;
-inline void Message::clear_returnmsg() {
-  returnmsg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string exceptMsg = 5;
+inline void Message::clear_exceptmsg() {
+  exceptmsg_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Message::returnmsg() const {
-  // @@protoc_insertion_point(field_get:Message.returnMsg)
-  return returnmsg_.GetNoArena();
+inline const ::std::string& Message::exceptmsg() const {
+  // @@protoc_insertion_point(field_get:Message.exceptMsg)
+  return exceptmsg_.GetNoArena();
 }
-inline void Message::set_returnmsg(const ::std::string& value) {
+inline void Message::set_exceptmsg(const ::std::string& value) {
   
-  returnmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Message.returnMsg)
+  exceptmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Message.exceptMsg)
 }
 #if LANG_CXX11
-inline void Message::set_returnmsg(::std::string&& value) {
+inline void Message::set_exceptmsg(::std::string&& value) {
   
-  returnmsg_.SetNoArena(
+  exceptmsg_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Message.returnMsg)
+  // @@protoc_insertion_point(field_set_rvalue:Message.exceptMsg)
 }
 #endif
-inline void Message::set_returnmsg(const char* value) {
+inline void Message::set_exceptmsg(const char* value) {
   
-  returnmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Message.returnMsg)
+  exceptmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Message.exceptMsg)
 }
-inline void Message::set_returnmsg(const char* value, size_t size) {
+inline void Message::set_exceptmsg(const char* value, size_t size) {
   
-  returnmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  exceptmsg_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Message.returnMsg)
+  // @@protoc_insertion_point(field_set_pointer:Message.exceptMsg)
 }
-inline ::std::string* Message::mutable_returnmsg() {
+inline ::std::string* Message::mutable_exceptmsg() {
   
-  // @@protoc_insertion_point(field_mutable:Message.returnMsg)
-  return returnmsg_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:Message.exceptMsg)
+  return exceptmsg_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Message::release_returnmsg() {
-  // @@protoc_insertion_point(field_release:Message.returnMsg)
+inline ::std::string* Message::release_exceptmsg() {
+  // @@protoc_insertion_point(field_release:Message.exceptMsg)
   
-  return returnmsg_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return exceptmsg_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Message::set_allocated_returnmsg(::std::string* returnmsg) {
-  if (returnmsg != NULL) {
+inline void Message::set_allocated_exceptmsg(::std::string* exceptmsg) {
+  if (exceptmsg != NULL) {
     
   } else {
     
   }
-  returnmsg_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), returnmsg);
-  // @@protoc_insertion_point(field_set_allocated:Message.returnMsg)
+  exceptmsg_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), exceptmsg);
+  // @@protoc_insertion_point(field_set_allocated:Message.exceptMsg)
+}
+
+// int64 storeId = 6;
+inline void Message::clear_storeid() {
+  storeid_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Message::storeid() const {
+  // @@protoc_insertion_point(field_get:Message.storeId)
+  return storeid_;
+}
+inline void Message::set_storeid(::google::protobuf::int64 value) {
+  
+  storeid_ = value;
+  // @@protoc_insertion_point(field_set:Message.storeId)
+}
+
+// string deviceId = 7;
+inline void Message::clear_deviceid() {
+  deviceid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Message::deviceid() const {
+  // @@protoc_insertion_point(field_get:Message.deviceId)
+  return deviceid_.GetNoArena();
+}
+inline void Message::set_deviceid(const ::std::string& value) {
+  
+  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Message.deviceId)
+}
+#if LANG_CXX11
+inline void Message::set_deviceid(::std::string&& value) {
+  
+  deviceid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Message.deviceId)
+}
+#endif
+inline void Message::set_deviceid(const char* value) {
+  
+  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Message.deviceId)
+}
+inline void Message::set_deviceid(const char* value, size_t size) {
+  
+  deviceid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Message.deviceId)
+}
+inline ::std::string* Message::mutable_deviceid() {
+  
+  // @@protoc_insertion_point(field_mutable:Message.deviceId)
+  return deviceid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Message::release_deviceid() {
+  // @@protoc_insertion_point(field_release:Message.deviceId)
+  
+  return deviceid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Message::set_allocated_deviceid(::std::string* deviceid) {
+  if (deviceid != NULL) {
+    
+  } else {
+    
+  }
+  deviceid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), deviceid);
+  // @@protoc_insertion_point(field_set_allocated:Message.deviceId)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
