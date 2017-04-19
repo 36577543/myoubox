@@ -1,4 +1,5 @@
 #include "TcpClient.h"
+#include <boost/asio/connect.hpp>		// boost::asio::async_connect
 
 TcpClient::TcpClient(boost::asio::io_service& ios):
 	_reconnectTimer(ios),
@@ -7,7 +8,7 @@ TcpClient::TcpClient(boost::asio::io_service& ios):
 	_logger(keywords::channel = "net")
 {
 	_session->_afterNetError = [this](){
-		this->asyncConnect(_endpoint);
+		this->asyncConnect();
 	};
 }
 
@@ -16,14 +17,15 @@ TcpClient::~TcpClient()
 	_session->stopSession();
 }
 
-bool TcpClient::syncConnect(const boost::asio::ip::tcp::endpoint& endpoint)
+bool TcpClient::syncConnect()
 {
-	_endpoint = endpoint;
 	boost::system::error_code ec;
-	_session->socket().connect(_endpoint, ec);
+	boost::asio::connect(_session->socket(), _endpointIter, ec);
 	if (!ec)
 	{
 		_session->startSession();
+		if (_authentication)
+			_authentication();
 		return true;
 	}
 	else
@@ -33,19 +35,20 @@ bool TcpClient::syncConnect(const boost::asio::ip::tcp::endpoint& endpoint)
 	}
 }
 
-void TcpClient::asyncConnect(const boost::asio::ip::tcp::endpoint& endpoint)
+void TcpClient::asyncConnect()
 {
-	_endpoint = endpoint;
 	if (_reconnectInterval < 10 * 60)
 		_reconnectInterval *= 2;
 
-	_session->socket().async_connect(_endpoint,
-		[this](boost::system::error_code ec)
+	boost::asio::async_connect(_session->socket(), _endpointIter,
+		[this](boost::system::error_code ec, boost::asio::ip::tcp::resolver::iterator i)
 	{
 		if (!ec)
 		{
 			_reconnectInterval = 1;
 			_session->startSession();
+			if (_authentication)
+				_authentication();
 		}
 		else
 		{
@@ -56,7 +59,7 @@ void TcpClient::asyncConnect(const boost::asio::ip::tcp::endpoint& endpoint)
 				boost::posix_time::seconds(_reconnectInterval));
 
 			_reconnectTimer.async_wait(
-				boost::bind(&TcpClient::asyncConnect, this, _endpoint));
+				boost::bind(&TcpClient::asyncConnect, this));
 		}
 	});
 }

@@ -7,17 +7,20 @@ class TcpClient
 public:
 	TcpClient(boost::asio::io_service& ios);
 	virtual ~TcpClient();
+	void setPeerAddress(boost::asio::ip::tcp::resolver::iterator iter);
 
-	bool syncConnect(const boost::asio::ip::tcp::endpoint& endpoint);
-	void asyncConnect(const boost::asio::ip::tcp::endpoint& endpoint);
+	bool syncConnect();
+	void asyncConnect();
+	std::function<bool(void)> _authentication;		// 连接后身份认证
 
 	SessionPtr session();
 	void setAutoReconnect(bool autoReconnect);
 	bool isConnected();
 	void stop();
+	void disconnect();
 
 private:
-	boost::asio::ip::tcp::endpoint _endpoint;
+	boost::asio::ip::tcp::resolver::iterator _endpointIter;
 	boost::asio::deadline_timer _reconnectTimer;	// 重连定时器
 	int _reconnectInterval;							// 重连时间间隔（秒）：2，4，8，16，32，64...最多不大于10分钟
 
@@ -25,10 +28,22 @@ private:
 	src::severity_channel_logger<SeverityLevel> _logger;
 };
 
+inline void TcpClient::setPeerAddress(boost::asio::ip::tcp::resolver::iterator iter)
+{
+	_endpointIter = iter;
+}
+
 inline void TcpClient::stop()
 {
-	setAutoReconnect(false);
 	_session->stopSession();
+}
+
+inline void TcpClient::disconnect()
+{
+	boost::system::error_code err;
+	auto &socket = _session->socket();
+	socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both, err);
+	socket.close(err);
 }
 
 inline SessionPtr TcpClient::session()
@@ -46,6 +61,6 @@ inline void TcpClient::setAutoReconnect(bool autoReconnect)
 	if (!autoReconnect)
 		_session->_afterNetError = NULL;
 	else
-		_session->_afterNetError = [this]() {asyncConnect(_endpoint);};
+		_session->_afterNetError = [this]() {asyncConnect();};
 }
 
