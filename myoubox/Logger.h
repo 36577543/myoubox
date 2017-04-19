@@ -42,7 +42,7 @@ enum SeverityLevel
 #define LOG_ERROR(logger)	BOOST_LOG_SEV(logger, error)
 #define LOG_FATAL(logger)	BOOST_LOG_SEV(logger, fatal)
 
-void initLogger(SeverityLevel lvl);
+void initLogger(SeverityLevel lvl, const std::string &file);
 BOOST_LOG_GLOBAL_LOGGER(tracer_logger, src::severity_logger_mt<SeverityLevel>)
 BOOST_LOG_GLOBAL_LOGGER(global_logger, src::severity_channel_logger_mt<SeverityLevel>)
 

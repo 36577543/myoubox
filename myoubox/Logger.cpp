@@ -48,7 +48,7 @@ logging::formatting_ostream& operator <<
 	return strm;
 }
 
-void initLogger(SeverityLevel lvl)
+void initLogger(SeverityLevel lvl, const std::string &file)
 {
 	static bool inited = false;
 	if (inited == false)
@@ -69,8 +69,9 @@ void initLogger(SeverityLevel lvl)
 	//else
 	//	logging::init_from_stream(settings);
 
+	boost::filesystem::path::imbue(std::locale("C"));
 	logging::add_file_log(
-		keywords::file_name = "log/Vr_%3N.log",
+		keywords::file_name = std::string("log/") + file + "_%3N.log",
 		keywords::open_mode = mode,
 		keywords::auto_flush = true,
 		keywords::rotation_size = 10 * 1024 * 1024,
