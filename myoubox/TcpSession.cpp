@@ -62,6 +62,7 @@ void TcpSession::startSession()
 
 void TcpSession::stopSession()
 {
+	_afterNetError = NULL;
 	boost::system::error_code err;
 	_socket.shutdown(tcp::socket::shutdown_both, err);
 	_socket.close(err);
@@ -109,7 +110,7 @@ void TcpSession::readBody(uint32_t bodyLen)
 					ret.second.set_value(std::move(msg));
 				else			//  ’µΩ«Î«Û
 				{
-					msg.set_returncode(0);
+					msg.set_exceptcode(0);
 					if (_requestHandler)
 						_requestHandler(std::move(msg));
 				}
@@ -148,8 +149,8 @@ void TcpSession::handleNetError(const boost::system::error_code & ec)
 	_isConnected = false;
 
 	Message msg;
-	msg.set_returncode(-1);
-	msg.set_returnmsg(ec.message());
+	msg.set_exceptcode(-1);
+	msg.set_exceptmsg(ec.message());
 
 	unique_lock<mutex> lck(_mutex);
 	for (auto it = _lstRequestCtx.begin(); it != _lstRequestCtx.end(); it++)
@@ -157,6 +158,7 @@ void TcpSession::handleNetError(const boost::system::error_code & ec)
 		it->prom->set_value(msg);
 	}
 	_lstRequestCtx.clear();
+	_msgQueue.clear();
 	lck.unlock();
 
 	if (_afterNetError)
@@ -176,8 +178,8 @@ boost::future<Message> TcpSession::request(Message msg)
 		LOG_ERROR(_logger) << boost::diagnostic_information(ex);
 		fut = boost::async([]() {
 			Message msg;
-			msg.set_returncode(-3);
-			msg.set_returnmsg("get_future exception");
+			msg.set_exceptcode(-3);
+			msg.set_exceptmsg("get_future exception");
 			return msg;
 		});
 		return fut;
