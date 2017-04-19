@@ -1,6 +1,7 @@
 #include "stdafx.h"
-#include "StoreConfig.h"
+#include "SvrConfig.h"
 #include "Logger.h"
+#include "Environ.h"
 
 #include <winsock2.h>
 #include <iphlpapi.h>
@@ -10,6 +11,7 @@
 #include <fstream>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/xml_parser.hpp>
 #include <boost/foreach.hpp>
 #include <boost/exception/exception.hpp>
 #include <boost/exception/diagnostic_information.hpp>   
@@ -20,55 +22,53 @@ using std::call_once;
 using std::mutex;
 using std::unique_lock;
 
-src::severity_channel_logger_mt<SeverityLevel>& logger = global_logger::get();
+static src::severity_channel_logger_mt<SeverityLevel>& logger = global_logger::get();
 
-StoreConfig::StoreConfig() :
-	_macID(0),
-	_deviceID(0)
+SvrConfig::SvrConfig()
 {
 }
 
-StoreConfig::~StoreConfig()
+SvrConfig::~SvrConfig()
 {
 }
 
-StoreConfig& StoreConfig::getInstance()
+SvrConfig& SvrConfig::getInstance()
 {
 	static once_flag instanceFlag;
-	static StoreConfig* pInstance;
+	static SvrConfig* pInstance;
 
 	call_once(instanceFlag, []()
 	{
-		static StoreConfig instance;
+		static SvrConfig instance;
 		pInstance = &instance;
-		initLogger(debug);
 	});
 	return *pInstance;
 }
 
-bool StoreConfig::load()
+bool SvrConfig::init()
+{
+	Environ::init();
+
+	return load();
+}
+
+bool SvrConfig::load()
 {
 	try
 	{
 		pt::ptree tree;
-		pt::read_json("store.cfg", tree);
+		pt::read_json(_file, tree);
+
+		_peerPort = tree.get<std::string>("peerAddr.port", "19880");
+		_peerAddress = tree.get<std::string>("peerAddr.address", "");
 
 		_username = tree.get<std::string>("unlock.username", "");
 		_password = tree.get<std::string>("unlock.password", "");
 
 		_storeName = tree.get<std::string>("store.storeName", "");
-		_storeId = tree.get<int64_t>("store.storeId", 0);
-		_deviceID = tree.get<int64_t>("store.deviceID", 0);
+		_storeID = tree.get<int64_t>("store.storeID", 0);
+		_deviceID = tree.get<std::string>("store.deviceID", "");
 
-		if (!GetMacAddressByAdaptersAddresses(_mac, &_macID))
-		{
-			LOG_ERROR(logger) << "GetMacAddressByAdaptersAddresses failed";
-			if (!GetMacAddressByAdaptersInfo(_mac, &_macID))
-			{
-				LOG_ERROR(logger) << "GetMacAddressByAdaptersInfo failed";
-				return false;
-			}				
-		}
 		return true;
 	}
 	catch (const boost::exception& ex)
@@ -82,18 +82,21 @@ bool StoreConfig::load()
 	return false;
 }
 
-void StoreConfig::save()
+void SvrConfig::save()
 {
 	pt::ptree tree;
 
-	tree.put("store.storeName", _storeName);
-	tree.put("store.storeId", _storeId);
-	tree.put("store.deviceID", _storeId);
+	tree.put("peerAddr.address", _peerAddress);	// 202.109.114.115	hn.wuyunjk.com
+	tree.put("peerAddr.port", _peerPort);
+
+	tree.put("store.storeName", gb2312ToUTF8(_storeName));
+	tree.put("store.storeID", _storeID);
+	tree.put("store.deviceID", _deviceID);
 
 	tree.put("unlock.username", _username);
 	tree.put("unlock.password", _password);
 
-	pt::write_json("store.cfg", tree);
+	pt::write_json(_file, tree);
 }
 
 bool GetMacAddressByAdaptersAddresses(std::string &mac, int64_t *pID)
@@ -191,3 +194,4 @@ bool GetMacAddressByAdaptersInfo(std::string &mac, int64_t *pID)
 	free(adapter_info);
 	return ret;
 }
+
