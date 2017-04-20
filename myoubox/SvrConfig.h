@@ -14,13 +14,12 @@ public:
 	std::string _username;
 	std::string _password;
 	std::string _storeName;
-	std::string _mac;
 	int64_t _storeID;
 	std::string _deviceID;
 
-	std::string _peerAddress;
-	std::string _peerPort;
-	std::string _file = "SvrConfig.json";
+	std::string _centerAddr;
+	std::string _centerPort;
+	std::string _file = "SvrConfig.ini";
 private:
 	SvrConfig();
 	~SvrConfig();

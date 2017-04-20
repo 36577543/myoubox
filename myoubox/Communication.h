@@ -8,52 +8,49 @@
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/ip/tcp.hpp>
+#include <boost/chrono/chrono.hpp>
 
 const unsigned int WM_APP_CENTER_EVENT = WM_APP + 1000;
 const unsigned int CENTER_EVENT_USER_LOGIN = 1;
 
+
 class TcpClient;
 class TcpSession;
-class CenterComm
+class Communication
 {
 public:
-	static CenterComm& getInstance();
+	static Communication& getInstance();
 
-	void setConfig(					// 设置参数
-		const std::string& peerAddr	// 对方地址（广告中心地址或网吧服务端地址）
-		, int peerPort				// 对方端口
-		, int storeId				// 营业点ID
-		, const std::string& logLvl);// 日志级别
-
-	void setLockWnd(HWND hwnd);// 设置锁屏窗口句柄
+	bool setConfig(const std::string& peerAddr	// 对方地址
+				, const std::string& peerPort);	// 对方端口
+	std::string GetLastError();
 
 	void bgnBusiness();
-
 	void endBusiness();
+	void setWnd(HWND hwnd);
 
 	bool authentication();
-
-	void GetConfig();
-
-	void GetPricePolicy();
-
-	void Checkout(std::string openid);
+	bool getConfig();
+	bool getPeriodPriceList();
+	bool beginCharge(const std::string& openid);
+	bool checkout(const std::string& openid);
 
 	void handleRequest(std::shared_ptr<TcpSession> session, Message msg);	// 处理网吧客户端的请求
 
+	Config _centerConfig;
+	PeriodPriceList _priceList;
+	Bill _bill;
+	UserInfo _user;
 	HWND _hwnd;
-	Config _config;
-	UserInfo _userinfo;
-	PricePolicy _pricePolicy;
 
+	int64_t _storeID;
+	std::string _deviceID;
 private:
-	CenterComm();
-	~CenterComm();
+	Communication();
+	~Communication();
 
 	std::mutex _mutex;
-	int _storeId;
-	std::string _deviceId;
-	boost::asio::ip::tcp::endpoint _endpoint;
+	boost::asio::ip::tcp::resolver::iterator _peerAddrIter;
 
 	std::thread _threadNet;
 	std::thread _threadBiz;
@@ -62,12 +59,20 @@ private:
 	std::shared_ptr<boost::asio::io_service::work> _workNet;
 	std::shared_ptr<boost::asio::io_service::work> _workBiz;
 
+	boost::chrono::seconds _timeoutCall;
 	std::shared_ptr<TcpClient> _tcpClient;
+	boost::asio::deadline_timer _timer;
 
+	std::string _lastError;
 	src::severity_channel_logger<SeverityLevel> _logger;
 };
 
-inline void CenterComm::setLockWnd(HWND hwnd)
+inline void Communication::setWnd(HWND hwnd)
 {
 	_hwnd = hwnd;
+}
+
+inline std::string Communication::GetLastError()
+{
+	return _lastError;
 }
