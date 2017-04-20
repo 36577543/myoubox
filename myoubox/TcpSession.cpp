@@ -110,7 +110,6 @@ void TcpSession::readBody(uint32_t bodyLen)
 					ret.second.set_value(std::move(msg));
 				else			//  ’µΩ«Î«Û
 				{
-					msg.set_exceptcode(0);
 					if (_requestHandler)
 						_requestHandler(std::move(msg));
 				}
