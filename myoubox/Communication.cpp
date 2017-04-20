@@ -100,6 +100,11 @@ void Communication::bgnBusiness()
 			{
 				_iosBiz.post([this]() { authentication(); });
 			};
+			_tcpClient->session()->_requestHandler = [this](Message msg)
+			{
+				handleRequest(_tcpClient->session(), msg);
+			};
+
 			getConfig();
 			getPeriodPriceList();
 		}

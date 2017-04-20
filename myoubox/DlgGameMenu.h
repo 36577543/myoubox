@@ -116,4 +116,5 @@ private:
 	bool GetProcessidFromName(CString &strName);
 public:
 	afx_msg LRESULT OnNcHitTest(CPoint point);
+	afx_msg LRESULT OnCenterEvent(WPARAM wparam, LPARAM lparam);
 };

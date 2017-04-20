@@ -22,6 +22,7 @@
 #include "LKBalloonDialog.h"
 #include "LKBalloonWnd.h"
 #include "LKMessageBox.h"
+#include "Communication.h"
 
 
 #ifdef _DEBUG
@@ -309,6 +310,7 @@ BEGIN_MESSAGE_MAP(CDlgGameMenu, CLKMainDialog)
 	ON_WM_SHOWWINDOW()
 	ON_WM_TIMER()
 	ON_WM_NCHITTEST()
+	ON_MESSAGE(WM_APP_CENTER_EVENT, OnCenterEvent)
 END_MESSAGE_MAP()
 
 
@@ -316,6 +318,8 @@ END_MESSAGE_MAP()
 
 BOOL CDlgGameMenu::OnInitDialog()
 {
+	Communication::getInstance().setWnd(m_hWnd);
+
 	CRect rt(0, 0, CURSCREEN_WIDTH, CURSCREEN_HEIGHT);
 #ifndef _DEBUG
 	SetWindowPos(&wndTopMost, 0, 0, rt.Width(), rt.Height(), SWP_HIDEWINDOW);
@@ -993,4 +997,13 @@ LRESULT CDlgGameMenu::OnNcHitTest(CPoint point)
 	return HTOBJECT;
 
 	//return CLKMainDialog::OnNcHitTest(point);
+}
+
+LRESULT CDlgGameMenu::OnCenterEvent(WPARAM wparam, LPARAM lparam)
+{
+	unsigned int event = wparam;
+	if (wparam == CENTER_EVENT_USER_LOGIN)
+		CDlgLockScreen::LockScreen(false);
+
+	return 0;
 }
