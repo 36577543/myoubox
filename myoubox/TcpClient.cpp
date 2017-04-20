@@ -7,9 +7,6 @@ TcpClient::TcpClient(boost::asio::io_service& ios):
 	_session(new TcpSession(ios)),
 	_logger(keywords::channel = "net")
 {
-	_session->_afterNetError = [this](){
-		this->asyncConnect();
-	};
 }
 
 TcpClient::~TcpClient()

@@ -11,7 +11,7 @@ public:
 
 	bool syncConnect();
 	void asyncConnect();
-	std::function<bool(void)> _authentication;		// 连接后身份认证
+	std::function<void(void)> _authentication = NULL;// 连接后身份认证
 
 	SessionPtr session();
 	void setAutoReconnect(bool autoReconnect);
