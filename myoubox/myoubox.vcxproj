@@ -157,13 +157,14 @@
     <ClInclude Include="..\Module\log.h" />
     <ClInclude Include="..\Proto\Message.pb.h" />
     <ClInclude Include="..\Proto\vr.pb.h" />
-    <ClInclude Include="CenterComm.h" />
+    <ClInclude Include="Communication.h" />
     <ClInclude Include="ChangeSkinDlg.h" />
     <ClInclude Include="DlgImgPl.h" />
     <ClInclude Include="DlgLockScreen.h" />
     <ClInclude Include="DlgAdminLogin.h" />
     <ClInclude Include="DlgAdminRegister.h" />
     <ClInclude Include="DlgWeb.h" />
+    <ClInclude Include="Environ.h" />
     <ClInclude Include="LocalDataInfo.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="md5.hh" />
@@ -172,7 +173,7 @@
     <ClInclude Include="DlgGameMenu.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="StoreConfig.h" />
+    <ClInclude Include="SvrConfig.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpSession.h" />
@@ -319,13 +320,20 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="CenterComm.cpp" />
+    <ClCompile Include="Communication.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="ChangeSkinDlg.cpp" />
     <ClCompile Include="DlgImgPl.cpp" />
     <ClCompile Include="DlgLockScreen.cpp" />
     <ClCompile Include="DlgAdminLogin.cpp" />
     <ClCompile Include="DlgAdminRegister.cpp" />
     <ClCompile Include="DlgWeb.cpp" />
+    <ClCompile Include="Environ.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="LocalDataInfo.cpp" />
     <ClCompile Include="Logger.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -341,7 +349,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="StoreConfig.cpp" />
+    <ClCompile Include="SvrConfig.cpp" />
     <ClCompile Include="TcpClient.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>

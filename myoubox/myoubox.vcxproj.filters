@@ -213,12 +213,6 @@
     <ClInclude Include="..\Proto\vr.pb.h">
       <Filter>Proto</Filter>
     </ClInclude>
-    <ClInclude Include="CenterComm.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="StoreConfig.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="DlgWeb.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -235,6 +229,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="DlgGameMenu.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SvrConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Communication.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Environ.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -371,12 +374,6 @@
     <ClCompile Include="..\Proto\vr.pb.cc">
       <Filter>Proto</Filter>
     </ClCompile>
-    <ClCompile Include="CenterComm.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="StoreConfig.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="DlgWeb.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -393,6 +390,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DlgGameMenu.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SvrConfig.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Communication.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Environ.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

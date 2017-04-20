@@ -12,7 +12,7 @@
 #include "TrayMainMenu.h"
 
 #include "log.h"
-#include "CenterComm.h"
+#include "Communication.h"
 
 // CDlgLockScreen ¶Ô»°¿ò
 CDlgLockScreen *CDlgLockScreen::m_pDlgLock = 0;

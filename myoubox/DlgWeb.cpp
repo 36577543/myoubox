@@ -4,8 +4,9 @@
 #include "stdafx.h"
 #include "myoubox.h"
 #include "DlgWeb.h"
-#include "StoreConfig.h"
+#include "SvrConfig.h"
 #include "Logger.h"
+#include "Environ.h"
 
 template <class T> void SafeRelease(T **ppT)
 {
@@ -73,7 +74,7 @@ END_DHTML_EVENT_MAP()
 
 HRESULT CDlgWeb::OnButtonOK(IHTMLElement* /*pElement*/)
 {
-	Navigate(L"http://139.224.61.179/vr/manage/login");
+	Navigate(L"http://www.hf-vr.cn/manage/login");
 	//OnOK();
 	return S_OK;
 }
@@ -166,14 +167,14 @@ void CDlgWeb::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 	IDispatch *pDispatchInput = NULL;
 
 	int64_t storeId = 0;
-	int64_t deviceID = 0;
+	std::string deviceID;
 	CString url = szUrl;
-	if (StoreConfig::getInstance()._storeId != 0 && StoreConfig::getInstance()._deviceID != 0)
+	if (SvrConfig::getInstance()._storeID != 0 && SvrConfig::getInstance()._deviceID != "")
 		return;
 	else
 	{
 		if (url.Find(_T("/manage/index")) != -1)
-			Navigate(_T("http://139.224.61.179/vr/manage/device/list"));
+			Navigate(_T("http://www.hf-vr.cn/manage/device/list"));
 	}
 
 	if (url.Find(_T("/device/add")) != -1 || url.Find(_T("/device/list")) != -1)
@@ -193,16 +194,16 @@ void CDlgWeb::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 		CHECK_HR(hr);
 		CHECK_NULL(pElementDeviceNumber);
 
-		hr = pElementDeviceNumber->put_innerText(_bstr_t(StoreConfig::getInstance()._mac.c_str()));
+		hr = pElementDeviceNumber->put_innerText(_bstr_t(Environ::_mac.c_str()));
 		CHECK_HR(hr);
 	}
 
 	if (url.Find(_T("/device/list")) != -1)
 	{
 		hr = pDoc3->getElementsByTagName(_bstr_t("tr"), &pCollectionTr);
-		long length;
-		pCollectionTr->get_length(&length);
-		for (long i = 0; i < length; i++)
+		long rows;
+		pCollectionTr->get_length(&rows);
+		for (long i = 0; i < rows; i++)
 		{
 			_variant_t index = i;
 			hr = pCollectionTr->item(index, index, &pDispatchTr);
@@ -222,14 +223,14 @@ void CDlgWeb::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 			CHECK_HR(hr);
 
 			CString text = bstr;
-			auto &mac = StoreConfig::getInstance()._mac;
-			if (text.Find(CString(mac.c_str())) != -1)
+			if (text.Find(CString(Environ::_mac.c_str())) != -1)
 			{
+				deviceID = Environ::_mac.c_str();
 				hr = pElement2Tr->getElementsByTagName(_bstr_t("input"), &pCollectionInput);
 				CHECK_HR(hr);
-				long len;
-				pCollectionInput->get_length(&len);
-				for (long j = 0; j < length; j++)
+				long item;
+				pCollectionInput->get_length(&item);
+				for (long j = 0; j < item; j++)
 				{
 					_variant_t index = j;
 					hr = pCollectionInput->item(index, index, &pDispatchInput);
@@ -250,23 +251,21 @@ void CDlgWeb::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 					varValue.ChangeType(VT_I4);
 					if (varName == _variant_t("storeId"))
 						storeId = varValue.iVal;
-					if (varName == _variant_t("id"))
-						deviceID = varValue.iVal;
 				}
 				break;
 			}
 		}
-		if (storeId == 0 || deviceID == 0)
+		if (storeId == 0 || deviceID == "")
 		{
 			AfxMessageBox(_T("未添加营业点，或未添加当前设备！"));
-			Navigate(_T("http://139.224.61.179/vr/manage/device/add"));
+			Navigate(_T("http://www.hf-vr.cn/manage/device/add"));
 		}
 		else
 		{
-			if (StoreConfig::getInstance()._storeId == 0 || StoreConfig::getInstance()._deviceID == 0)
+			auto &cfg = SvrConfig::getInstance();
+			if (cfg._storeID == 0 || cfg._deviceID == "")
 			{
-				auto &cfg = StoreConfig::getInstance();
-				cfg._storeId = storeId;
+				cfg._storeID = storeId;
 				cfg._deviceID = deviceID;
 				cfg.save();
 				AfxMessageBox(_T("绑定设备成功！"));

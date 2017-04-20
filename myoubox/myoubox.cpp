@@ -17,9 +17,10 @@
 #include "ConfigFile.h"
 #include "log.h"
 #include "DlgAdminRegister.h"
-#include "StoreConfig.h"
+#include "SvrConfig.h"
 #include "DlgWeb.h"
 
+#include "Communication.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -112,10 +113,10 @@ BOOL CmyouboxApp::InitInstance()
 	//LoadAllResourceImageToImageArray(pImageMgr)
 	AppLoadAllResourceImageToImageArray(pImageMgr);
 
-	StoreConfig& config = StoreConfig::getInstance();
-	if (!config.load())
+	SvrConfig& config = SvrConfig::getInstance();
+	if (!config.init())
 	{
-		AfxMessageBox(L"配置文件加载失败，程序起动失败，请检查store.cfg");
+		AfxMessageBox(CString("配置文件加载失败，程序起动失败，请检查") + config._file.c_str());
 		return FALSE;
 	}
 	if (config._username == "" || config._password == "")
@@ -124,13 +125,17 @@ BOOL CmyouboxApp::InitInstance()
 		if (IDOK != dlg.DoModal())
 			return FALSE;
 	}
-	if (config._storeId == 0 || config._deviceID == 0)
+	if (config._storeID == 0 || config._deviceID == "")
 	{
 		CDlgWeb dlg;
 		dlg.DoModal();
 	}
-	if (config._storeId == 0 || config._deviceID == 0)
+	if (config._storeID == 0 || config._deviceID == "")
 		return FALSE;
+
+	Communication& comm = Communication::getInstance();
+	comm.setConfig(config._centerAddr, config._centerPort);
+	comm.bgnBusiness();
 
 	CDlgLockScreen::LockScreen(true);
 	CDlgGameMenu dlg;

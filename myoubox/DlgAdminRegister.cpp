@@ -10,7 +10,7 @@
 #include "LKFontMgr.h"
 #include "LKImageMgr.h"
 
-#include "StoreConfig.h"
+#include "SvrConfig.h"
 #include "AtlBase.h"
 #include "AtlConv.h"
 #include "md5.hh"
@@ -140,7 +140,7 @@ void CDlgAdminRegister::OnBnClickedButtonOk()
 	username = m_ctlUserName.GetText();
 	password = m_ctlUserPass.GetPassword();
 
-	auto & config = StoreConfig::getInstance();
+	auto & config = SvrConfig::getInstance();
 	config._username = CW2A((LPCWSTR)username);
 	config._password = CW2A((LPCWSTR)password);
 
