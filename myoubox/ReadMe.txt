@@ -28,3 +28,4 @@ CDyn***（动态窗口类）此类为动态窗口类，目的是不用资源创�
 
 微信充值：http://www.hf-vr.cn/open/recharge/view
 注册登录：http://hf-vr.cn/open/game/login?deviceId=50E5493D5D78
+www.bundjr.com/vr
