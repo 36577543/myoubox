@@ -25,3 +25,6 @@ CLK***(自绘控件类)：此类为自绘控件类，大部分基于MFC的CWnd�
 CLog***(日志类)：此类为日志类，不同的类名会生成不同文件名的日志。
 
 CDyn***（动态窗口类）此类为动态窗口类，目的是不用资源创建窗口。用于菜单中获取焦点的焦点框。
+
+微信充值：http://www.hf-vr.cn/open/recharge/view
+注册登录：http://hf-vr.cn/open/game/login?deviceId=50E5493D5D78
