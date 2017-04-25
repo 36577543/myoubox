@@ -229,7 +229,7 @@ void Environ::SetIECoreVersion()
 	REGSAM samDesiredOpen = KEY_ALL_ACCESS;
 	TCHAR* path = _T("SOFTWARE\\Microsoft\\Internet Explorer\\MAIN\\FeatureControl\\FEATURE_BROWSER_EMULATION");
 	std::string valueName = _processName + ".exe";
-	LPCTSTR lpValueName = CA2T(valueName.c_str());
+	CA2T lpValueName(valueName.c_str());
 
 	long version = 9999;
 	HKEY hKey;
