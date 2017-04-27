@@ -1,5 +1,6 @@
-// version	1.12
+// version	1.13
 // protoc.exe --cpp_out=.  vr.proto
+// https://github.com/36577543/myoubox/blob/master/Proto/Vr.proto
 
 syntax = "proto3";
 
@@ -50,13 +51,16 @@ message Price {			// 价格，例：[10分钟10元][30分钟25元]
 	int32 money = 2;	// 价格，元
 }
 
-// 接  口：bool BeginCharge(string openid)	开始计费
+// 接  口：int64 BeginCharge(string openid)	开始计费
+// 返回值：int64为playId
 
-// 接  口：Bill Checkout(string openid)		用户结帐
+// 接  口：Bill Checkout(Bill bill)		用户结帐
 message Bill {
-	int32 balance = 1;		// 账户余额
-	int32 consume = 2;		// 本次消费金额
-	int32 duration = 3;		// 本次游戏时长
+	string openid = 1;		// 微信openid
+	int64 playId = 2;		// 此次消费记录id
+	int32 balance = 3;		// 账户余额
+	int32 consume = 4;		// 本次消费金额
+	int32 duration = 5;		// 本次游戏时长
 }
 
 

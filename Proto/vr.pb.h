@@ -882,21 +882,41 @@ class Bill : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
 
   // accessors -------------------------------------------------------
 
-  // int32 balance = 1;
+  // string openid = 1;
+  void clear_openid();
+  static const int kOpenidFieldNumber = 1;
+  const ::std::string& openid() const;
+  void set_openid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_openid(::std::string&& value);
+  #endif
+  void set_openid(const char* value);
+  void set_openid(const char* value, size_t size);
+  ::std::string* mutable_openid();
+  ::std::string* release_openid();
+  void set_allocated_openid(::std::string* openid);
+
+  // int64 playId = 2;
+  void clear_playid();
+  static const int kPlayIdFieldNumber = 2;
+  ::google::protobuf::int64 playid() const;
+  void set_playid(::google::protobuf::int64 value);
+
+  // int32 balance = 3;
   void clear_balance();
-  static const int kBalanceFieldNumber = 1;
+  static const int kBalanceFieldNumber = 3;
   ::google::protobuf::int32 balance() const;
   void set_balance(::google::protobuf::int32 value);
 
-  // int32 consume = 2;
+  // int32 consume = 4;
   void clear_consume();
-  static const int kConsumeFieldNumber = 2;
+  static const int kConsumeFieldNumber = 4;
   ::google::protobuf::int32 consume() const;
   void set_consume(::google::protobuf::int32 value);
 
-  // int32 duration = 3;
+  // int32 duration = 5;
   void clear_duration();
-  static const int kDurationFieldNumber = 3;
+  static const int kDurationFieldNumber = 5;
   ::google::protobuf::int32 duration() const;
   void set_duration(::google::protobuf::int32 value);
 
@@ -904,6 +924,8 @@ class Bill : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr openid_;
+  ::google::protobuf::int64 playid_;
   ::google::protobuf::int32 balance_;
   ::google::protobuf::int32 consume_;
   ::google::protobuf::int32 duration_;
@@ -2194,7 +2216,73 @@ inline void Price::set_money(::google::protobuf::int32 value) {
 
 // Bill
 
-// int32 balance = 1;
+// string openid = 1;
+inline void Bill::clear_openid() {
+  openid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Bill::openid() const {
+  // @@protoc_insertion_point(field_get:Bill.openid)
+  return openid_.GetNoArena();
+}
+inline void Bill::set_openid(const ::std::string& value) {
+  
+  openid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:Bill.openid)
+}
+#if LANG_CXX11
+inline void Bill::set_openid(::std::string&& value) {
+  
+  openid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Bill.openid)
+}
+#endif
+inline void Bill::set_openid(const char* value) {
+  
+  openid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Bill.openid)
+}
+inline void Bill::set_openid(const char* value, size_t size) {
+  
+  openid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Bill.openid)
+}
+inline ::std::string* Bill::mutable_openid() {
+  
+  // @@protoc_insertion_point(field_mutable:Bill.openid)
+  return openid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Bill::release_openid() {
+  // @@protoc_insertion_point(field_release:Bill.openid)
+  
+  return openid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Bill::set_allocated_openid(::std::string* openid) {
+  if (openid != NULL) {
+    
+  } else {
+    
+  }
+  openid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), openid);
+  // @@protoc_insertion_point(field_set_allocated:Bill.openid)
+}
+
+// int64 playId = 2;
+inline void Bill::clear_playid() {
+  playid_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Bill::playid() const {
+  // @@protoc_insertion_point(field_get:Bill.playId)
+  return playid_;
+}
+inline void Bill::set_playid(::google::protobuf::int64 value) {
+  
+  playid_ = value;
+  // @@protoc_insertion_point(field_set:Bill.playId)
+}
+
+// int32 balance = 3;
 inline void Bill::clear_balance() {
   balance_ = 0;
 }
@@ -2208,7 +2296,7 @@ inline void Bill::set_balance(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:Bill.balance)
 }
 
-// int32 consume = 2;
+// int32 consume = 4;
 inline void Bill::clear_consume() {
   consume_ = 0;
 }
@@ -2222,7 +2310,7 @@ inline void Bill::set_consume(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:Bill.consume)
 }
 
-// int32 duration = 3;
+// int32 duration = 5;
 inline void Bill::clear_duration() {
   duration_ = 0;
 }
