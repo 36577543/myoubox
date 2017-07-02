@@ -43,7 +43,7 @@ protected:
 };
 
 #else
-#include "D:\personalproject\common\single.h"
+#include "single.h"
 #endif
 ////////////////////////////////////////////////////////////////////////////////
 // 封装互斥量的安全单键类
